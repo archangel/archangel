@@ -23,6 +23,7 @@ gem 'image_processing', '~> 1.12.1'
 gem 'jbuilder', '~> 2.11.2'
 gem 'kaminari', '~> 1.2.1'
 gem 'pundit', '~> 2.1.0'
+gem 'sidekiq', '~> 6.2.1'
 gem 'simple_form', '~> 5.1.0'
 gem 'turbolinks', '~> 5.2.1'
 
@@ -31,6 +32,7 @@ gem 'tzinfo-data', platforms: %i[jruby mingw mswin x64_mingw]
 group :development do
   gem 'database_consistency', '~> 1.1.1', require: false
 
+  gem 'brakeman', '~> 5.0.4'
   gem 'letter_opener', '~> 1.7.0'
   gem 'listen', '~> 3.5.1'
   gem 'rack-mini-profiler', '~> 2.3.2'

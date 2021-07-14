@@ -24,6 +24,9 @@
 /storage/*
 !/storage/.keep
 
+# Brakeman
+brakeman.html
+
 /public/assets
 .byebug_history
 

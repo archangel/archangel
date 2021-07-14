@@ -26,6 +26,10 @@ module Archangel
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # Use a real queuing backend for Active Job (and separate queues per environment).
+    config.active_job.queue_adapter = ENV.fetch('JOB_QUEUE_ADAPTER', 'async')
+    config.active_job.queue_name_prefix = "archangel_#{Rails.env}"
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

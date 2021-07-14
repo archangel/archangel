@@ -1,0 +1,59 @@
+version: '3.0'
+services:
+  postgres:
+    image: postgres:13.3
+    container_name: archangel_postgres
+    command: postgres -c listen_addresses='*'
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  redis:
+    image: redis:6.0
+    container_name: archangel_redis
+    restart: always
+    ports:
+      - "6379"
+    volumes:
+      - ./tmp/redis/redis.conf:/usr/local/etc/redis/redis.conf
+  sidekiq:
+    build: .
+    container_name: archangel_sidekiq
+    command: ./docker/entrypoint/sidekiq.sh
+    restart: always
+    environment:
+      JOB_QUEUE_ADAPTER: sidekiq
+      REDIS_PROVIDER: redis:6379
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - sidekiq:/var/www/archangel
+  app:
+    build: .
+    container_name: archangel_app
+    command: ./docker/entrypoint/docker.sh
+    ports:
+      - "3000:3000"
+      - "3035:3035"
+    environment:
+      DB_HOST: postgres
+      DB_PASSWORD: password
+      JOB_QUEUE_ADAPTER: sidekiq
+      REDIS_PROVIDER: redis:6379
+    depends_on:
+      - postgres
+      - redis
+      - sidekiq
+    volumes:
+      - app:/var/www/archangel
+    stdin_open: true
+    tty: true
+volumes:
+  app:
+  postgres:
+  sidekiq:

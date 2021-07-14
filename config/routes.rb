@@ -20,6 +20,12 @@ Rails.application.routes.draw do
                unlock: 'unlock'
              }
 
+  if Rails.env.development?
+    require 'sidekiq/web'
+
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   namespace :manage do
     resource :profile, only: %i[edit show update]
     resource :site, only: %i[edit show update]
