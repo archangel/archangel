@@ -1,0 +1,9 @@
+<div class="btn-toolbar mb-2 mb-md-0">
+  <div class="btn-group me-2">
+    <%= link_to(t("pages.buttons.index"), manage_pages_path, type: "button", class: "btn btn-sm btn-outline-secondary") if member_action? || create_actions? %>
+    <%= link_to(t("pages.buttons.show"), manage_page_path(@page), type: "button", class: "btn btn-sm btn-outline-secondary") if update_actions? %>
+    <%= link_to(t("pages.buttons.new"), new_manage_page_path, type: "button", class: "btn btn-sm btn-outline-secondary") if collection_action? || member_action? %>
+    <%= link_to(t("pages.buttons.edit"), edit_manage_page_path(@page), type: "button", class: "btn btn-sm btn-outline-secondary") if show_action? %>
+    <%= link_to(t("pages.buttons.destroy"), manage_page_path(@page), type: "button", class: "btn btn-sm btn-outline-secondary", method: :delete, data: { confirm: "Are you sure?"}) if member_action? && !@page.discarded? %>
+  </div>
+</div>

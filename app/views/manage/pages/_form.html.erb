@@ -1,0 +1,17 @@
+<%= simple_form_for [:manage, page], html: { autocomplete: 'false' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :slug %>
+  <%= f.input :published_at %>
+
+  <div id="metatags">
+    <%= f.simple_fields_for :metatags do |metatag| %>
+      <%= render 'metatag_fields', f: metatag %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association(f, :metatags) %>
+    </div>
+  </div>
+
+  <%= f.button :submit %>
+<% end %>

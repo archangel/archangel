@@ -1,0 +1,51 @@
+---
+en:
+  dashboards:
+    titles:
+      show: Dashboard
+  inputs:
+    roles:
+      admin: Administrator
+      editor: Editor
+      manager: Manager
+      reader: Reader
+  pages:
+    buttons:
+      destroy: Destroy
+      edit: Edit
+      index: Back
+      new: New
+      show: Show
+    titles:
+      edit: Edit Page
+      index: Pages
+      new: New Page
+      show: Page
+    zero: No pages available
+  profiles:
+    buttons:
+      edit: Edit
+      show: Show
+    titles:
+      edit: Edit Profile
+      show: Profile
+  sites:
+    buttons:
+      edit: Edit
+      show: Show
+    titles:
+      edit: Edit Site
+      show: Site
+  users:
+    buttons:
+      destroy: Destroy
+      edit: Edit
+      index: Back
+      new: New
+      show: Show
+    titles:
+      edit: Edit User
+      index: Users
+      new: New User
+      show: User
+    zero: No users available

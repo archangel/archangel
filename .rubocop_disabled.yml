@@ -1,0 +1,6 @@
+# https://docs.rubocop.org/rubocop-rails/cops_rails.html#railsenvironmentvariableaccess
+Rails/EnvironmentVariableAccess:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false

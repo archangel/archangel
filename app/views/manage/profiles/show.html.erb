@@ -1,0 +1,25 @@
+<% content_for :section do %>
+  <h1 class="h2"><%= t('profiles.titles.show') %></h1>
+
+  <%= render partial: 'buttons' %>
+<% end %>
+
+<p>
+  <strong><%= @profile.attribute_translate(:first_name) %>:</strong>
+  <%= @profile.first_name %>
+</p>
+
+<p>
+  <strong><%= @profile.attribute_translate(:last_name) %>:</strong>
+  <%= @profile.last_name %>
+</p>
+
+<p>
+  <strong><%= @profile.attribute_translate(:username) %>:</strong>
+  <%= @profile.username %>
+</p>
+
+<p>
+  <strong><%= @profile.attribute_translate(:email) %>:</strong>
+  <%= @profile.email %>
+</p>

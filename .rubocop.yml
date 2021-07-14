@@ -1,0 +1,17 @@
+inherit_from:
+  - .rubocop_disabled.yml
+  - .rubocop_exclude.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+  Exclude:
+    - 'bin/bundle'
+    - 'db/migrate/*.rb'
+    - 'db/schema.rb'
+    - 'node_modules/**/*'

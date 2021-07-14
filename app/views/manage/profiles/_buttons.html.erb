@@ -1,0 +1,6 @@
+<div class="btn-toolbar mb-2 mb-md-0">
+  <div class="btn-group me-2">
+    <%= link_to(t('profiles.buttons.show'), manage_profile_path, type: "button", class: "btn btn-sm btn-outline-secondary") if update_actions? %>
+    <%= link_to(t('profiles.buttons.edit'), edit_manage_profile_path, type: "button", class: "btn btn-sm btn-outline-secondary") if show_action? %>
+  </div>
+</div>

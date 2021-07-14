@@ -1,0 +1,10 @@
+<%= simple_form_for [:manage, user], html: { autocomplete: 'false' } do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :username %>
+  <%= f.input :email, as: :email, disabled: f.object.persisted? %>
+
+  <%= f.input :role, as: :role %>
+
+  <%= f.button :submit %>
+<% end %>

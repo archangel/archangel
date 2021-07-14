@@ -1,0 +1,9 @@
+---
+en:
+  cocoon:
+    defaults:
+      add: Add Record
+      remove: Remove Record
+    metatags:
+      add: Add Metatag
+      remove: Remove Metatag

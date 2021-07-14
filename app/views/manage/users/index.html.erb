@@ -1,0 +1,33 @@
+<% content_for :section do %>
+  <h1 class="h2"><%= t('users.titles.index') %></h1>
+
+  <%= render partial: 'buttons' %>
+<% end %>
+
+<% if @users.present? %>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= @users.first.attribute_translate(:first_name) %></th>
+          <th><%= @users.first.attribute_translate(:last_name) %></th>
+          <th><%= @users.first.attribute_translate(:username) %></th>
+          <th><%= @users.first.attribute_translate(:email) %></th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= render partial: 'user', collection: @users %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= paginate @users %>
+
+<% else %>
+
+  <p><%= t('users.zero') %></p>
+
+<% end %>

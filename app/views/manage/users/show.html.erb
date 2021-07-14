@@ -1,0 +1,25 @@
+<% content_for :section do %>
+  <h1 class="h2"><%= t('users.titles.show') %></h1>
+
+  <%= render partial: 'buttons' %>
+<% end %>
+
+<p>
+  <strong><%= @user.attribute_translate(:first_name) %>:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong><%= @user.attribute_translate(:last_name) %>:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong><%= @user.attribute_translate(:username) %>:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong><%= @user.attribute_translate(:email) %>:</strong>
+  <%= @user.email %>
+</p>

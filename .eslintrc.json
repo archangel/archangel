@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "standard"
+  ],
+  "rules": {
+    "arrow-parens": ["error", "always"],
+    "arrow-spacing": "error",
+    "eol-last": ["error", "always"],
+    "max-len": ["error", {
+      "code": 120,
+      "tabWidth": 2
+    }],
+    "max-params": ["error", 4],
+    "no-alert": "error",
+    "no-confusing-arrow": "error",
+    "no-console": "error",
+    "no-use-before-define": "error",
+    "no-var": "error",
+    "prefer-arrow-callback": ["error", {
+      "allowNamedFunctions": false
+    }],
+    "prefer-const": "error"
+  }
+}

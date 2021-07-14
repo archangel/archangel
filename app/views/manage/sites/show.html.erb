@@ -1,0 +1,15 @@
+<% content_for :section do %>
+  <h1 class="h2"><%= t('sites.titles.show') %></h1>
+
+  <%= render partial: 'buttons' %>
+<% end %>
+
+<p>
+  <strong><%= @site.attribute_translate(:name) %>:</strong>
+  <%= @site.name %>
+</p>
+
+<p>
+  <strong><%= @site.attribute_translate(:token) %>:</strong>
+  <%= @site.token %>
+</p>

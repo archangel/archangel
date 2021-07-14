@@ -1,0 +1,37 @@
+DatabaseConsistencySettings:
+  color: true
+  # log_level: INFO # Show only failures
+  log_level: DEBUG # Show both failures and successes
+
+# Ignore false positive from Rails' ActionText and ActiveStorage
+ActionText::RichText:
+  enabled: false
+ActiveStorage::Attachment:
+  enabled: false
+ActiveStorage::Blob:
+  enabled: false
+
+Site:
+  index_sites_on_token:
+    UniqueIndexChecker:
+      enabled: false
+  token:
+    NullConstraintChecker:
+      enabled: false
+
+User:
+  auth_token:
+    NullConstraintChecker:
+      enabled: false
+  index_users_on_auth_token:
+    UniqueIndexChecker:
+      enabled: false
+  index_users_on_confirmation_token:
+    UniqueIndexChecker:
+      enabled: false
+  index_users_on_reset_password_token:
+    UniqueIndexChecker:
+      enabled: false
+  index_users_on_unlock_token:
+    UniqueIndexChecker:
+      enabled: false
