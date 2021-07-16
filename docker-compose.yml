@@ -23,7 +23,7 @@ services:
   sidekiq:
     build: .
     container_name: archangel_sidekiq
-    command: ./docker/entrypoint/sidekiq.sh
+    command: ./docker/sidekiq/entrypoint.sh
     restart: always
     environment:
       JOB_QUEUE_ADAPTER: sidekiq
@@ -36,7 +36,7 @@ services:
   app:
     build: .
     container_name: archangel_app
-    command: ./docker/entrypoint/docker.sh
+    command: ./docker/app/entrypoint.sh
     ports:
       - "3000:3000"
       - "3035:3035"
