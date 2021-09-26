@@ -8,14 +8,12 @@ class UserSite < ApplicationRecord
   #
   # 0: Can view, edit, update and delete
   # 1: Can view, create and update but not delete
-  # 2: Can update but not create or delete
-  # 3: Can view but not create, update or delete
+  # 2: Can view but not create, update or delete
   #
   ROLES = {
     admin: 0,
-    manager: 1,
-    editor: 2,
-    reader: 3
+    editor: 1,
+    reader: 2
   }.freeze
 
   ##
@@ -23,7 +21,7 @@ class UserSite < ApplicationRecord
   #
   # Default role to assign to Users. Assign to "reader" role by default
   #
-  ROLE_DEFAULT = 3
+  ROLE_DEFAULT = 1
 
   enum role: ROLES
 

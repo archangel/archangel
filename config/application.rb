@@ -38,6 +38,8 @@ module Archangel
     # config.time_zone = 'Central Time (US & Canada)'
     # config.eager_load_paths << Rails.root.join('extras')
 
+    config.secret_key_base = ENV.fetch('SECRET_KEY_BASE', SecureRandom.hex(64))
+
     # Don't generate system test files.
     config.generators.system_tests = nil
   end

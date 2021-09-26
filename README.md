@@ -157,6 +157,16 @@ View coverage with
 $ open coverage/index.html
 ```
 
+## Swagger
+
+Swagger API documentation
+
+```
+$ rake rswag:specs:swaggerize
+```
+
+In your browser go to [http://localhost:3000/api-docs/index.html](http://localhost:3000/api-docs/index.html)
+
 ## Linting
 
 Several tools are used to ensure code is styled, linted and formatted correctly.

@@ -1,0 +1,32 @@
+<% content_for :section do %>
+  <h1 class="h2"><%= t('contents.titles.index') %></h1>
+
+  <%= render partial: 'buttons' %>
+<% end %>
+
+<% if @contents.present? %>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= @contents.first.attribute_translate(:title) %></th>
+          <th><%= @contents.first.attribute_translate(:slug) %></th>
+          <th><%= @contents.first.attribute_translate(:published_at) %></th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= render partial: 'content', collection: @contents %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= paginate @contents %>
+
+<% else %>
+
+  <p><%= t('contents.zero') %></p>
+
+<% end %>

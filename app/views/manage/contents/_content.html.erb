@@ -1,0 +1,8 @@
+<tr>
+  <td><%= content.name %></td>
+  <td><%= content.slug %></td>
+  <td><%= content.published_at %></td>
+  <td><%= link_to 'Show', manage_content_path(content) %></td>
+  <td><%= link_to 'Edit', edit_manage_content_path(content) %></td>
+  <td><%= link_to 'Discard', manage_content_path(content), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

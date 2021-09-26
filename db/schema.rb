@@ -10,43 +10,90 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_09_225032) do
+ActiveRecord::Schema.define(version: 2021_07_25_102902) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "metatags", force: :cascade do |t|
-    t.string "metatagable_type"
-    t.bigint "metatagable_id"
-    t.string "name", null: false
-    t.string "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["metatagable_type", "metatagable_id"], name: "index_metatags_on_metatagable"
-    t.index ["name", "metatagable_type", "metatagable_id"], name: "index_metatags_on_name_and_tagable_type_and_tagable_id", unique: true
-  end
-
-  create_table "pages", force: :cascade do |t|
-    t.bigint "site_id"
-    t.string "title", default: "", null: false
-    t.string "slug", default: "", null: false
+  create_table "collection_entries", force: :cascade do |t|
+    t.bigint "collection_id"
+    t.jsonb "content", default: "{}", null: false
+    t.integer "position", default: 0
     t.datetime "published_at"
     t.datetime "discarded_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["discarded_at"], name: "index_pages_on_discarded_at"
-    t.index ["published_at"], name: "index_pages_on_published_at"
-    t.index ["site_id"], name: "index_pages_on_site_id"
-    t.index ["slug", "site_id"], name: "index_pages_on_slug_and_site_id", unique: true
+    t.index ["collection_id"], name: "index_collection_entries_on_collection_id"
+    t.index ["content"], name: "index_collection_entries_on_content", using: :gin
+    t.index ["discarded_at"], name: "index_collection_entries_on_discarded_at"
+    t.index ["published_at"], name: "index_collection_entries_on_published_at"
+  end
+
+  create_table "collection_fields", force: :cascade do |t|
+    t.string "label", null: false
+    t.string "key", null: false
+    t.bigint "collection_id"
+    t.integer "classification", default: 0, null: false
+    t.boolean "required", default: false
+    t.integer "position", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["collection_id"], name: "index_collection_fields_on_collection_id"
+    t.index ["key", "collection_id"], name: "index_collection_fields_on_key_and_collection_id", unique: true
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.bigint "site_id"
+    t.datetime "published_at"
+    t.datetime "discarded_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["discarded_at"], name: "index_collections_on_discarded_at"
+    t.index ["published_at"], name: "index_collections_on_published_at"
+    t.index ["site_id"], name: "index_collections_on_site_id"
+    t.index ["slug", "site_id"], name: "index_collections_on_slug_and_site_id", unique: true
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.bigint "site_id"
+    t.text "body"
+    t.datetime "published_at"
+    t.datetime "discarded_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["discarded_at"], name: "index_contents_on_discarded_at"
+    t.index ["published_at"], name: "index_contents_on_published_at"
+    t.index ["site_id"], name: "index_contents_on_site_id"
+    t.index ["slug", "site_id"], name: "index_contents_on_slug_and_site_id", unique: true
   end
 
   create_table "sites", force: :cascade do |t|
     t.string "name", default: "", null: false
-    t.string "token", null: false
+    t.string "subdomain", null: false
+    t.jsonb "settings", default: "{}", null: false
+    t.datetime "discarded_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["discarded_at"], name: "index_sites_on_discarded_at"
     t.index ["name"], name: "index_sites_on_name", unique: true
-    t.index ["token"], name: "index_sites_on_token", unique: true
+    t.index ["settings"], name: "index_sites_on_settings", using: :gin
+    t.index ["subdomain"], name: "index_sites_on_subdomain", unique: true
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "storable_type"
+    t.bigint "storable_id"
+    t.string "key", null: false
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["key", "storable_type", "storable_id"], name: "index_stores_on_key_and_storable_type_and_storable_id", unique: true
+    t.index ["storable_type", "storable_id"], name: "index_stores_on_storable"
   end
 
   create_table "user_sites", force: :cascade do |t|
@@ -63,7 +110,7 @@ ActiveRecord::Schema.define(version: 2021_07_09_225032) do
   create_table "users", force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name"
-    t.string "username", default: "", null: false
+    t.string "username", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -90,6 +137,7 @@ ActiveRecord::Schema.define(version: 2021_07_09_225032) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.string "auth_token", null: false
+    t.jsonb "preferences", default: "{}", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
@@ -98,10 +146,14 @@ ActiveRecord::Schema.define(version: 2021_07_09_225032) do
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
+    t.index ["preferences"], name: "index_users_on_preferences", using: :gin
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "pages", "sites"
+  add_foreign_key "collection_entries", "collections"
+  add_foreign_key "collection_fields", "collections"
+  add_foreign_key "collections", "sites"
+  add_foreign_key "contents", "sites"
 end

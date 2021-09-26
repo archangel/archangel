@@ -1,0 +1,498 @@
+---
+openapi: 3.0.1
+info:
+  title: Archangel API V1
+  description: Headless CMS
+  version: v1
+paths:
+  "/api/v1/auth":
+    post:
+      summary: Retrieve authentication token
+      tags:
+      - Auth
+      security: []
+      parameters: []
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/auth_create"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+  "/api/v1/contents":
+    get:
+      summary: Content listing
+      tags:
+      - Contents
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/contents"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+    post:
+      summary: Create a content
+      tags:
+      - Contents
+      security:
+      - Bearer: {}
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/content"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '422':
+          description: unprocessable
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unprocessable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - slug
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                body:
+                  type: string
+                published_at:
+                  type: string
+                  nullable: true
+  "/api/v1/contents/{contentSlug}":
+    get:
+      summary: Retrieve a content
+      tags:
+      - Contents
+      security:
+      - Bearer: {}
+      parameters:
+      - name: contentSlug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/content"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+    put:
+      summary: Update a content
+      tags:
+      - Contents
+      security:
+      - Bearer: {}
+      parameters:
+      - name: contentSlug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/content"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+        '422':
+          description: unprocessable
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unprocessable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+    delete:
+      summary: Delete a content
+      tags:
+      - Contents
+      security:
+      - Bearer: {}
+      parameters:
+      - name: contentSlug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: no content
+        '401':
+          description: unauthorized
+  "/api/v1/users":
+    post:
+      summary: Create a user
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/user"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '422':
+          description: unprocessable
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unprocessable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - username
+              - first_name
+              properties:
+                email:
+                  type: string
+                username:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                  nullable: true
+  "/api/v1/users/{userUsername}":
+    get:
+      summary: Retrieve a user
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters:
+      - name: userUsername
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/user"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+    delete:
+      summary: Delete a user
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters:
+      - name: userUsername
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: no content
+        '401':
+          description: unauthorized
+  "/api/v1/users/{userUsername}/unlock":
+    post:
+      summary: Unlock a user
+      tags:
+      - Users
+      security:
+      - Bearer: {}
+      parameters:
+      - name: userUsername
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/user"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+servers:
+- url: http://localhost:3000
+  description: Development
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    not_found:
+      type: object
+      required:
+      - success
+      - status
+      - message
+      properties:
+        success:
+          type: boolean
+          default: false
+        status:
+          type: integer
+          default: 404
+        message:
+          type: string
+    unauthorized:
+      type: object
+      required:
+      - success
+      - status
+      - message
+      properties:
+        success:
+          type: boolean
+          default: false
+        status:
+          type: integer
+          default: 401
+        message:
+          type: string
+    unprocessable:
+      type: object
+      required:
+      - success
+      - status
+      - errors
+      properties:
+        success:
+          type: boolean
+          default: false
+        status:
+          type: integer
+          default: 422
+        errors:
+          type: object
+    auth_create_item:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
+    auth_create:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 202
+        data:
+          "$ref": "#/components/schemas/auth_create_item"
+    content_item:
+      type: object
+      required:
+      - name
+      - slug
+      - body
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        body:
+          type: string
+        publishedAt:
+          type: string
+          nullable: true
+        deletedAt:
+          type: string
+          nullable: true
+          default:
+    content:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 200
+        data:
+          "$ref": "#/components/schemas/content_item"
+    contents:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 200
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/content_item"
+    user_item:
+      type: object
+      required:
+      - email
+      - username
+      - firstName
+      - lastName
+      - name
+      - locked
+      properties:
+        email:
+          type: string
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        name:
+          type: string
+        locked:
+          type: boolean
+          default: false
+        deletedAt:
+          type: string
+          nullable: true
+          default:
+    user:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 200
+        data:
+          "$ref": "#/components/schemas/user_item"

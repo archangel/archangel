@@ -10,11 +10,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    manager? || admin?
+    admin?
   end
 
   def update?
-    manager? || editor? || admin?
+    editor? || admin?
   end
 
   def destroy?

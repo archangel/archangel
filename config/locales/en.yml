@@ -1,5 +1,18 @@
 ---
 en:
+  contents:
+    buttons:
+      destroy: Destroy
+      edit: Edit
+      index: Back
+      new: New
+      show: Show
+    titles:
+      edit: Edit Content
+      index: Contents
+      new: New Content
+      show: Content
+    zero: No content available
   dashboards:
     titles:
       show: Dashboard
@@ -9,19 +22,6 @@ en:
       editor: Editor
       manager: Manager
       reader: Reader
-  pages:
-    buttons:
-      destroy: Destroy
-      edit: Edit
-      index: Back
-      new: New
-      show: Show
-    titles:
-      edit: Edit Page
-      index: Pages
-      new: New Page
-      show: Page
-    zero: No pages available
   profiles:
     buttons:
       edit: Edit

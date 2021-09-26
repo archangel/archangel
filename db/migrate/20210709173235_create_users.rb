@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       ## Common
       t.string :first_name, null: false, default: ""
       t.string :last_name
-      t.string :username, null: false, default: ""
+      t.string :username, null: false
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""
@@ -47,6 +47,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.integer    :invitations_count, default: 0
 
       t.string :auth_token, null: false
+      t.jsonb :preferences, null: false, default: "{}"
 
       t.timestamps null: false
     end
@@ -59,5 +60,6 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     add_index :users, :auth_token,           unique: true
     add_index :users, :invitation_token,     unique: true
     add_index :users, :invited_by_id
+    add_index :users, :preferences,          using: :gin
   end
 end

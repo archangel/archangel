@@ -24,8 +24,8 @@ module Manage
 
     def permitted_attributes
       [
-        :name,
-        { metatags_attributes: %i[id _destroy name content] }
+        :name, :subdomain,
+        { stores_attributes: %i[id _destroy key value] }
       ]
     end
 

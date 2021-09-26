@@ -36,7 +36,9 @@ end
 now = Time.current
 
 # Site
-site = Site.first_or_create(name: 'Archangel')
+site = Site.find_or_create_by(subdomain: 'archangel') do |item|
+  item.name = 'Archangel'
+end
 
 # User (admin)
 user = User.find_or_create_by(email: prompt_for_admin_email, username: prompt_for_admin_username) do |item|
@@ -56,9 +58,10 @@ UserSite.find_or_create_by(site_id: site.id, user_id: user.id) do |item|
   item.role = 0
 end
 
-# Page
-Page.where(site_id: site.id, slug: 'sample').first_or_create do |item|
-  item.title = 'Sample Page'
+# Content
+Content.where(site_id: site.id, slug: 'sample').first_or_create do |item|
+  item.name = 'Sample Content'
+  item.body = '<p>Body of the content</p>'
   item.published_at = now
 end
 

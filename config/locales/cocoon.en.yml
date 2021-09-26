@@ -4,6 +4,6 @@ en:
     defaults:
       add: Add Record
       remove: Remove Record
-    metatags:
-      add: Add Metatag
-      remove: Remove Metatag
+    stores:
+      add: Add Store
+      remove: Remove Store

@@ -93,6 +93,7 @@ search:
 
 ## Do not consider these keys missing:
 ignore_missing:
+  - 'api.unauthorized.{invalid,not_authorized,token_invalid,token_missing}'
   - 'errors.messages.{email,not_saved,slug,url}'
   - 'devise.invitations.{edit,new}.{header,submit_button}'
   - 'devise.mailer.invitation_instructions.{accept,accept_until,hello,ignore,someone_invited_you}'

@@ -1,0 +1,20 @@
+<% content_for :section do %>
+  <h1 class="h2"><%= t('contents.titles.show') %></h1>
+
+  <%= render partial: 'buttons' %>
+<% end %>
+
+<p>
+  <strong><%= @content.attribute_translate(:name) %>:</strong>
+  <%= @content.name %>
+</p>
+
+<p>
+  <strong><%= @content.attribute_translate(:slug) %>:</strong>
+  <%= @content.slug %>
+</p>
+
+<p>
+  <strong><%= @content.attribute_translate(:published_at) %>:</strong>
+  <%= @content.published_at %>
+</p>

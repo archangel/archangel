@@ -28,6 +28,6 @@ class User < ApplicationRecord
   end
 
   def generate_auth_token
-    SecureRandom.urlsafe_base64
+    SecureRandom.hex(24)
   end
 end

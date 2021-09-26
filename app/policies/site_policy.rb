@@ -6,6 +6,6 @@ class SitePolicy < ApplicationPolicy
   end
 
   def update?
-    manager? || editor? || admin?
+    editor? || admin?
   end
 end

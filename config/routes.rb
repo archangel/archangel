@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  if Rails.env.development?
+    require 'sidekiq/web'
+
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
+
   devise_for :users,
              module: :devise,
              controllers: {
@@ -20,17 +29,23 @@ Rails.application.routes.draw do
                unlock: 'unlock'
              }
 
-  if Rails.env.development?
-    require 'sidekiq/web'
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resource :auth, only: %i[create]
 
-    mount Sidekiq::Web => '/sidekiq'
+      resources :contents, except: %i[new edit]
+
+      resources :users, except: %i[index new edit update] do
+        post :unlock, on: :member
+      end
+    end
   end
 
   namespace :manage do
     resource :profile, only: %i[edit show update]
     resource :site, only: %i[edit show update]
 
-    resources :pages
+    resources :contents
 
     resources :users do
       get :reinvite, on: :member
@@ -40,5 +55,5 @@ Rails.application.routes.draw do
     root to: 'dashboards#show'
   end
 
-  root to: 'pages#show'
+  root to: 'homes#show'
 end

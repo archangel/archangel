@@ -12,16 +12,17 @@ en:
         label: Label
         required: Required
         slug: Slug
-      metatag:
-        content: Content
-        name: Name
-      page:
+      content:
+        body: Body
         published_at: Publish Date
         slug: Slug
-        title: Title
+        name: Name
+      store:
+        key: Key
+        value: Value
       site:
         name: Name
-        token: Token
+        subdomain: Subdomain
       user:
         email: Email
         first_name: First Name
@@ -39,12 +40,12 @@ en:
       collection_field:
         one: Field
         other: Fields
-      metatag:
-        one: Metatag
-        other: Metatags
-      page:
-        one: Page
-        other: Pages
+      content:
+        one: Content
+        other: Contents
+      store:
+        one: Store
+        other: Stores
       site:
         one: Site
         other: Sites
