@@ -41,7 +41,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = {
-    host: 'archangel.local'
+    host: 'archangel.test'
   }
 
   # Tell Action Mailer not to deliver emails to the real world.

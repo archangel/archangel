@@ -1,7 +1,7 @@
 FROM ruby:3.0.2
 LABEL maintainer="dfreerksen@gmail.com"
 
-ENV APP_DIR /var/www/archangel
+ENV RAILS_ROOT /var/www/archangel
 ENV PORT 3000
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
@@ -18,19 +18,24 @@ RUN apt-get install -qq -y apt-utils \
                            yarn
 RUN apt-get clean
 
-RUN mkdir -p $APP_DIR
-WORKDIR $APP_DIR
+RUN mkdir -p $RAILS_ROOT
+WORKDIR $RAILS_ROOT
 
-COPY Gemfile Gemfile.lock $APP_DIR/
-RUN gem install bundler
+COPY Gemfile Gemfile.lock $RAILS_ROOT/
 RUN bundle install --jobs 20 --retry 5
 
-COPY package.json $APP_DIR/
+COPY package.json $RAILS_ROOT/
 RUN yarn install --check-files
 
 # The `node-sass` build is different for Mac and Windows and Linux
 RUN npm rebuild node-sass
 
-COPY . $APP_DIR/
+COPY . $RAILS_ROOT/
 
 EXPOSE $PORT
+
+COPY docker/app/entrypoint.sh /usr/bin/docker-entrypoint.sh
+RUN chmod +x /usr/bin/docker-entrypoint.sh
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]
