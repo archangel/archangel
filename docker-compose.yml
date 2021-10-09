@@ -39,6 +39,8 @@ services:
     build: .
     container_name: archangel_app
     restart: unless-stopped
+    stdin_open: true
+    tty: true
     ports:
       - '3000:3000'
       - '3035:3035'
@@ -55,7 +57,16 @@ services:
       - sidekiq
     volumes:
       - .:/var/www/archangel
-    stdin_open: true
-    tty: true
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    container_name: archangel_web
+    depends_on:
+      - app
+    ports:
+      - 80:80
+    volumes:
+      - ./log:/var/www/archangel/log
 volumes:
   postgres:

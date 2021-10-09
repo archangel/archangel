@@ -78,7 +78,14 @@ If Redis is needed (for background workers), either change the `JOB_QUEUE_ADAPTE
 
 ### Docker
 
-First, ensure the [Docker](https://www.docker.com/products/docker-desktop) app is running. Set up the database by running
+First, make sure the domains used are in the `/etc/hosts` file
+
+```
+$ sudo sh -c "echo 127.0.0.1  www.archangel.io >> /etc/hosts"
+$ sudo sh -c "echo 127.0.0.1  archangel.io >> /etc/hosts"
+```
+
+Next, ensure the [Docker](https://www.docker.com/products/docker-desktop) app is running. Set up the database by running
 
 ```
 $ docker-compose build
@@ -91,7 +98,7 @@ Start the server by running the following command in the console
 $ docker-compose up
 ```
 
-In your browser go to [http://localhost:3000](http://localhost:3000)
+In your browser go to [http://archangel.io](http://archangel.io) or [http://localhost:3000](http://localhost:3000)
 
 #### Sample Data
 
