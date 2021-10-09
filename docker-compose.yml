@@ -62,11 +62,14 @@ services:
       context: .
       dockerfile: ./docker/web/Dockerfile
     container_name: archangel_web
+    restart: unless-stopped
     depends_on:
       - app
     ports:
-      - 80:80
+      - '80:80'
+      - '443:443'
     volumes:
+      - ./public:/var/www/archangel/public
       - ./log:/var/www/archangel/log
 volumes:
   postgres:
