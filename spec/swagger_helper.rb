@@ -107,6 +107,58 @@ RSpec.configure do |config|
               }
             }
           },
+          collection_item: {
+            type: :object,
+            required: %w[name slug],
+            properties: {
+              name: { type: :string },
+              slug: { type: :string },
+              publishedAt: {
+                type: :string,
+                nullable: true
+              },
+              deletedAt: {
+                type: :string,
+                nullable: true,
+                default: nil
+              }
+            }
+          },
+          collection: {
+            type: :object,
+            required: %w[success status data],
+            properties: {
+              success: {
+                type: :boolean,
+                default: true
+              },
+              status: {
+                type: :integer,
+                default: 200
+              },
+              data: {
+                '$ref' => '#/components/schemas/collection_item'
+              }
+            }
+          },
+          collections: {
+            type: :object,
+            required: %w[success status data],
+            properties: {
+              success: {
+                type: :boolean,
+                default: true
+              },
+              status: {
+                type: :integer,
+                default: 200
+              },
+              data: {
+                type: :array,
+                items: { '$ref' => '#/components/schemas/collection_item' }
+              }
+            }
+          },
           content_item: {
             type: :object,
             required: %w[name slug body],

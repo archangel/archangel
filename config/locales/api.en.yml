@@ -2,6 +2,7 @@
 en:
   api:
     not_found:
+      collections: Collection not found
       contents: Content not found
       users: User not found
     unauthorized:

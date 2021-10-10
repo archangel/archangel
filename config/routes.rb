@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resource :auth, only: %i[create]
 
+      resources :collections, except: %i[new edit]
       resources :contents, except: %i[new edit]
 
       resources :users, except: %i[index new edit update] do

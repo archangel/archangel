@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe 'API v1 Content delete', type: :request do
+RSpec.describe 'API v1 Collection delete', type: :request do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
   let(:access_token) { profile.auth_token }
-  let(:resource) { create(:content, site: site) }
+  let(:resource) { create(:collection, site: site) }
 
   before do
     create(:user_site, user: profile, site: site)
 
-    delete "/api/v1/contents/#{resource.slug}",
+    delete "/api/v1/collections/#{resource.slug}",
            headers: { accept: 'application/json', authorization: access_token }
   end
 
