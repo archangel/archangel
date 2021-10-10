@@ -17,11 +17,9 @@ require('src/js/common/flatpickr/defaults')
 require('src/js/common/jodit/defaults')
 
 // Simpleform Custom Inputs
-require('src/js/manage/inputs/date_picker')
 require('src/js/manage/inputs/datetime_picker')
 require('src/js/manage/inputs/slug')
 require('src/js/manage/inputs/subdomain')
-require('src/js/manage/inputs/time_picker')
 require('src/js/manage/inputs/username')
 require('src/js/manage/inputs/wysiwyg')
 

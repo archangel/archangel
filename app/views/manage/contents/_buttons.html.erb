@@ -4,6 +4,6 @@
     <%= link_to(t("contents.buttons.show"), manage_content_path(@content), type: "button", class: "btn btn-sm btn-outline-secondary") if update_actions? %>
     <%= link_to(t("contents.buttons.new"), new_manage_content_path, type: "button", class: "btn btn-sm btn-outline-secondary") if collection_action? || member_action? %>
     <%= link_to(t("contents.buttons.edit"), edit_manage_content_path(@content), type: "button", class: "btn btn-sm btn-outline-secondary") if show_action? %>
-    <%= link_to(t("contents.buttons.destroy"), manage_content_path(@content), type: "button", class: "btn btn-sm btn-outline-secondary", method: :delete, data: { confirm: "Are you sure?"}) if member_action? && !@content.discarded? %>
+    <%= link_to(t("contents.buttons.destroy"), manage_content_path(@content), type: "button", class: "btn btn-sm btn-outline-secondary", method: :delete, data: { confirm: t("contents.are_you_sure") }) if member_action? && !@content.discarded? %>
   </div>
 </div>

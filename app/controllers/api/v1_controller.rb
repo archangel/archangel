@@ -6,10 +6,6 @@ module Api
 
     # rescue_from ActiveRecord::RecordNotFound, with: -> { render json: { error: 'Not found' }, status: :not_found }
 
-    def current_site
-      @current_site ||= Site.first
-    end
-
     def json_not_found(resource)
       {
         success: false,
