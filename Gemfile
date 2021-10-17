@@ -16,6 +16,7 @@ gem 'rack-cors', '~> 1.1.1'
 gem 'rails', '~> 6.1.4'
 gem 'webpacker', '~> 5.4.3'
 
+gem 'activerecord-typedstore', '~> 1.4.0'
 gem 'acts_as_list', '~> 1.0.4'
 gem 'cocoon', '~> 1.2.15'
 gem 'devise', '~> 4.8.0'
@@ -55,13 +56,13 @@ group :development, :test do
   gem 'bullet', '~> 6.1.5'
   gem 'dotenv-rails', '~> 2.7.6'
   gem 'i18n-tasks', '~> 0.9.34'
-  gem 'launchy', '~> 2.5.0'
   gem 'pry-byebug', '~> 3.9.0'
 end
 
 group :test do
   gem 'capybara', '~> 3.35.3', require: false
   gem 'factory_bot_rails', '~> 6.2.0', require: false
+  gem 'launchy', '~> 2.5.0'
   # gem 'pundit-matchers', '~> 1.6.0', require: false
   gem 'rspec_junit_formatter', '~> 0.4.1', require: false
   gem 'rspec-rails', '~> 5.0.2', require: false

@@ -54,6 +54,7 @@ en:
         other: Users
   errors:
     messages:
+      camel_case: must be camel case (eg. camelCase)
       email: is not a valid email
       slug: is not a valid slug
       url: is not a valid URL

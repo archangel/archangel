@@ -1,29 +1,15 @@
-import slugify from 'slugify'
-
-import { slugifyOptions } from '../../common/slugify/modules/options'
+import { slugifyString } from './modules/slugify_string'
 
 function initializeSlugifyOnUsernameInputs () {
   const inputFields = document.querySelectorAll('input.username')
-  const inputOptions = slugifyOptions
 
   inputFields.forEach((inputField) => {
-    // const originField = document.querySelector(originElem)
-    // const destinationField = document.querySelector(destinationElem)
-    //
-    // if (originField === null) {
-    //   return false
-    // }
-    //
-    // originField.addEventListener('blur', (evt) => {
-    //   if (destinationField.value !== '') {
-    //     return false
-    //   }
-    //
-    //   const originFieldValue = originField.value
-    //   const sluggedValue = slugify(originFieldValue, slugifyOptions())
-    //
-    //   destinationField.value = sluggedValue
-    // })
+    inputField.addEventListener('input', (evt) => {
+      const inputFieldValue = inputField.value
+      const sluggedValue = slugifyString(inputFieldValue)
+
+      inputField.value = sluggedValue
+    })
   })
 }
 

@@ -25,6 +25,7 @@ module Manage
     def permitted_attributes
       [
         :name, :subdomain,
+        :format_datetime,
         { stores_attributes: %i[id _destroy key value] }
       ]
     end

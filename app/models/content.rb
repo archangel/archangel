@@ -2,6 +2,7 @@
 
 class Content < ApplicationRecord
   include DeleteConcern
+  include PublishConcern
 
   belongs_to :site
 

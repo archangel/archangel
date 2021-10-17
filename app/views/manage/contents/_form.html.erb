@@ -6,7 +6,7 @@
   <%= f.input :body, as: :wysiwyg %>
   <%= f.input :published_at, as: :datetime_picker %>
 
-  <div id="stores">
+  <div id="content_stores">
     <%= f.simple_fields_for :stores do |store| %>
       <%= render 'store_fields', f: store %>
     <% end %>

@@ -54,19 +54,21 @@ module Manage
 
     def permitted_attributes
       [
-        :published_at, :site_id, :name, :slug,
+        :body, :name, :published_at, :slug,
         { stores_attributes: %i[id _destroy key value] }
       ]
     end
 
     def set_contents
-      @contents = current_site.contents.order(name: :asc).page(page_num).per(per_page)
+      @contents = current_site.contents.all.order(name: :asc).page(page_num).per(per_page)
 
       authorize @contents
     end
 
     def set_content
-      @content = current_site.contents.find(params[:id])
+      resource_id = params.fetch(:id, nil)
+
+      @content = current_site.contents.all.find(resource_id)
 
       authorize @content
     end

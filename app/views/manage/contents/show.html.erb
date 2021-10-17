@@ -16,5 +16,5 @@
 
 <p>
   <strong><%= @content.attribute_translate(:published_at) %>:</strong>
-  <%= @content.published_at %>
+  <%= l(@content.published_at, format: current_site.format_datetime, default: nil) %>
 </p>

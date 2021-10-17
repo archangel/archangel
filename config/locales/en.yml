@@ -1,5 +1,6 @@
 ---
 en:
+  are_you_sure: Are you sure?
   contents:
     actions: Actions
     are_you_sure: Are you sure you want to delete this content?
@@ -15,10 +16,15 @@ en:
       index: Contents
       new: New Content
       show: Content
-    zero: No content available
+    zero: No contents available
   dashboards:
     titles:
       show: Dashboard
+  errors:
+    not_found: Not Found
+    not_found_message: Error 404
+    unauthorized: Unauthorized
+    unauthorized_message: Error 404
   inputs:
     roles:
       admin: Administrator
@@ -36,6 +42,7 @@ en:
     buttons:
       edit: Edit
       show: Show
+    submitting: Saving...
     titles:
       edit: Edit Site
       show: Site

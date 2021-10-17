@@ -1,0 +1,13 @@
+table.table {
+  tbody tr.status-deleted {
+    border-left: solid 10px $red-200;
+  }
+
+  tbody tr.status-available {
+    border-left: solid 10px $green-200;
+  }
+
+  tbody tr.status-scheduled {
+    border-left: solid 10px $purple-200;
+  }
+}
