@@ -35,6 +35,7 @@ en:
     buttons:
       edit: Edit
       show: Show
+    submitting: Saving...
     titles:
       edit: Edit Profile
       show: Profile

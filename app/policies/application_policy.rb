@@ -8,32 +8,18 @@ class ApplicationPolicy
     @record = record
   end
 
-  def index?
-    false
-  end
-
-  def show?
-    false
-  end
-
-  def create?
-    false
+  %w[index show create update destroy].each do |rest_action|
+    define_method("#{rest_action}?".to_sym) do
+      false
+    end
   end
 
   def new?
     create?
   end
 
-  def update?
-    false
-  end
-
   def edit?
     update?
-  end
-
-  def destroy?
-    false
   end
 
   class Scope

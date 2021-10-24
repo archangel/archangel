@@ -17,7 +17,7 @@ RSpec.describe 'Manage Content #show', type: :system do
     it 'returns 200 status' do
       visit "/manage/contents/#{resource.id}"
 
-      expect(page.status_code).to eq 200
+      expect(page.status_code).to eq(200)
     end
 
     it 'returns success when resource is marked as discarded' do
@@ -25,7 +25,7 @@ RSpec.describe 'Manage Content #show', type: :system do
 
       visit "/manage/contents/#{resource.id}"
 
-      expect(page.status_code).to eq 200
+      expect(page.status_code).to eq(200)
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe 'Manage Content #show', type: :system do
     it 'returns 404 status' do
       visit '/manage/contents/0'
 
-      expect(page.status_code).to eq 404
+      expect(page.status_code).to eq(404)
     end
 
     it 'returns 404 when it does not exist' do

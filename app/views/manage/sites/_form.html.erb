@@ -6,7 +6,7 @@
 
   <%= f.input :format_datetime %>
 
-  <div id="stores">
+  <div id="site_stores">
     <%= f.simple_fields_for :stores do |store| %>
       <%= render 'store_fields', f: store %>
     <% end %>

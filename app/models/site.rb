@@ -17,4 +17,5 @@ class Site < ApplicationRecord
   accepts_nested_attributes_for :stores, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true, uniqueness: true
+  validates :subdomain, presence: true, uniqueness: true
 end

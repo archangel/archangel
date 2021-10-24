@@ -1,7 +1,9 @@
 <%= simple_form_for [:manage, profile], as: :profile, url: :manage_profile, html: { autocomplete: 'false' } do |f| %>
+  <%= f.error_notification %>
+
   <%= f.input :first_name %>
   <%= f.input :last_name %>
-  <%= f.input :username %>
+  <%= f.input :username, as: :username %>
   <%= f.input :email, as: :email %>
 
   <div class="form-row">
@@ -9,5 +11,5 @@
     <%= f.input :password_confirmation, wrapper_html: { class: 'col-md-6' } %>
   </div>
 
-  <%= f.button :submit %>
+  <%= f.button :submit, data: { disable_with: t('profiles.submitting') } %>
 <% end %>

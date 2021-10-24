@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admin - Content #new', type: :system do
+RSpec.describe 'Manage Content #new', type: :system do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
   let(:resource_data) do
@@ -47,7 +47,7 @@ RSpec.describe 'Admin - Content #new', type: :system do
         expect(page).to have_content('Content was successfully created.')
       end
 
-      it 'successful with multiple assigns' do
+      it 'successful with multiple stores' do
         fill_in_content_form_with(resource_data)
         add_and_fill_in_content_store_form_with(key: 'foo', value: 'bar')
         add_and_fill_in_content_store_form_with(key: 'bat', value: 'baz')
@@ -86,7 +86,7 @@ RSpec.describe 'Admin - Content #new', type: :system do
       expect(page.find('.slug.content_slug')).to have_content('has already been taken')
     end
 
-    describe 'with assigns', js: true do
+    describe 'with stores', js: true do
       before do
         fill_in_content_form_with(resource_data)
       end
