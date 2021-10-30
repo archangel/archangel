@@ -34,7 +34,10 @@ Rails.application.routes.draw do
       resource :auth, only: %i[create]
 
       resources :collections, except: %i[new edit]
-      resources :contents, except: %i[new edit]
+
+      resources :contents, except: %i[new edit] do
+        post :restore
+      end
 
       resources :users, except: %i[index new edit update] do
         post :unlock, on: :member
@@ -46,7 +49,9 @@ Rails.application.routes.draw do
     resource :profile, only: %i[edit show update]
     resource :site, only: %i[edit show update]
 
-    resources :contents
+    resources :contents do
+      post :restore
+    end
 
     resources :users do
       get :reinvite, on: :member

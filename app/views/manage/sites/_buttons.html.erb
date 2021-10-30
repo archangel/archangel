@@ -1,6 +1,6 @@
 <div class="btn-toolbar mb-2 mb-md-0">
-  <div class="btn-group" role="group" aria-label="Actions">
-    <%= link_to_show(t("sites.buttons.show"), manage_site_path) if update_actions? %>
-    <%= link_to_edit(t("sites.buttons.edit"), edit_manage_site_path) if show_action? %>
+  <div class="btn-group" role="group" aria-label="<%= t('sites.actions') %>">
+    <%= link_to_show(t("sites.buttons.show"), manage_site_path) if policy(:site).show? && update_actions? %>
+    <%= link_to_edit(t("sites.buttons.edit"), edit_manage_site_path) if policy(:site).edit? && show_action? %>
   </div>
 </div>

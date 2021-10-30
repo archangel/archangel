@@ -8,6 +8,7 @@ module Manage
     before_action :set_content, only: %i[show edit update destroy]
     before_action :set_new_content, only: %i[new]
     before_action :set_create_content, only: %i[create]
+    before_action :set_restore_content, only: %i[restore]
 
     def index; end
 
@@ -50,6 +51,15 @@ module Manage
       end
     end
 
+    def restore
+      @content.undiscard
+
+      respond_to do |format|
+        format.html { redirect_to manage_contents_path, notice: 'Content was successfully restored.' }
+        format.json { head :no_content }
+      end
+    end
+
     protected
 
     def permitted_attributes
@@ -60,7 +70,7 @@ module Manage
     end
 
     def set_contents
-      @contents = current_site.contents.all.order(name: :asc).page(page_num).per(per_page)
+      @contents = current_site.contents.with_discarded.order(name: :asc).page(page_num).per(per_page)
 
       authorize @contents
     end
@@ -68,7 +78,7 @@ module Manage
     def set_content
       resource_id = params.fetch(:id, nil)
 
-      @content = current_site.contents.all.find(resource_id)
+      @content = current_site.contents.with_discarded.find(resource_id)
 
       authorize @content
     end
@@ -81,6 +91,14 @@ module Manage
 
     def set_create_content
       @content = current_site.contents.new(resource_params)
+
+      authorize @content
+    end
+
+    def set_restore_content
+      resource_id = params.fetch(:content_id, nil)
+
+      @content = current_site.contents.with_discarded.find(resource_id)
 
       authorize @content
     end

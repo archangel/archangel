@@ -1,9 +1,13 @@
-<tr class="user-role-<%= user.role %>">
+<tr class="user-role-<%= user.role %> status-<%= user_status(user) %>">
   <td><%= user.first_name %></td>
   <td><%= user.last_name %></td>
   <td><%= user.username %></td>
   <td><%= user.email %></td>
-  <td><%= link_to 'Show', manage_user_path(user) %></td>
-  <td><%= link_to 'Edit', edit_manage_user_path(user) %></td>
-  <td><%= link_to 'Destroy', manage_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <td>
+    <div class="btn-group" role="group" aria-label="<%= t('users.actions') %>">
+      <%= link_to_show(t("users.buttons.show"), manage_user_path(user)) if policy(:user).show? %>
+      <%= link_to_edit(t("users.buttons.edit"), edit_manage_user_path(user)) if policy(:user).edit? %>
+      <%= link_to_delete(t("users.buttons.destroy"), manage_user_path(user), method: :delete, data: { confirm: t("users.are_you_sure") }) if policy(:user).destroy? %>
+    </div>
+  </td>
 </tr>

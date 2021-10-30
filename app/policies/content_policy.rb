@@ -20,4 +20,8 @@ class ContentPolicy < ApplicationPolicy
   def destroy?
     admin?
   end
+
+  def restore?
+    admin?
+  end
 end

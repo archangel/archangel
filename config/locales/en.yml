@@ -9,6 +9,7 @@ en:
       edit: Edit Content
       index: Back to Contents
       new: New Content
+      restore: Restore Content
       show: Show Content
     submitting: Saving...
     titles:
@@ -32,28 +33,33 @@ en:
       manager: Manager
       reader: Reader
   profiles:
+    actions: Actions
     buttons:
-      edit: Edit
-      show: Show
+      edit: Edit Profile
+      show: Profile
     submitting: Saving...
     titles:
       edit: Edit Profile
       show: Profile
   sites:
+    actions: Actions
     buttons:
-      edit: Edit
-      show: Show
+      edit: Edit Site
+      show: Site
     submitting: Saving...
     titles:
       edit: Edit Site
       show: Site
   users:
+    actions: Actions
+    are_you_sure: Are you sure you want to delete this user?
     buttons:
-      destroy: Destroy
-      edit: Edit
-      index: Back
-      new: New
-      show: Show
+      destroy: Delete User
+      edit: Edit User
+      index: Back to Users
+      new: New User
+      show: Show User
+    submitting: Saving...
     titles:
       edit: Edit User
       index: Users

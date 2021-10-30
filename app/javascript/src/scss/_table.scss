@@ -1,10 +1,16 @@
 table.table {
-  tbody tr.status-deleted {
+  tbody tr.status-available {
+    border-left: solid 10px $green-200;
+  }
+
+  tbody tr.status-deleted,
+  tbody tr.status-locked {
     border-left: solid 10px $red-200;
   }
 
-  tbody tr.status-available {
-    border-left: solid 10px $green-200;
+  tbody tr.status-draft,
+  tbody tr.status-unconfirmed {
+    border-left: solid 10px $gray-200;
   }
 
   tbody tr.status-scheduled {

@@ -1,9 +1,9 @@
 <div class="btn-toolbar mb-2 mb-md-0">
-  <div class="btn-group me-2">
-    <%= link_to(t("users.buttons.index"), manage_users_path, type: "button", class: "btn btn-sm btn-outline-secondary") if member_action? || create_actions? %>
-    <%= link_to(t("users.buttons.show"), manage_user_path(@user), type: "button", class: "btn btn-sm btn-outline-secondary") if update_actions? %>
-    <%= link_to(t("users.buttons.new"), new_manage_user_path, type: "button", class: "btn btn-sm btn-outline-secondary") if collection_action? || member_action? %>
-    <%= link_to(t("users.buttons.edit"), edit_manage_user_path(@user), type: "button", class: "btn btn-sm btn-outline-secondary") if show_action? %>
-    <%= link_to(t("users.buttons.destroy"), manage_user_path(@user), type: "button", class: "btn btn-sm btn-outline-secondary", method: :delete, data: { confirm: "Are you sure?"}) if member_action? %>
+  <div class="btn-group" role="group" aria-label="<%= t('users.actions') %>">
+    <%= link_to_index(t("users.buttons.index"), manage_users_path) if policy(:user).index? && (member_action? || create_actions?) %>
+    <%= link_to_show(t("users.buttons.show"), manage_user_path(@user)) if policy(:user).show? && update_actions? %>
+    <%= link_to_new(t("users.buttons.new"), new_manage_user_path) if policy(:user).new? && (collection_action? || member_action?) %>
+    <%= link_to_edit(t("users.buttons.edit"), edit_manage_user_path(@user)) if policy(:user).edit? && show_action? %>
+    <%= link_to_delete(t("users.buttons.destroy"), manage_user_path(@user), data: { confirm: t("users.are_you_sure") }) if policy(:user).destroy? && member_action? %>
   </div>
 </div>

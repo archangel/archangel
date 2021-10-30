@@ -86,6 +86,23 @@ module LinkToHelper
   alias link_to_destroy link_to_delete
 
   ##
+  # "Restore" button using `link_to`
+  #
+  # Example
+  #   link_to_restore('Restore', '/foo')
+  #   link_to_restore('Restore', '/foo', class: 'btn btn-foo')
+  #
+  def link_to_restore(name = nil, link = nil, options = {})
+    options = {
+      class: 'btn btn-danger btn-action',
+      icon: 'bi bi-arrow-repeat',
+      method: :post
+    }.deep_merge(options)
+
+    link_to_custom(name, link, options)
+  end
+
+  ##
   # Custom button using `link_to`
   #
   # Example
