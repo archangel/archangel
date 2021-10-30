@@ -5,9 +5,10 @@ module Manage
     include Controllers::PaginationConcern
 
     before_action :set_users, only: %i[index]
-    before_action :set_user, only: %i[show edit update destroy reinvite unlock]
+    before_action :set_user, only: %i[show edit update reinvite unlock]
     before_action :set_new_user, only: %i[new]
     before_action :set_create_user, only: %i[create]
+    before_action :set_destroy_user, only: %i[destroy]
 
     def index; end
 
@@ -51,10 +52,10 @@ module Manage
     end
 
     def destroy
-      @user.destroy
+      @user_site.destroy
 
       respond_to do |format|
-        format.html { redirect_to manage_users_path, notice: 'User was successfully destroyed.' }
+        format.html { redirect_to manage_users_path, notice: 'User was successfully removed from this site.' }
         format.json { head :no_content }
       end
     end
@@ -109,6 +110,17 @@ module Manage
       @user = User.invite!(managed_resource_params, current_user)
 
       authorize @user
+    end
+
+    def set_destroy_user
+      resource_id = params.fetch(:id, nil)
+
+      @user_site = current_site.user_sites
+                               .where.not(user_id: current_user.id)
+                               .where(site_id: current_site.id, user_id: resource_id)
+                               .first
+
+      authorize @user_site
     end
 
     def resource_params

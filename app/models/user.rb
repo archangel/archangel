@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_one :user_site, dependent: :destroy
   has_many :sites, through: :user_site
 
-  delegate :role, to: :user_site
+  delegate :role, to: :user_site, allow_nil: true
 
   validates :email, presence: true, email: true, uniqueness: true
   validates :first_name, presence: true
