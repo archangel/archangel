@@ -22,7 +22,7 @@ module Manage
           current_site.user_sites
                       .create(user: @user, role: resource_params.fetch(:role, UserSite::ROLE_DEFAULT))
 
-          format.html { redirect_to manage_users_path, notice: 'User was successfully created.' }
+          format.html { redirect_to manage_users_path, notice: I18n.t('flash.users.create.success') }
           format.json { render :show, status: :created, location: manage_user_path(@user) }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ module Manage
                       .find_by(user: params[:id])
                       .update(role: resource_params.fetch(:role, UserSite::ROLE_DEFAULT))
 
-          format.html { redirect_to manage_user_path(@user), notice: 'User was successfully updated.' }
+          format.html { redirect_to manage_user_path(@user), notice: I18n.t('flash.users.update.success') }
           format.json { render :show, status: :ok, location: manage_user_path(@user) }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ module Manage
       @user_site.destroy
 
       respond_to do |format|
-        format.html { redirect_to manage_users_path, notice: 'User was successfully removed from this site.' }
+        format.html { redirect_to manage_users_path, notice: I18n.t('flash.users.destroy.success') }
         format.json { head :no_content }
       end
     end
@@ -64,7 +64,7 @@ module Manage
       @user.deliver_invitation
 
       respond_to do |format|
-        format.html { redirect_to manage_user_path(@user), notice: 'User was successfully reinvited.' }
+        format.html { redirect_to manage_user_path(@user), notice: I18n.t('flash.users.reinvite.success') }
         format.json { render :show, status: :ok, location: manage_user_path(@user) }
       end
     end
@@ -73,7 +73,7 @@ module Manage
       @user.unlock_access!
 
       respond_to do |format|
-        format.html { redirect_to manage_user_path(@user), notice: 'User was successfully unlocked.' }
+        format.html { redirect_to manage_user_path(@user), notice: I18n.t('flash.users.unlock.success') }
         format.json { render :show, status: :ok, location: manage_user_path(@user) }
       end
     end

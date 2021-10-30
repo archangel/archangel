@@ -16,7 +16,7 @@ module Manage
         if @profile.update(update_resource_params)
           bypass_sign_in(@profile)
 
-          format.html { redirect_to manage_profile_path, notice: 'Profile was successfully updated.' }
+          format.html { redirect_to manage_profile_path, notice: I18n.t('flash.profiles.update.success') }
           format.json { render :show, status: :ok, location: manage_profile_path }
         else
           format.html { render :edit, status: :unprocessable_entity }

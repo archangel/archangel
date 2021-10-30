@@ -19,7 +19,7 @@ module Manage
     def create
       respond_to do |format|
         if @content.save
-          format.html { redirect_to manage_content_path(@content), notice: 'Content was successfully created.' }
+          format.html { redirect_to manage_content_path(@content), notice: I18n.t('flash.contents.create.success') }
           format.json { render :show, status: :created, location: manage_content_path(@content) }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +33,7 @@ module Manage
     def update
       respond_to do |format|
         if @content.update(resource_params)
-          format.html { redirect_to manage_content_path(@content), notice: 'Content was successfully updated.' }
+          format.html { redirect_to manage_content_path(@content), notice: I18n.t('flash.contents.update.success') }
           format.json { render :show, status: :ok, location: manage_content_path(@content) }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ module Manage
       @content.discard
 
       respond_to do |format|
-        format.html { redirect_to manage_contents_path, notice: 'Content was successfully destroyed.' }
+        format.html { redirect_to manage_contents_path, notice: I18n.t('flash.contents.destroy.success') }
         format.json { head :no_content }
       end
     end
@@ -55,7 +55,7 @@ module Manage
       @content.undiscard
 
       respond_to do |format|
-        format.html { redirect_to manage_contents_path, notice: 'Content was successfully restored.' }
+        format.html { redirect_to manage_contents_path, notice: I18n.t('flash.contents.restore.success') }
         format.json { head :no_content }
       end
     end

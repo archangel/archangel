@@ -11,7 +11,7 @@ module Manage
     def update
       respond_to do |format|
         if @site.update(site_params)
-          format.html { redirect_to manage_site_path, notice: 'Site was successfully updated.' }
+          format.html { redirect_to manage_site_path, notice: I18n.t('flash.sites.update.success') }
           format.json { render :show, status: :ok, location: manage_site_path }
         else
           format.html { render :edit, status: :unprocessable_entity }

@@ -1,0 +1,29 @@
+---
+en:
+  flash:
+    contents:
+      create:
+        success: Content was successfully created.
+      update:
+        success: Content was successfully updated.
+      destroy:
+        success: Content was successfully destroyed.
+      restore:
+        success: Content was successfully restored.
+    profiles:
+      update:
+        success: Profile was successfully updated.
+    sites:
+      update:
+        success: Site was successfully updated.
+    users:
+      create:
+        success: User was successfully created.
+      update:
+        success: User was successfully updated.
+      destroy:
+        success: User was successfully removed from this site.
+      reinvite:
+        success: User was successfully reinvited.
+      unlock:
+        success: User was successfully unlocked.
