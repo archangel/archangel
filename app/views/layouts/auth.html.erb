@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html dir="<%= html_dir %>" lang="<%= html_lang %>">
   <head>
     <title>Archangel Auth</title>
 
@@ -12,6 +12,8 @@
     <%= javascript_pack_tag 'auth', 'data-turbolinks-track': 'reload' %>
   </head>
   <body class="text-center">
+    <%= render "layouts/shared/flash_messages" %>
+
     <main class="form-auth">
       <%= yield %>
     </main>

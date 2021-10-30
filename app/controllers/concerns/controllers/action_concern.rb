@@ -49,108 +49,32 @@ module Controllers
     end
 
     ##
-    # Check if index
+    # Check if action
     #
-    # Check if action is the index action type. The check will pass if it is an `index` action
+    # Check if action is action type. The check will pass if it is the action
     #
     # Usage
     #   index_action? # true
     #   index_action? # false
-    #
-    # @return [Boolean] if action is action type
-    #
-    def index_action?
-      action?('index')
-    end
-
-    ##
-    # Check if show
-    #
-    # Check if action is the show action type. The check will pass if it is a `show` action
-    #
-    # Usage
     #   show_action? # true
     #   show_action? # false
-    #
-    # @return [Boolean] if action is action type
-    #
-    def show_action?
-      action?('show')
-    end
-
-    ##
-    # Check if new
-    #
-    # Check if action is the new action type. The check will pass if it is a `new` action
-    #
-    # Usage
     #   new_action? # true
     #   new_action? # false
-    #
-    # @return [Boolean] if action is action type
-    #
-    def new_action?
-      action?('new')
-    end
-
-    ##
-    # Check if create
-    #
-    # Check if action is the create action type. The check will pass if it is a `create` action
-    #
-    # Usage
     #   create_action? # true
     #   create_action? # false
-    #
-    # @return [Boolean] if action is action type
-    #
-    def create_action?
-      action?('create')
-    end
-
-    ##
-    # Check if edit
-    #
-    # Check if action is the edit action type. The check will pass if it is an `edit` action
-    #
-    # Usage
     #   edit_action? # true
     #   edit_action? # false
-    #
-    # @return [Boolean] if action is action type
-    #
-    def edit_action?
-      action?('edit')
-    end
-
-    ##
-    # Check if update
-    #
-    # Check if action is the update action type. The check will pass if it is an `update` action
-    #
-    # Usage
     #   update_action? # true
     #   update_action? # false
-    #
-    # @return [Boolean] if action is action type
-    #
-    def update_action?
-      action?('update')
-    end
-
-    ##
-    # Check if destroy
-    #
-    # Check if action is the destroy action type. The check will pass if it is a `destroy` action
-    #
-    # Usage
     #   destroy_action? # true
     #   destroy_action? # false
     #
     # @return [Boolean] if action is action type
     #
-    def destroy_action?
-      action?('destroy')
+    %w[index show new create edit update destroy].each do |rest_action|
+      define_method("#{rest_action}_action?".to_sym) do
+        action?(rest_action)
+      end
     end
 
     ##
