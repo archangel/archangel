@@ -100,6 +100,8 @@ $ docker-compose up
 
 In your browser go to [http://archangel.io](http://archangel.io) or [http://localhost:3000](http://localhost:3000)
 
+> NOTE: `binding.pry` does not work inside Docker without attaching the process. To use pry with Docker, a bin script has been created. To use pry with Docker, start the server by running `bin/dev`
+
 #### Sample Data
 
 The database is empty by default. Seed the database with sample data
