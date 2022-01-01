@@ -486,8 +486,8 @@ paths:
 servers:
 - url: http://localhost:3000
   description: Local Development
-- url: https://archangel.io
-  description: archangel.io
+- url: https://archangel.local
+  description: archangel.local
 components:
   securitySchemes:
     Bearer:

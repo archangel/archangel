@@ -81,8 +81,8 @@ If Redis is needed (for background workers), either change the `JOB_QUEUE_ADAPTE
 First, make sure the domains used are in the `/etc/hosts` file
 
 ```
-$ sudo sh -c "echo 127.0.0.1  www.archangel.io >> /etc/hosts"
-$ sudo sh -c "echo 127.0.0.1  archangel.io >> /etc/hosts"
+$ sudo sh -c "echo 127.0.0.1  www.archangel.local >> /etc/hosts"
+$ sudo sh -c "echo 127.0.0.1  archangel.local >> /etc/hosts"
 ```
 
 Next, ensure the [Docker](https://www.docker.com/products/docker-desktop) app is running. Set up the database by running
@@ -98,7 +98,7 @@ Start the server by running the following command in the console
 $ docker-compose up
 ```
 
-In your browser go to [http://archangel.io](http://archangel.io) or [http://localhost:3000](http://localhost:3000)
+In your browser go to [http://archangel.local](http://archangel.local) or [http://localhost:3000](http://localhost:3000)
 
 > NOTE: `binding.pry` does not work inside Docker without attaching the process. To use pry with Docker, a bin script has been created. To use pry with Docker, start the server by running `bin/dev`
 

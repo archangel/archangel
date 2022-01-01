@@ -29,8 +29,8 @@ RSpec.configure do |config|
           description: 'Local Development'
         },
         {
-          url: 'https://archangel.io',
-          description: 'archangel.io'
+          url: 'https://archangel.local',
+          description: 'archangel.local'
         }
       ],
       components: {
