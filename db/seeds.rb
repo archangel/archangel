@@ -65,5 +65,35 @@ Content.where(site_id: site.id, slug: 'sample').first_or_create do |item|
   item.published_at = now
 end
 
+# Collection
+if Collection.find_by(site_id: site.id, slug: 'sample').blank?
+  # Collection
+  collection = Collection.create(site_id: site.id, slug: 'sample', name: 'Sample Collection', published_at: now)
+
+  # Fields
+  CollectionField.create(
+    [
+      { collection_id: collection.id, key: 'field1', label: 'Field 1', classification: 'string' },
+      { collection_id: collection.id, key: 'field2', label: 'Field 2', classification: 'string' }
+    ]
+  )
+
+  # Entries
+  CollectionEntry.create(
+    [
+      {
+        collection_id: collection.id,
+        content: { field1: 'First Item, First Field', field2: 'First Item, Second Field' },
+        published_at: now
+      },
+      {
+        collection_id: collection.id,
+        content: { field1: 'Second Item, First Field', field2: 'Second Item, Second Field' },
+        published_at: now
+      }
+    ]
+  )
+end
+
 # Done
 say('Insemination complete')

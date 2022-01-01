@@ -5,6 +5,7 @@ en:
       collection:
         name: Name
         slug: Slug
+        published_at: Publish Date
       collection_entry:
         published_at: Publish Date
       collection_field:

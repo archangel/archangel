@@ -1,0 +1,22 @@
+<%= simple_form_for [:manage, collection, collection_entry], html: { autocomplete: 'false' } do |f| %>
+  <%= f.error_notification %>
+
+  <% @collection.collection_fields.each do |field| %>
+    <% if %w[date datetime time].include?(field.classification) %>
+      <%# Date, Datetime and Time picker #%>
+      <%- field_classification = "#{field.classification}_picker" -%>
+    <% else %>
+      <%# All other field classifications #%>
+      <%- field_classification = field.classification -%>
+    <% end %>
+    <%- field_hint = %w[boolean].exclude?(field.classification) ? t("classifications.#{field.classification}") : nil -%>
+    <%= f.input :"#{field.key}", as: :"#{field_classification}",
+                                  label: "#{field.label} (#{field.key})",
+                                  required: field.required,
+                                  hint: field_hint %>
+  <% end %>
+
+  <%= f.input :published_at, as: :datetime_picker %>
+
+  <%= f.button :submit, data: { disable_with: t('collection_entries.submitting') } %>
+<% end %>

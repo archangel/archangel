@@ -4,7 +4,15 @@ class Site < ApplicationRecord
   include DeleteConcern
 
   typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
-    s.string :format_datetime, blank: false, default: '%B %-d, %Y @ %I:%M:%S %p'
+    # Date formats for Ruby
+    s.string :format_date, blank: false, default: '%B %-d, %Y'
+    s.string :format_datetime, blank: false, default: '%B %-d, %Y @ %I:%M %p'
+    s.string :format_time, blank: false, default: '%I:%M %p'
+
+    # Date formats for Javascript (using Moment.js formatting)
+    s.string :format_js_date, blank: false, default: 'MMMM Do YYYY'
+    s.string :format_js_datetime, blank: false, default: 'MMMM Do YYYY @ h:mm a'
+    s.string :format_js_time, blank: false, default: 'h:mm a'
   end
 
   has_many :collections, dependent: :destroy

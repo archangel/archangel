@@ -1,0 +1,19 @@
+<%= simple_form_for [:manage, collection], html: { autocomplete: 'false' } do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name %>
+  <%= f.input :slug, as: :slug %>
+  <%= f.input :published_at, as: :datetime_picker %>
+
+  <div id="collection_collection_fields">
+    <%= f.simple_fields_for :collection_fields do |collection_field| %>
+      <%= render 'collection_field_fields', f: collection_field %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association(f, :collection_fields) %>
+    </div>
+  </div>
+
+  <%= f.button :submit, data: { disable_with: t('collections.submitting') } %>
+<% end %>

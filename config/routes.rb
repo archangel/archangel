@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  concern :repositionable do
+    post :reposition, on: :collection
+  end
+
+  concern :restoreable do
+    post :restore, on: :member
+  end
+
   if Rails.env.development?
     require 'sidekiq/web'
 
@@ -49,9 +57,12 @@ Rails.application.routes.draw do
     resource :profile, only: %i[edit show update]
     resource :site, only: %i[edit show update]
 
-    resources :contents do
-      post :restore
+    resources :collections, concerns: %i[restoreable] do
+      resources :collection_entries, controller: 'collections/collection_entries',
+                                     concerns: %i[restoreable repositionable]
     end
+
+    resources :contents, concerns: %i[restoreable]
 
     resources :users do
       get :reinvite, on: :member

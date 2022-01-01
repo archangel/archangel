@@ -1,0 +1,32 @@
+<% content_for :section do %>
+  <h1 class="h2"><%= t('collections.titles.index') %></h1>
+
+  <%= render partial: 'buttons' %>
+<% end %>
+
+<% if @collections.present? %>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= @collections.first.attribute_translate(:name) %></th>
+          <th><%= @collections.first.attribute_translate(:slug) %></th>
+          <th><%= @collections.first.attribute_translate(:published_at) %></th>
+          <th colspan="3"><%= t('collections.actions') %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= render partial: 'collection', collection: @collections %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= paginate @collections %>
+
+<% else %>
+
+  <p><%= t('collections.zero') %></p>
+
+<% end %>

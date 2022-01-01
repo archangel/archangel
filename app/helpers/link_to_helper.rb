@@ -10,7 +10,7 @@ module LinkToHelper
   #
   def link_to_index(name = nil, link = nil, options = {})
     options = options.reverse_merge(
-      class: 'btn btn-secondary btn-action',
+      class: 'btn btn-secondary btn-action btn-index',
       icon: 'bi bi-collection'
     )
 
@@ -26,7 +26,7 @@ module LinkToHelper
   #
   def link_to_show(name = nil, link = nil, options = {})
     options = options.reverse_merge(
-      class: 'btn btn-primary btn-action',
+      class: 'btn btn-primary btn-action btn-show',
       icon: 'bi bi-eye'
     )
 
@@ -42,7 +42,7 @@ module LinkToHelper
   #
   def link_to_new(name = nil, link = nil, options = {})
     options = options.reverse_merge(
-      class: 'btn btn-success btn-action',
+      class: 'btn btn-success btn-action btn-new',
       icon: 'bi bi-file-earmark-plus'
     )
 
@@ -58,7 +58,7 @@ module LinkToHelper
   #
   def link_to_edit(name = nil, link = nil, options = {})
     options = options.reverse_merge(
-      class: 'btn btn-info btn-action',
+      class: 'btn btn-info btn-action btn-edit',
       icon: 'bi bi-pencil'
     )
 
@@ -75,7 +75,7 @@ module LinkToHelper
   #
   def link_to_delete(name = nil, link = nil, options = {})
     options = {
-      class: 'btn btn-danger btn-action',
+      class: 'btn btn-danger btn-action btn-delete',
       icon: 'bi bi-trash',
       data: { confirm: I18n.t('are_you_sure') },
       method: :delete
@@ -94,7 +94,7 @@ module LinkToHelper
   #
   def link_to_restore(name = nil, link = nil, options = {})
     options = {
-      class: 'btn btn-danger btn-action',
+      class: 'btn btn-danger btn-action btn-restore',
       icon: 'bi bi-arrow-repeat',
       method: :post
     }.deep_merge(options)

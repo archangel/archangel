@@ -1,6 +1,9 @@
 ---
 en:
   cocoon:
+    collection_fields:
+      add: Add Collection Field
+      remove: Remove Collection Field
     defaults:
       add: Add Record
       remove: Remove Record

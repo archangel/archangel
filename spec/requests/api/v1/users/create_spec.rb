@@ -57,11 +57,11 @@ RSpec.describe 'API v1 User create', type: :request do
     end
 
     it 'returns correct short error' do
-      expect(json_response[:errors][:email][:short]).to eq('is not a valid email')
+      expect(json_response[:errors][:email][:short]).to eq("can't be blank")
     end
 
     it 'returns correct long error' do
-      expect(json_response[:errors][:email][:long]).to eq('Email is not a valid email')
+      expect(json_response[:errors][:email][:long]).to eq("Email can't be blank")
     end
   end
 

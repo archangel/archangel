@@ -5,7 +5,6 @@ require 'swagger_helper'
 RSpec.describe 'Auths API' do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
-  let(:access_token) { user.auth_token }
 
   before do
     create(:user_site, user: profile, site: site)

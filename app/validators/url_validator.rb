@@ -2,7 +2,7 @@
 
 class UrlValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    return if url_valid?(value)
+    return if value.blank? || url_valid?(value)
 
     msg = options[:message] || I18n.t('errors.messages.url')
 

@@ -1,0 +1,14 @@
+<div class="nested-fields">
+  <%= f.input :classification, as: :classification %>
+
+  <div class="form-row">
+    <%= f.input :label, wrapper_html: { class: 'col-md-6' } %>
+    <%= f.input :key, as: :camel_case, disabled: f.object.persisted?, wrapper_html: { class: 'col-md-6' } %>
+  </div>
+
+  <%= f.input :required, as: :boolean %>
+
+  <div class="form-group">
+    <%= link_to_remove_association(f) %>
+  </div>
+</div>

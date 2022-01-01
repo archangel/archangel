@@ -2,6 +2,11 @@
 
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
+  # Method used to tidy up errors. Specify any Rails Array method.
+  # :first lists the first message for each field.
+  # :to_sentence to list all errors for each field.
+  config.error_method = :first
+
   config.error_notification_class = 'alert alert-danger'
   config.button_class = 'btn btn-primary'
   config.boolean_label_class = nil
@@ -17,8 +22,8 @@ SimpleForm.setup do |config|
     b.use :label, class: 'control-label'
 
     b.use :input, class: 'form-control'
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :full_error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
   end
 
   config.wrappers :vertical_file_input, tag: 'div', class: 'form-outline', error_class: 'has-error' do |b|
@@ -29,8 +34,8 @@ SimpleForm.setup do |config|
     b.use :label, class: 'control-label'
 
     b.use :input
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :full_error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
   end
 
   config.wrappers :vertical_boolean, tag: 'div', class: 'form-outline', error_class: 'has-error' do |b|
@@ -41,8 +46,8 @@ SimpleForm.setup do |config|
       ba.use :label_input
     end
 
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :full_error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
   end
 
   config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-outline', error_class: 'has-error' do |b|
@@ -50,8 +55,8 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.use :label, class: 'control-label'
     b.use :input
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :full_error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
   end
 
   config.wrappers :horizontal_form, tag: 'div', class: 'form-outline', error_class: 'has-error' do |b|
@@ -121,8 +126,8 @@ SimpleForm.setup do |config|
     b.use :label, class: 'sr-only'
 
     b.use :input, class: 'form-control'
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :full_error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
   end
 
   # Wrappers for forms and inputs using the Bootstrap toolkit.

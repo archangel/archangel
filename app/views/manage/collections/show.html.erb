@@ -1,0 +1,20 @@
+<% content_for :section do %>
+  <h1 class="h2"><%= t('collections.titles.show') %></h1>
+
+  <%= render partial: 'buttons' %>
+<% end %>
+
+<p>
+  <strong><%= @collection.attribute_translate(:name) %>:</strong>
+  <%= @collection.name %>
+</p>
+
+<p>
+  <strong><%= @collection.attribute_translate(:slug) %>:</strong>
+  <%= @collection.slug %>
+</p>
+
+<p>
+  <strong><%= @collection.attribute_translate(:published_at) %>:</strong>
+  <%= l(@collection.published_at, format: current_site.format_datetime, default: nil) %>
+</p>

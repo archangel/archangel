@@ -5,7 +5,6 @@ require 'swagger_helper'
 RSpec.describe 'Contents API' do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
-  let(:access_token) { user.auth_token }
   let(:content) { create(:content, site: site) }
   let(:contentSlug) { content.slug }
   let(:body) do

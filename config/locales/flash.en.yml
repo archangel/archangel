@@ -1,6 +1,26 @@
 ---
 en:
   flash:
+    collection_entries:
+      create:
+        success: Collection Entry was successfully created.
+      update:
+        success: Collection Entry was successfully updated.
+      destroy:
+        success: Collection Entry was successfully destroyed.
+      reposition:
+        success: Collection Entry reposition was successful.
+      restore:
+        success: Collection Entry was successfully restored.
+    collections:
+      create:
+        success: Collection was successfully created.
+      update:
+        success: Collection was successfully updated.
+      destroy:
+        success: Collection was successfully destroyed.
+      restore:
+        success: Collection was successfully restored.
     contents:
       create:
         success: Content was successfully created.

@@ -5,6 +5,11 @@
   <%= f.input :subdomain, as: :subdomain %>
 
   <%= f.input :format_datetime %>
+  <%= f.input :format_date %>
+  <%= f.input :format_time %>
+  <%= f.input :format_js_datetime %>
+  <%= f.input :format_js_date %>
+  <%= f.input :format_js_time %>
 
   <div id="site_stores">
     <%= f.simple_fields_for :stores do |store| %>

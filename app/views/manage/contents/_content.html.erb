@@ -7,7 +7,7 @@
       <%= link_to_show(t("contents.buttons.show"), manage_content_path(content)) if policy(:content).show? %>
       <%= link_to_edit(t("contents.buttons.edit"), edit_manage_content_path(content)) if policy(:content).edit? %>
       <%= link_to_delete(t("contents.buttons.destroy"), manage_content_path(content), method: :delete, data: { confirm: t("contents.are_you_sure") }) if policy(:content).destroy? && !content.discarded? %>
-      <%= link_to_restore(t("contents.buttons.restore"), manage_content_restore_path(content)) if policy(:content).restore? && content.discarded? %>
+      <%= link_to_restore(t("contents.buttons.restore"), restore_manage_content_path(content)) if policy(:content).restore? && content.discarded? %>
     </div>
   </td>
 </tr>

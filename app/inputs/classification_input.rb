@@ -21,7 +21,7 @@ class ClassificationInput < SimpleForm::Inputs::CollectionSelectInput
 
   def resource_options
     [].tap do |option|
-      ClassificationField.classifications.keys.map do |classification|
+      CollectionField.classifications.keys.map do |classification|
         option << [I18n.t("classifications.#{classification}", default: classification.upcase), classification]
       end
     end

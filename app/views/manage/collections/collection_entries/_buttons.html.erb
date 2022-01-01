@@ -1,0 +1,12 @@
+<div class="btn-toolbar mb-2 mb-md-0">
+  <div class="btn-group" role="group" aria-label="<%= t('collection_entries.actions') %>">
+    <%= link_to_custom(t("collection_entries.buttons.collection"), manage_collection_path(@collection), class: 'btn btn-secondary btn-action', icon: 'bi bi-view-list') if policy(:collection).index? && (collection_action? || member_action? || create_actions?) %>
+    <%= link_to_index(t("collection_entries.buttons.index"), manage_collection_collection_entries_path(@collection)) if policy(:collection_entry).index? && (member_action? || create_actions?) %>
+    <%= link_to_show(t("collection_entries.buttons.show"), manage_collection_collection_entry_path(@collection, @collection_entry)) if policy(:collection_entry).show? && update_actions? %>
+    <%= link_to_new(t("collection_entries.buttons.new"), new_manage_collection_collection_entry_path(@collection)) if policy(:collection_entry).new? && (collection_action? || member_action?) %>
+    <%= link_to_edit(t("collection_entries.buttons.edit"), edit_manage_collection_collection_entry_path(@collection, @collection_entry)) if policy(:collection_entry).edit? && show_action? %>
+    <%= link_to_delete(t("collection_entries.buttons.destroy"), manage_collection_collection_entry_path(@collection, @collection_entry), data: { confirm: t("collection_entries.are_you_sure") }) if policy(:collection_entry).destroy? && member_action? && !@collection_entry.discarded? %>
+    <%= link_to_restore(t("collection_entries.buttons.restore"), restore_manage_collection_collection_entry_path(@collection, @collection_entry)) if policy(:collection_entry).restore? && member_action? && @collection_entry.discarded? %>
+    <%= link_to_delete(t("collection_entries.buttons.really_destroy"), manage_collection_collection_entry_path(@collection, @collection_entry), data: { confirm: t("collection_entries.are_you_very_sure") }) if policy(:collection_entry).destroy? && member_action? && @collection_entry.discarded? %>
+  </div>
+</div>

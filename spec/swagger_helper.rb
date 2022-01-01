@@ -26,7 +26,11 @@ RSpec.configure do |config|
       servers: [
         {
           url: 'http://localhost:3000',
-          description: 'Development'
+          description: 'Local Development'
+        },
+        {
+          url: 'https://archangel.io',
+          description: 'archangel.io'
         }
       ],
       components: {

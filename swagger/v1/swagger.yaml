@@ -38,6 +38,164 @@ paths:
                   type: string
                 password:
                   type: string
+  "/api/v1/collections":
+    get:
+      summary: Collection listing
+      tags:
+      - Collections
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/collections"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+    post:
+      summary: Create a collection
+      tags:
+      - Collections
+      security:
+      - Bearer: {}
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/collection"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '422':
+          description: unprocessable
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unprocessable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - slug
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                published_at:
+                  type: string
+                  nullable: true
+  "/api/v1/collections/{collectionSlug}":
+    get:
+      summary: Retrieve a collection
+      tags:
+      - Collections
+      security:
+      - Bearer: {}
+      parameters:
+      - name: collectionSlug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/collection"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+    put:
+      summary: Update a collection
+      tags:
+      - Collections
+      security:
+      - Bearer: {}
+      parameters:
+      - name: collectionSlug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/collection"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+        '422':
+          description: unprocessable
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unprocessable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+    delete:
+      summary: Delete a collection
+      tags:
+      - Collections
+      security:
+      - Bearer: {}
+      parameters:
+      - name: collectionSlug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: no collection
+        '401':
+          description: unauthorized
   "/api/v1/contents":
     get:
       summary: Content listing
@@ -327,7 +485,9 @@ paths:
                 "$ref": "#/components/schemas/not_found"
 servers:
 - url: http://localhost:3000
-  description: Development
+  description: Local Development
+- url: https://archangel.io
+  description: archangel.io
 components:
   securitySchemes:
     Bearer:
@@ -402,6 +562,55 @@ components:
           default: 202
         data:
           "$ref": "#/components/schemas/auth_create_item"
+    collection_item:
+      type: object
+      required:
+      - name
+      - slug
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        publishedAt:
+          type: string
+          nullable: true
+        deletedAt:
+          type: string
+          nullable: true
+          default:
+    collection:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 200
+        data:
+          "$ref": "#/components/schemas/collection_item"
+    collections:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 200
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/collection_item"
     content_item:
       type: object
       required:

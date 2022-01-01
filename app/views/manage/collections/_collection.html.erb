@@ -1,0 +1,14 @@
+<tr class="status-<%= collection_status(collection) %>">
+  <td><%= collection.name %></td>
+  <td><%= collection.slug %></td>
+  <td><%= l(collection.published_at, format: current_site.format_datetime, default: nil) %></td>
+  <td>
+    <div class="btn-group" role="group" aria-label="<%= t('collections.actions') %>">
+      <%= link_to_custom(t("collections.buttons.entries"), manage_collection_collection_entries_path(collection), class: 'btn btn-secondary btn-action', icon: 'bi bi-view-list') if policy(:collection_entry).index? %>
+      <%= link_to_show(t("collections.buttons.show"), manage_collection_path(collection)) if policy(:collection).show? %>
+      <%= link_to_edit(t("collections.buttons.edit"), edit_manage_collection_path(collection)) if policy(:collection).edit? %>
+      <%= link_to_delete(t("collections.buttons.destroy"), manage_collection_path(collection), method: :delete, data: { confirm: t("collections.are_you_sure") }) if policy(:collection).destroy? && !collection.discarded? %>
+      <%= link_to_restore(t("collections.buttons.restore"), restore_manage_collection_path(collection)) if policy(:collection).restore? && collection.discarded? %>
+    </div>
+  </td>
+</tr>

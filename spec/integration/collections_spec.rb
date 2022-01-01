@@ -5,7 +5,6 @@ require 'swagger_helper'
 RSpec.describe 'Collections API' do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
-  let(:access_token) { user.auth_token }
   let(:collection) { create(:collection, site: site) }
   let(:collectionSlug) { collection.slug }
   let(:body) do
