@@ -85,7 +85,11 @@ module Manage
     end
 
     def set_users
-      @users = current_site.users.order(username: :asc).where.not(id: current_user.id).page(page_num).per(per_page)
+      @users = current_site.users
+                           .includes(%i[user_site])
+                           .order(username: :asc)
+                           .where.not(id: current_user.id)
+                           .page(page_num).per(per_page)
 
       authorize @users
     end
