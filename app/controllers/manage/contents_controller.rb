@@ -96,7 +96,7 @@ module Manage
     end
 
     def set_restore_content
-      resource_id = params.fetch(:content_id, nil)
+      resource_id = params.fetch(:id, nil)
 
       @content = current_site.contents.with_discarded.find(resource_id)
 
