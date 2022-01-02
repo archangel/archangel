@@ -1,0 +1,12 @@
+#!/bin/sh
+
+rm -rf ./coverage
+rm -f ./tmp/{capybara,miniprofiler,screenshots}/*
+rm -rf ./tmp/letter_opener/*
+rm -f ./database_consistency_*
+rm -f ./brakeman.html
+
+bin/rails log:clear tmp:clear
+
+RAILS_ENV=test bin/rails webpacker:clobber
+bin/rails webpacker:clobber
