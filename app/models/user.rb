@@ -19,6 +19,14 @@ class User < ApplicationRecord
     [first_name, last_name].join(' ')
   end
 
+  def locked?
+    locked_at.present?
+  end
+
+  def invitation_pending?
+    invitation_accepted_at.blank?
+  end
+
   private
 
   def create_auth_token

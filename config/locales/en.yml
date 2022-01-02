@@ -106,7 +106,9 @@ en:
       edit: Edit User
       index: Back to Users
       new: New User
+      reinvite: Reinvite User
       show: Show User
+      unlock: Unlock User
     submitting: Saving...
     titles:
       edit: Edit User

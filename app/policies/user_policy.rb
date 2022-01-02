@@ -20,4 +20,12 @@ class UserPolicy < ApplicationPolicy
   def destroy?
     admin?
   end
+
+  def reinvite?
+    editor? || admin?
+  end
+
+  def unlock?
+    editor? || admin?
+  end
 end
