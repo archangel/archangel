@@ -1,0 +1,23 @@
+section#section {
+  height: 100%;
+  margin-left: 0;
+  overflow: scroll;
+  padding: $header-height $spacer $footer-height $spacer;
+  position: fixed;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+}
+
+@include media-breakpoint-up(sm) {
+  section#section {
+    margin-left: $sidebar-min-width;
+    width: calc(100% - $sidebar-min-width);
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  section#section {
+    margin-left: $sidebar-width;
+    width: calc(100% - $sidebar-width);
+  }
+}

@@ -4,32 +4,32 @@ en:
     collection_entries:
       create:
         success: Collection Entry was successfully created.
-      update:
-        success: Collection Entry was successfully updated.
       destroy:
         success: Collection Entry was successfully destroyed.
       reposition:
         success: Collection Entry reposition was successful.
       restore:
         success: Collection Entry was successfully restored.
+      update:
+        success: Collection Entry was successfully updated.
     collections:
       create:
         success: Collection was successfully created.
-      update:
-        success: Collection was successfully updated.
       destroy:
         success: Collection was successfully destroyed.
       restore:
         success: Collection was successfully restored.
+      update:
+        success: Collection was successfully updated.
     contents:
       create:
         success: Content was successfully created.
-      update:
-        success: Content was successfully updated.
       destroy:
         success: Content was successfully destroyed.
       restore:
         success: Content was successfully restored.
+      update:
+        success: Content was successfully updated.
     profiles:
       update:
         success: Profile was successfully updated.
@@ -39,11 +39,11 @@ en:
     users:
       create:
         success: User was successfully created.
-      update:
-        success: User was successfully updated.
       destroy:
         success: User was successfully removed from this site.
       reinvite:
         success: User was successfully reinvited.
       unlock:
         success: User was successfully unlocked.
+      update:
+        success: User was successfully updated.

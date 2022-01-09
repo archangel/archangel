@@ -1,0 +1,9 @@
+---
+en:
+  layout:
+    header:
+      logout: Sign Out
+      name: Archangel
+      name_short: A
+      profile: Profile
+      toggle_navigation: Toggle Navigation

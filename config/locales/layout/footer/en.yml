@@ -1,0 +1,5 @@
+---
+en:
+  layout:
+    footer:
+      copyright: Copyright %{year} Archangel

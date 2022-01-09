@@ -1,16 +1,17 @@
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+<header id="header" class="navbar navbar-dark bg-dark flex-sm-nowrap p-0 shadow">
+  <button class="navbar-toggler d-sm-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="<%= t('layout.header.toggle_navigation') %>">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <%= link_to("Archangel", manage_root_path, class: "navbar-brand col-md-3 col-lg-2 me-0 px-3") %>
+  <%= link_to(t('layout.header.name'), manage_root_path, class: "navbar-brand d-sm-none d-lg-block col-lg-2 px-3") %>
+  <%= link_to(t('layout.header.name_short'), manage_root_path, class: "navbar-brand d-none d-sm-block d-lg-none col-md-3 px-3") %>
 
   <ul class="nav justify-content-end">
     <li class="nav-item">
-      <%= link_to("Profile", manage_profile_path, class: "nav-link") %>
+      <%= link_to(t('layout.header.profile'), manage_profile_path, class: "nav-link") %>
     </li>
     <li class="nav-item">
-      <%= link_to("Sign Out", destroy_user_session_path, class: "nav-link", method: :delete) %>
+      <%= link_to(t('layout.header.logout'), destroy_user_session_path, class: "nav-link", method: :delete) %>
     </li>
   </ul>
 </header>

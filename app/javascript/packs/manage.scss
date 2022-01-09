@@ -1,18 +1,8 @@
-// 3rd party
+// Variables
+@import 'src/scss/theme/variables';
+
+// Bootstrap
 @import '~bootstrap/scss/bootstrap';
-@import '~flatpickr/dist/flatpickr';
-@import '~jodit/build/jodit.min';
 
-// External
-@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css');
-
-// 3rd party overrides
-// n/a
-
-// application styles
-@import 'src/scss/checkbox';
-@import 'src/scss/table';
-
-body {
-  background-color: $white;
-}
+// Section
+@import 'src/scss/manage';

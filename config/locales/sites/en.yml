@@ -1,0 +1,11 @@
+---
+en:
+  sites:
+    actions: Actions
+    buttons:
+      edit: Edit Site
+      show: Site
+    submitting: Saving...
+    titles:
+      edit: Edit Site
+      show: Site

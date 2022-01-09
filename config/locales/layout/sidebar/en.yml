@@ -1,0 +1,9 @@
+---
+en:
+  layout:
+    sidebar:
+      collections: Collections
+      contents: Contents
+      dashboard: Dashboard
+      site: Site
+      users: Users

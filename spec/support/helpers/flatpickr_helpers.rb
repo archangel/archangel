@@ -13,15 +13,15 @@ module Archangel
       #
       def select_flatpickr_date(value, **options)
         from = options.fetch(:from, nil)
+        value = processed_date(value)
 
         return unless page.has_css?('label', text: from)
 
-        value = processed_date(value)
-        path = "//label[contains(text(),'#{from}')]/following-sibling::input[position()=2]"
+        id = find('label', text: from)[:for]
+        selector = "label[for='#{id}'] + input[type='hidden'] + input"
 
-        find(:xpath, path).set(value)
-        find(:xpath, path).send_keys(:enter)
-        find(:xpath, '//body').click
+        find(selector).set(value)
+        page.execute_script("document.querySelector('.flatpickr-calendar.open').classList.remove('open')")
       end
 
       protected

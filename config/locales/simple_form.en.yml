@@ -2,16 +2,16 @@
 en:
   helpers:
     submit:
-      profile:
-        update: Update Profile
       collection_entry:
         create: Create Collection Entry
         update: Update Collection Entry
+      profile:
+        update: Update Profile
   simple_form:
     error_notification:
-      default_message: "Please review the problems below:"
-    "no": 'No'
+      default_message: 'Please review the problems below:'
+    'no': 'No'
     required:
-      text: 'required'
-      mark: '*'
-    "yes": 'Yes'
+      mark: "*"
+      text: required
+    'yes': 'Yes'

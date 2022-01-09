@@ -94,7 +94,7 @@ module LinkToHelper
   #
   def link_to_restore(name = nil, link = nil, options = {})
     options = {
-      class: 'btn btn-danger btn-action btn-restore',
+      class: 'btn btn-warning btn-action btn-restore',
       icon: 'bi bi-arrow-repeat',
       method: :post
     }.deep_merge(options)

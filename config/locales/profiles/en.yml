@@ -1,0 +1,11 @@
+---
+en:
+  profiles:
+    actions: Actions
+    buttons:
+      edit: Edit Profile
+      show: Profile
+    submitting: Saving...
+    titles:
+      edit: Edit Profile
+      show: Profile

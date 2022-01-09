@@ -1,0 +1,17 @@
+table {
+  thead {
+    th.actions {
+      text-align: right;
+    }
+  }
+
+  tbody {
+    td.actions {
+      text-align: right;
+
+      a.btn {
+        span { display: none; }
+      }
+    }
+  }
+}

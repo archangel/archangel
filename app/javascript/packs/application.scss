@@ -1,3 +1,8 @@
-body {
-  background-color: #fff;
-}
+// Variables
+@import 'src/scss/theme/variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Section
+@import 'src/scss/application';

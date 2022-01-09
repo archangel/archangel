@@ -1,0 +1,24 @@
+aside#sidebar {
+  background-color: $white;
+  border-right: 1px solid $gray-300;
+  height: 100%;
+  overflow: scroll;
+  padding-top: $header-height;
+  position: fixed;
+  top: 0;
+  transition: all 0.2s ease-in-out;
+  width: $sidebar-width;
+  z-index: 20;
+}
+
+@include media-breakpoint-up(sm) {
+  aside#sidebar {
+    width: $sidebar-min-width;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  aside#sidebar {
+    width: $sidebar-width;
+  }
+}

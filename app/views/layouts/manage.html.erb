@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html dir="<%= html_dir %>" lang="<%= html_lang %>">
   <head>
-    <title>Archangel Manage</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
 
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Archangel Manage</title>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,27 +14,24 @@
     <%= stylesheet_pack_tag 'manage', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'manage', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= render "layouts/shared/flash_messages" %>
 
     <%= render "layouts/manage/header" %>
 
-    <div class="container-fluid">
-      <div class="row">
-        <%= render "layouts/manage/sidebar" %>
+    <%= render "layouts/manage/sidebar" %>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <%= yield :section %>
-          </div>
+    <section id="section">
+      <%= render "layouts/shared/flash_messages" %>
 
-          <%= yield %>
-        </main>
-
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <%= yield :section %>
       </div>
-    </div>
 
-    <%= render "layouts/manage/footer" %>
+      <main id="main">
+        <%= yield %>
+      </main>
+
+      <%= render "layouts/manage/footer" %>
+    </section>
   </body>
 </html>

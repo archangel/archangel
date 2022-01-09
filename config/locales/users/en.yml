@@ -1,0 +1,20 @@
+---
+en:
+  users:
+    actions: Actions
+    are_you_sure: Are you sure you want to delete this user?
+    buttons:
+      destroy: Delete User
+      edit: Edit User
+      index: Back to Users
+      new: New User
+      reinvite: Reinvite User
+      show: Show User
+      unlock: Unlock User
+    submitting: Saving...
+    titles:
+      edit: Edit User
+      index: Users
+      new: New User
+      show: User
+    zero: No users available

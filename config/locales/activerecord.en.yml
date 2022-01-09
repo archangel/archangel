@@ -4,8 +4,8 @@ en:
     attributes:
       collection:
         name: Name
-        slug: Slug
         published_at: Publish Date
+        slug: Slug
       collection_entry:
         published_at: Publish Date
       collection_field:
@@ -15,15 +15,15 @@ en:
         slug: Slug
       content:
         body: Body
+        name: Name
         published_at: Publish Date
         slug: Slug
-        name: Name
-      store:
-        key: Key
-        value: Value
       site:
         name: Name
         subdomain: Subdomain
+      store:
+        key: Key
+        value: Value
       user:
         email: Email
         first_name: First Name
@@ -44,12 +44,12 @@ en:
       content:
         one: Content
         other: Contents
-      store:
-        one: Store
-        other: Stores
       site:
         one: Site
         other: Sites
+      store:
+        one: Store
+        other: Stores
       user:
         one: User
         other: Users

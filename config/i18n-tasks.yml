@@ -16,9 +16,10 @@ data:
   # Locale files or `File.find` patterns where translations are read from:
   read:
     ## Default:
-    # - config/locales/%{locale}.yml
+    - config/locales/%{locale}.yml
     ## More files:
-    # - config/locales/**/*.%{locale}.yml
+    - config/locales/**/%{locale}.yml
+    - config/locales/**/*.%{locale}.yml
 
   # Locale files to write new keys to, based on a list of key pattern => file rules. Matched from top to bottom:
   # `i18n-tasks normalize -p` will force move the keys according to these rules
@@ -99,16 +100,25 @@ ignore_missing:
   - 'devise.invitations.{edit,new}.{header,submit_button}'
   - 'devise.mailer.invitation_instructions.{accept,accept_until,hello,ignore,someone_invited_you}'
   - 'flash.{collection_entries,collections,contents,profiles,sites,users}.*'
-# - 'errors.messages.{accepted,blank,invalid,too_short,too_long}'
-# - '{devise,simple_form}.*'
+  # - 'errors.messages.{accepted,blank,invalid,too_short,too_long}'
+  # - '{devise,simple_form}.*'
 
 ## Consider these keys used:
-# ignore_unused:
-# - 'activerecord.attributes.*'
-# - '{devise,kaminari,will_paginate}.*'
-# - 'simple_form.{yes,no}'
-# - 'simple_form.{placeholders,hints,labels}.*'
-# - 'simple_form.{error_notification,required}.:'
+ignore_unused:
+  - 'activerecord.{attributes,models}.*'
+  - 'api.unauthorized.not_authorized'
+  - 'cocoon.{collection_fields,defaults,stores}.{add,remove}'
+  - 'devise.{confirmations,failure,invitations,mailer,omniauth_callbacks,passwords,registrations,sessions,unlocks}.*'
+  - 'errors.messages.*'
+  - 'helpers.page_entries_info.more_pages.*'
+  - 'helpers.page_entries_info.one_page.display_entries.{one,other,zero}'
+  - 'helpers.submit.{collection_entry,profile}.{create,update}'
+  - 'simple_form.{yes,no}'
+  - 'simple_form.{placeholders,hints,labels}.*'
+  - 'simple_form.{error_notification,required}.:'
+  - 'time.formats.devise.mailer.invitation_instructions.*'
+  - 'validates_timeliness.*'
+  - 'views.pagination.*'
 
 ## Exclude these keys from the `i18n-tasks eq-base' report:
 # ignore_eq_base:

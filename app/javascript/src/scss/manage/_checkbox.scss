@@ -1,0 +1,60 @@
+// Based on https://codepen.io/thelaazyguy/pen/MvqpPr
+
+@use 'sass:math';
+
+$switch-rail-width: 46px;
+$switch-rail-height: 28px;
+$switch-rail-background-color: $body-bg;
+$switch-rail-background-checked-color: $component-active-bg;
+$switch-rail-border-color: $input-border-color;
+$switch-rail-border-checked-color: $component-active-bg;
+$switch-rail-border-size: $input-border-width;
+$switch-rail-border-radius: math.div($switch-rail-height, 2);
+$switch-button-background-color: $gray-200;
+$switch-button-background-checked-color: $white;
+$switch-button-border-color: $input-border-color;
+$switch-button-border-checked-color: $white;
+$switch-button-border-size: $input-border-width;
+$switch-button-scale: 0.82;
+$switch-gap-right: $spacer * 0.5;
+$switch-transition: $transition-base;
+
+input[type="checkbox"] {
+  appearance: none;
+  background: $switch-rail-background-color;
+  border: $switch-rail-border-size solid $switch-rail-border-color;
+  border-radius: $switch-rail-border-radius;
+  cursor: pointer;
+  height: $switch-rail-height;
+  margin-right: $switch-gap-right; // Needed here because the label is the wrapper and the label text is next to the checkbox
+  outline: none;
+  position: relative;
+  transition: $switch-transition;
+  vertical-align: bottom;
+  width: $switch-rail-width;
+
+  &::after {
+    background: $switch-button-background-color;
+    border: $switch-button-border-size solid $switch-button-border-color;
+    border-radius: 50%;
+    content: "";
+    height: $switch-rail-height;
+    left: 0;
+    position: absolute;
+    top: $switch-rail-border-size * -1;
+    transform: scale($switch-button-scale);
+    transition: $switch-transition;
+    width: $switch-rail-height;
+  }
+
+  &:checked {
+    background: $switch-rail-background-checked-color;
+    border-color: $switch-rail-border-checked-color;
+
+    &::after {
+      background: $switch-button-background-checked-color;
+      border-color: $switch-button-border-checked-color;
+      left: calc(100% - $switch-rail-height);
+    }
+  }
+}

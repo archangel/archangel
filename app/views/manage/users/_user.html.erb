@@ -3,7 +3,7 @@
   <td><%= user.last_name %></td>
   <td><%= user.username %></td>
   <td><%= user.email %></td>
-  <td>
+  <td class="actions">
     <div class="btn-group" role="group" aria-label="<%= t('users.actions') %>">
       <%= link_to_show(t("users.buttons.show"), manage_user_path(user)) if policy(:user).show? %>
       <%= link_to_edit(t("users.buttons.edit"), edit_manage_user_path(user)) if policy(:user).edit? %>
