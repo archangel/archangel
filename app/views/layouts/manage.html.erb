@@ -16,12 +16,12 @@
   </head>
   <body>
 
-    <%= render "layouts/manage/header" %>
+    <%= render 'layouts/manage/header' %>
 
-    <%= render "layouts/manage/sidebar" %>
+    <%= render 'layouts/manage/sidebar' %>
 
     <section id="section">
-      <%= render "layouts/shared/flash_messages" %>
+      <%= render 'layouts/shared/flash_messages' %>
 
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
         <%= yield :section %>
@@ -31,7 +31,7 @@
         <%= yield %>
       </main>
 
-      <%= render "layouts/manage/footer" %>
+      <%= render 'layouts/manage/footer' %>
     </section>
   </body>
 </html>

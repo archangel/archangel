@@ -43,7 +43,7 @@ module Manage
     end
 
     def destroy
-      @content.discard
+      @content.discarded? ? @content.destroy : @content.discard
 
       respond_to do |format|
         format.html { redirect_to manage_contents_path, notice: I18n.t('flash.contents.destroy.success') }

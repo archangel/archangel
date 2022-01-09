@@ -49,7 +49,7 @@ module Manage
     end
 
     def destroy
-      @collection.discard
+      @collection.discarded? ? @collection.destroy : @collection.discard
 
       respond_to do |format|
         format.html { redirect_to manage_collections_path, notice: I18n.t('flash.collections.destroy.success') }
