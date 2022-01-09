@@ -1,10 +1,11 @@
 <div class="btn-toolbar mb-2 mb-md-0">
   <div class="btn-group" role="group" aria-label="<%= t('contents.actions') %>">
-    <%= link_to_index(t("contents.buttons.index"), manage_contents_path) if policy(:content).index? && (member_action? || create_actions?) %>
-    <%= link_to_show(t("contents.buttons.show"), manage_content_path(@content)) if policy(:content).show? && update_actions? %>
-    <%= link_to_new(t("contents.buttons.new"), new_manage_content_path) if policy(:content).new? && (collection_action? || member_action?) %>
-    <%= link_to_edit(t("contents.buttons.edit"), edit_manage_content_path(@content)) if policy(:content).edit? && show_action? %>
-    <%= link_to_delete(t("contents.buttons.destroy"), manage_content_path(@content), data: { confirm: t("contents.are_you_sure") }) if policy(:content).destroy? && member_action? && !@content.discarded? %>
-    <%= link_to_restore(t("contents.buttons.restore"), restore_manage_content_path(@content)) if policy(:content).restore? && member_action? && @content.discarded? %>
-  </div>
+    <%= link_to_index(t('contents.buttons.index'), manage_contents_path) if policy(:content).index? && (member_action? || create_actions?) %>
+    <%= link_to_show(t('contents.buttons.show'), manage_content_path(@content)) if policy(:content).show? && update_actions? %>
+    <%= link_to_new(t('contents.buttons.new'), new_manage_content_path) if policy(:content).new? && (collection_action? || member_action?) %>
+    <%= link_to_edit(t('contents.buttons.edit'), edit_manage_content_path(@content)) if policy(:content).edit? && show_action? %>
+    <%= link_to_delete(t('contents.buttons.delete'), manage_content_path(@content), data: { confirm: t('contents.are_you_sure') }) if policy(:content).destroy? && member_action? && !@content.discarded? %>
+    <%= link_to_restore(t('contents.buttons.restore'), restore_manage_content_path(@content)) if policy(:content).restore? && member_action? && @content.discarded? %>
+    <%= link_to_delete(t('contents.buttons.destroy'), manage_content_path(@content), data: { confirm: t('contents.are_you_very_sure') }) if policy(:content).destroy? && member_action? && @content.discarded? %>
+    </div>
 </div>

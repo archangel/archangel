@@ -40,4 +40,27 @@ RSpec.describe 'Manage Collection #destroy', type: :system do
       end
     end
   end
+
+  describe 'when destroying' do
+    before do
+      create(:collection, :discarded, site: site, name: 'Destroy Me')
+      create(:collection, site: site, name: 'Keep Me')
+
+      visit '/manage/collections'
+
+      within(:css, 'table.table tbody tr:nth-child(1)') do
+        click_on 'Destroy Collection'
+      end
+    end
+
+    it 'returns a success message' do
+      expect(page).to have_content('Collection was successfully destroyed.')
+    end
+
+    it 'does not list destrayed resource' do
+      within(:css, 'table.table tbody') do
+        expect(page).not_to have_content('Destroy Me')
+      end
+    end
+  end
 end

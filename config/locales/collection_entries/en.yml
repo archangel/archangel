@@ -6,11 +6,11 @@ en:
     are_you_very_sure: Are you sure you want to delete this collection entry? This will permanently delete the record. This action cannot be reversed.
     buttons:
       collection: Back to Collection
-      destroy: Delete Collection Entry
+      delete: Delete Collection Entry
+      destroy: Destroy Collection Entry
       edit: Edit Collection Entry
       index: Back to Collection Entries
       new: New Collection Entry
-      really_destroy: Really Delete Collection Entry
       restore: Restore Collection Entry
       show: Show Collection Entry
     submitting: Saving...

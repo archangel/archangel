@@ -1,6 +1,6 @@
 <div class="btn-toolbar mb-2 mb-md-0">
   <div class="btn-group" role="group" aria-label="<%= t('profiles.actions') %>">
-    <%= link_to_show(t("profiles.buttons.show"), manage_profile_path) if policy(:profile).show? && update_actions? %>
-    <%= link_to_edit(t("profiles.buttons.edit"), edit_manage_profile_path) if policy(:content).edit? && show_action? %>
+    <%= link_to_show(t('profiles.buttons.show'), manage_profile_path) if policy(:profile).show? && update_actions? %>
+    <%= link_to_edit(t('profiles.buttons.edit'), edit_manage_profile_path) if policy(:content).edit? && show_action? %>
   </div>
 </div>

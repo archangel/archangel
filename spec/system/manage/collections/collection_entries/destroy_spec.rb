@@ -48,4 +48,27 @@ RSpec.describe 'Manage Collection Entry #destroy', type: :system do
       end
     end
   end
+
+  describe 'when destroying' do
+    before do
+      create(:collection_entry, :discarded, collection: parent_resource, content: { name: 'Destroy Me', slug: 'entrySlugA' })
+      create(:collection_entry, collection: parent_resource, content: { name: 'Keep Me', slug: 'entrySlugB' })
+
+      visit "/manage/collections/#{parent_resource.id}/collection_entries"
+
+      within(:css, 'table.table tbody tr:nth-child(2)') do
+        click_on 'Destroy Collection Entry'
+      end
+    end
+
+    it 'returns a success message' do
+      expect(page).to have_content('Collection Entry was successfully destroyed.')
+    end
+
+    it 'does not list destrayed resource' do
+      within(:css, 'table.table tbody') do
+        expect(page).not_to have_content('Destroy Me')
+      end
+    end
+  end
 end

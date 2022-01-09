@@ -26,11 +26,11 @@
               </div>
             </td>
             <td class="actions">
-              <%= link_to_show(t("collection_entries.buttons.show"), manage_collection_collection_entry_path(@collection, collection_entry)) if policy(:collection_entry).show? %>
-              <%= link_to_edit(t("collection_entries.buttons.edit"), edit_manage_collection_collection_entry_path(@collection, collection_entry)) if policy(:collection_entry).edit? %>
-              <%= link_to_delete(t("collection_entries.buttons.destroy"), manage_collection_collection_entry_path(@collection, collection_entry), method: :delete, data: { confirm: t("collection_entries.are_you_sure") }) if policy(:collection_entry).destroy? && !collection_entry.discarded? %>
-              <%= link_to_restore(t("collection_entries.buttons.restore"), restore_manage_collection_collection_entry_path(@collection, collection_entry)) if policy(:collection_entry).restore? && collection_entry.discarded? %>
-              <%= link_to_delete(t("collection_entries.buttons.really_destroy"), manage_collection_collection_entry_path(@collection, collection_entry), method: :delete, data: { confirm: t("collection_entries.are_you_very_sure") }) if policy(:collection_entry).destroy? && collection_entry.discarded? %>
+              <%= link_to_show(t('collection_entries.buttons.show'), manage_collection_collection_entry_path(@collection, collection_entry)) if policy(:collection_entry).show? %>
+              <%= link_to_edit(t('collection_entries.buttons.edit'), edit_manage_collection_collection_entry_path(@collection, collection_entry)) if policy(:collection_entry).edit? %>
+              <%= link_to_delete(t('collection_entries.buttons.delete'), manage_collection_collection_entry_path(@collection, collection_entry), method: :delete, data: { confirm: t('collection_entries.are_you_sure') }) if policy(:collection_entry).destroy? && !collection_entry.discarded? %>
+              <%= link_to_restore(t('collection_entries.buttons.restore'), restore_manage_collection_collection_entry_path(@collection, collection_entry)) if policy(:collection_entry).restore? && collection_entry.discarded? %>
+              <%= link_to_delete(t('collection_entries.buttons.destroy'), manage_collection_collection_entry_path(@collection, collection_entry), method: :delete, data: { confirm: t('collection_entries.are_you_very_sure') }) if policy(:collection_entry).destroy? && collection_entry.discarded? %>
             </td>
           </tr>
         <% end %>

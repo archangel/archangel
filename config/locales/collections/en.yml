@@ -3,8 +3,10 @@ en:
   collections:
     actions: Actions
     are_you_sure: Are you sure you want to delete this collection?
+    are_you_very_sure: Are you sure you want to delete this collection? This will permanently delete the record. This action cannot be reversed.
     buttons:
-      destroy: Delete Collection
+      delete: Delete Collection
+      destroy: Destroy Collection
       edit: Edit Collection
       entries: Collection Entries
       index: Back to Collections
