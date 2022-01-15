@@ -1,12 +1,15 @@
 <%= simple_form_for [:manage, profile], as: :profile, url: :manage_profile, html: { autocomplete: 'false' } do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
+  <div class="row">
+    <%= f.input :first_name, wrapper_html: { class: 'col-md-6' } %>
+    <%= f.input :last_name, wrapper_html: { class: 'col-md-6' } %>
+  </div>
+
   <%= f.input :username, as: :username %>
   <%= f.input :email, as: :email %>
 
-  <div class="form-row">
+  <div class="row">
     <%= f.input :password, wrapper_html: { class: 'col-md-6' } %>
     <%= f.input :password_confirmation, wrapper_html: { class: 'col-md-6' } %>
   </div>

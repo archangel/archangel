@@ -1,7 +1,7 @@
 <div class="nested-fields">
   <%= f.input :classification, as: :classification %>
 
-  <div class="form-row">
+  <div class="row">
     <%= f.input :label, wrapper_html: { class: 'col-md-6' } %>
     <%= f.input :key, as: :camel_case, disabled: f.object.persisted?, wrapper_html: { class: 'col-md-6' } %>
   </div>

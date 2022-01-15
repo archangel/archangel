@@ -1,8 +1,11 @@
 <%= simple_form_for [:manage, user], html: { autocomplete: 'false' } do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
+  <div class="row">
+    <%= f.input :first_name, wrapper_html: { class: 'col-md-6' } %>
+    <%= f.input :last_name, wrapper_html: { class: 'col-md-6' } %>
+  </div>
+
   <%= f.input :username %>
   <%= f.input :email, as: :email, disabled: f.object.persisted? %>
 

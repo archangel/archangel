@@ -1,7 +1,7 @@
-<div class="nested-fields">
-  <%= f.input :key, as: :camel_case %>
-  <%= f.input :value %>
-
+<div class="row nested-fields">
+  <%= f.input :key, as: :camel_case, wrapper_html: { class: 'col-md-6' } %>
+  <%= f.input :value, wrapper_html: { class: 'col-md-6' } %>
+  
   <div class="form-group">
     <%= link_to_remove_association(f) %>
   </div>
