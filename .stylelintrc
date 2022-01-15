@@ -7,7 +7,7 @@
   ],
   "rules": {
     "at-rule-no-unknown": [true, {
-      "ignoreAtRules": ["else", "extend", "if", "for", "include", "mixin"]
+      "ignoreAtRules": ["if", "else", "for", "extend", "include", "mixin", "use"]
     }],
     "declaration-no-important": true,
     "order/order": [

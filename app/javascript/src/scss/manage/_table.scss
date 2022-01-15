@@ -1,19 +1,39 @@
-table.table {
-  tbody tr.status-available {
-    border-left: solid 10px $green-200;
+table {
+  thead {
+    th.actions {
+      text-align: right;
+    }
   }
 
-  tbody tr.status-deleted,
-  tbody tr.status-locked {
-    border-left: solid 10px $red-200;
+  tbody {
+    td.actions {
+      text-align: right;
+
+      a.btn {
+        span { display: none; }
+      }
+    }
   }
 
-  tbody tr.status-draft,
-  tbody tr.status-unconfirmed {
-    border-left: solid 10px $gray-200;
-  }
+  &.table {
+    tbody {
+      tr.status-available {
+        border-left: solid 10px $green-200;
+      }
 
-  tbody tr.status-scheduled {
-    border-left: solid 10px $purple-200;
+      tr.status-deleted,
+      tr.status-locked {
+        border-left: solid 10px $red-200;
+      }
+
+      tr.status-draft,
+      tr.status-unconfirmed {
+        border-left: solid 10px $gray-200;
+      }
+
+      tr.status-scheduled {
+        border-left: solid 10px $purple-200;
+      }
+    }
   }
 }

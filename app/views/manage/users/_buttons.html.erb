@@ -1,4 +1,4 @@
-<div class="btn-toolbar mb-2 mb-md-0">
+<div class="title-toolbar btn-toolbar mb-2 mb-md-0">
   <div class="btn-group" role="group" aria-label="<%= t('users.actions') %>">
     <%= link_to_index(t('users.buttons.index'), manage_users_path) if policy(:user).index? && (member_action? || create_actions?) %>
     <%= link_to_custom(t('users.buttons.reinvite'), reinvite_manage_user_path(@user), class: 'btn btn-secondary btn-action', icon: 'bi bi-unlock') if policy(:user).reinvite? && member_action? && @user.invitation_pending? %>

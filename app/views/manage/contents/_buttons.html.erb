@@ -1,4 +1,4 @@
-<div class="btn-toolbar mb-2 mb-md-0">
+<div class="title-toolbar btn-toolbar mb-2 mb-md-0">
   <div class="btn-group" role="group" aria-label="<%= t('contents.actions') %>">
     <%= link_to_index(t('contents.buttons.index'), manage_contents_path) if policy(:content).index? && (member_action? || create_actions?) %>
     <%= link_to_show(t('contents.buttons.show'), manage_content_path(@content)) if policy(:content).show? && update_actions? %>

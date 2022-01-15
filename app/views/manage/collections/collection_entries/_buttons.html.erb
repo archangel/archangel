@@ -1,4 +1,4 @@
-<div class="btn-toolbar mb-2 mb-md-0">
+<div class="title-toolbar btn-toolbar mb-2 mb-md-0">
   <div class="btn-group" role="group" aria-label="<%= t('collection_entries.actions') %>">
     <%= link_to_custom(t('collection_entries.buttons.collection'), manage_collection_path(@collection), class: 'btn btn-secondary btn-action', icon: 'bi bi-view-list') if policy(:collection).index? && (collection_action? || member_action? || create_actions?) %>
     <%= link_to_index(t('collection_entries.buttons.index'), manage_collection_collection_entries_path(@collection)) if policy(:collection_entry).index? && (member_action? || create_actions?) %>
