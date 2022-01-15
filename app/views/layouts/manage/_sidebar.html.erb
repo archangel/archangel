@@ -3,19 +3,34 @@
     <div class="position-sticky pt-3">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <%= link_to(t('layout.sidebar.dashboard'), manage_root_path, class: 'nav-link') %>
+          <%= link_to(manage_root_path, class: 'nav-link') do %>
+            <i class="bi bi-house-door-fill"></i>
+            <span><%= t('layout.sidebar.dashboard') %></span>
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to(t('layout.sidebar.contents'), manage_contents_path, class: 'nav-link') %>
+          <%= link_to(manage_contents_path, class: 'nav-link') do %>
+             <i class="bi bi-diagram-3-fill"></i>
+             <span><%= t('layout.sidebar.contents') %></span>
+           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to(t('layout.sidebar.collections'), manage_collections_path, class: 'nav-link') %>
+          <%= link_to(manage_collections_path, class: 'nav-link') do %>
+             <i class="bi bi-collection-fill"></i>
+             <span><%= t('layout.sidebar.collections') %></span>
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to(t('layout.sidebar.users'), manage_users_path, class: 'nav-link') %>
+          <%= link_to(manage_users_path, class: 'nav-link') do %>
+             <i class="bi bi-people-fill"></i>
+             <span><%= t('layout.sidebar.users') %></span>
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to(t('layout.sidebar.site'), manage_site_path, class: 'nav-link') %>
+          <%= link_to(manage_site_path, class: 'nav-link') do %>
+             <i class="bi bi-gear-wide"></i>
+             <span><%= t('layout.sidebar.site') %></span>
+          <% end %>
         </li>
       </ul>
     </div>

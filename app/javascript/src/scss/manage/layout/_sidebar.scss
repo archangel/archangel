@@ -14,11 +14,44 @@ aside#sidebar {
 @include media-breakpoint-up(sm) {
   aside#sidebar {
     width: $sidebar-min-width;
+
+    ul.nav {
+      li.nav-item {
+        a {
+          text-align: center;
+        }
+
+        i {
+          font-size: $sidebar-font-size-sm;
+        }
+
+        span {
+          display: none;
+        }
+      }
+    }
   }
 }
 
 @include media-breakpoint-up(lg) {
   aside#sidebar {
     width: $sidebar-width;
+
+    ul.nav {
+      li.nav-item {
+        a {
+          font-size: $sidebar-font-size-lg;
+          text-align: inherit;
+        }
+
+        i {
+          font-size: inherit;
+        }
+
+        span {
+          display: inline;
+        }
+      }
+    }
   }
 }
