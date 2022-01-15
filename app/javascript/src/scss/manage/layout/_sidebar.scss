@@ -9,6 +9,23 @@ aside#sidebar {
   transition: all 0.2s ease-in-out;
   width: $sidebar-width;
   z-index: 20;
+
+  a.nav-link {
+    &.active {
+      background-color: $sidebar-link-active-background-color;
+      color: $sidebar-link-active-color;
+    }
+
+    &:hover {
+      background-color: $sidebar-link-hover-background-color;
+      color: $sidebar-link-hover-color;
+
+      &.active {
+        background-color: $sidebar-link-active-hover-background-color;
+        color: $sidebar-link-active-hover-color;
+      }
+    }
+  }
 }
 
 @include media-breakpoint-up(sm) {

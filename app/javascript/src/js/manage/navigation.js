@@ -1,7 +1,7 @@
 function activeNavItem () {
   const path = window.location.pathname
   const parts = path.split('/')
-  const navLinks = document.querySelectorAll('#sidebarMenu .nav-link')
+  const navLinks = document.querySelectorAll('#sidebar .nav-link')
 
   let route = '/' + parts[1]
 
