@@ -11,6 +11,9 @@ aside#sidebar {
   z-index: 20;
 
   a.nav-link {
+    background-color: $sidebar-link-background-color;
+    color: $sidebar-link-color;
+
     &.active {
       background-color: $sidebar-link-active-background-color;
       color: $sidebar-link-active-color;
