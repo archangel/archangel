@@ -1,6 +1,7 @@
 section#section {
   height: 100%;
   margin-left: 0;
+  max-width: $section-max-width;
   overflow: scroll;
   padding: $header-height $spacer $footer-height $spacer;
   position: fixed;

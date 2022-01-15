@@ -10,6 +10,10 @@ require('@rails/activestorage').start()
 require('@oddcamp/cocoon-vanilla-js')
 require('bootstrap')
 
+// Bootstrap
+require('src/js/common/bootstrap/alerts')
+require('src/js/common/bootstrap/tooltips')
+
 // Flatpickr
 require('src/js/common/flatpickr/defaults')
 
