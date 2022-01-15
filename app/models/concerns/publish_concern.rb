@@ -65,21 +65,6 @@ module PublishConcern
   end
 
   ##
-  # Available check
-  #
-  # Check if an item is available based on the past presence of a value in the published column.
-  #
-  # Usage
-  #   @example.available? => true
-  #   @example.available? => false
-  #
-  # @return [Boolean] if resource is available
-  #
-  def available?
-    published? && self[self.class.published_column] <= Time.current
-  end
-
-  ##
   # Published check
   #
   # Check if an item is published based on the presence of a value in the published column. This does not take into
