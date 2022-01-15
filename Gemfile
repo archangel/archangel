@@ -11,7 +11,7 @@ gem 'highline', '~> 2.0.3', require: false
 
 gem 'bcrypt', '~> 3.1.16'
 gem 'pg', '~> 1.2.3'
-gem 'puma', '~> 5.5.0'
+gem 'puma', '~> 5.5.2'
 gem 'rack-cors', '~> 1.1.1'
 gem 'rails', '~> 6.1.4'
 gem 'webpacker', '~> 5.4.3'
