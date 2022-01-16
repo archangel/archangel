@@ -4,12 +4,7 @@
   <%= render partial: 'buttons' %>
 <% end %>
 
-<p>
-  <strong><%= @site.attribute_translate(:name) %>:</strong>
-  <%= @site.name %>
-</p>
-
-<p>
-  <strong><%= @site.attribute_translate(:subdomain) %>:</strong>
-  <%= @site.subdomain %>
-</p>
+<%= show_for @site do |record| %>
+  <%= record.attribute :name %>
+  <%= record.attribute :subdomain %>
+<% end %>

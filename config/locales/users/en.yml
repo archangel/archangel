@@ -11,6 +11,11 @@ en:
       reinvite: Reinvite User
       show: Show User
       unlock: Unlock User
+    columns:
+      actions: Actions
+      email: Email
+      name: Name
+      username: Username
     submitting: Saving...
     titles:
       edit: Edit User

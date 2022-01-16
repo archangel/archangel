@@ -4,22 +4,9 @@
   <%= render partial: 'buttons' %>
 <% end %>
 
-<p>
-  <strong><%= @user.attribute_translate(:first_name) %>:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong><%= @user.attribute_translate(:last_name) %>:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong><%= @user.attribute_translate(:username) %>:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong><%= @user.attribute_translate(:email) %>:</strong>
-  <%= @user.email %>
-</p>
+<%= show_for @user do |record| %>
+  <%= record.attribute :first_name %>
+  <%= record.attribute :last_name %>
+  <%= record.attribute :username %>
+  <%= record.attribute :email %>
+<% end %>

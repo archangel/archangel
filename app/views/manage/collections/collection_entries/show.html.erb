@@ -4,15 +4,12 @@
   <%= render partial: 'buttons' %>
 <% end %>
 
-<%- fields = @collection.collection_fields -%>
-<% fields.each do |field| %>
-  <p>
-    <strong><%= field.label %> (<%= field.key %>):</strong>
-    <%= collection_entry_value(@collection_entry, field.classification, field.key) %>
-  </p>
-<% end %>
+<%= show_for @collection_entry do |record| %>
+  <% @collection.collection_fields.each do |field| %>
+    <%= record.attribute "#{field.label} (#{field.key})", if_blank: '' do %>
+      <%= collection_entry_value(@collection_entry, field.classification, field.key) %>
+    <% end %>
+  <% end %>
 
-<p>
-  <strong><%= @collection_entry.attribute_translate(:published_at) %>:</strong>
-  <%= l(@collection_entry.published_at, format: current_site.format_datetime, default: nil) %>
-</p>
+  <%= record.attribute :published_at, format: current_site.format_datetime, if_blank: '' %>
+<% end %>

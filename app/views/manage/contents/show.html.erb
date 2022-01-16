@@ -4,17 +4,8 @@
   <%= render partial: 'buttons' %>
 <% end %>
 
-<p>
-  <strong><%= @content.attribute_translate(:name) %>:</strong>
-  <%= @content.name %>
-</p>
-
-<p>
-  <strong><%= @content.attribute_translate(:slug) %>:</strong>
-  <%= @content.slug %>
-</p>
-
-<p>
-  <strong><%= @content.attribute_translate(:published_at) %>:</strong>
-  <%= l(@content.published_at, format: current_site.format_datetime, default: nil) %>
-</p>
+<%= show_for @content do |record| %>
+  <%= record.attribute :name %>
+  <%= record.attribute :slug %>
+  <%= record.attribute :published_at, format: current_site.format_datetime, if_blank: '' %>
+<% end %>

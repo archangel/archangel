@@ -1,0 +1,10 @@
+---
+en:
+  date:
+    formats:
+      human_date: "%m.%d.%y"
+  time:
+    formats:
+      human_date: "%m.%d.%y"
+      human_datetime: "%m.%d.%y @ %-l:%M %p"
+      human_time: "%-l:%M %p"

@@ -10,11 +10,10 @@
     <table class="table">
       <thead>
         <tr>
-          <th><%= @users.first.attribute_translate(:first_name) %></th>
-          <th><%= @users.first.attribute_translate(:last_name) %></th>
-          <th><%= @users.first.attribute_translate(:username) %></th>
-          <th><%= @users.first.attribute_translate(:email) %></th>
-          <th class="actions"><%= t('users.actions') %></th>
+          <th><%= t('users.columns.name') %></th>
+          <th><%= t('users.columns.username') %></th>
+          <th><%= t('users.columns.email') %></th>
+          <th class="actions"><%= t('users.columns.actions') %></th>
         </tr>
       </thead>
 

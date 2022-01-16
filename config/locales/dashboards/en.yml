@@ -1,5 +1,6 @@
 ---
 en:
   dashboards:
+    dashboard: Dashboard
     titles:
       show: Dashboard

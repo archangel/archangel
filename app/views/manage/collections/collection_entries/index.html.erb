@@ -21,7 +21,7 @@
                 </div>
               <% end %>
               <div class="collection-entry">
-                <span class="collection-entry-label"><strong><%= @collection_entries.first.attribute_translate(:published_at) %>: </strong></span>
+                <span class="collection-entry-label"><strong><%= t('collection_entries.columns.published_at') %>: </strong></span>
                 <span class="collection-entry-value"><%= l(collection_entry.published_at, format: current_site.format_datetime, default: nil) %></span>
               </div>
             </td>

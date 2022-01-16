@@ -13,6 +13,8 @@ en:
       new: New Collection Entry
       restore: Restore Collection Entry
       show: Show Collection Entry
+    columns:
+      published_at: Publish Date
     submitting: Saving...
     titles:
       edit: Edit Collection Entry

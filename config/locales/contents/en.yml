@@ -12,6 +12,11 @@ en:
       new: New Content
       restore: Restore Content
       show: Show Content
+    columns:
+      actions: Actions
+      published_at: Publish Date
+      slug: Slug
+      title: Title
     submitting: Saving...
     titles:
       edit: Edit Content

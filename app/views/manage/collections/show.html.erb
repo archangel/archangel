@@ -4,17 +4,8 @@
   <%= render partial: 'buttons' %>
 <% end %>
 
-<p>
-  <strong><%= @collection.attribute_translate(:name) %>:</strong>
-  <%= @collection.name %>
-</p>
-
-<p>
-  <strong><%= @collection.attribute_translate(:slug) %>:</strong>
-  <%= @collection.slug %>
-</p>
-
-<p>
-  <strong><%= @collection.attribute_translate(:published_at) %>:</strong>
-  <%= l(@collection.published_at, format: current_site.format_datetime, default: nil) %>
-</p>
+<%= show_for @collection do |record| %>
+  <%= record.attribute :name %>
+  <%= record.attribute :slug %>
+  <%= record.attribute :published_at, format: current_site.format_datetime, if_blank: '' %>
+<% end %>

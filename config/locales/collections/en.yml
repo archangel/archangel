@@ -13,6 +13,11 @@ en:
       new: New Collection
       restore: Restore Collection
       show: Show Collection
+    columns:
+      actions: Actions
+      name: Name
+      published_at: Publish Date
+      slug: Slug
     submitting: Saving...
     titles:
       edit: Edit Collection
