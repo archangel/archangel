@@ -10,7 +10,7 @@ def add_and_fill_in_collection_field_form_with(fields = {})
   fill_in_collection_field_resource_form_with(fields)
 end
 
-# rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 def fill_in_collection_field_resource_form_with(fields = {})
   classification = fields.fetch(:classification, nil)
   label = fields.fetch(:label, nil)
@@ -31,4 +31,4 @@ def fill_in_collection_field_resource_form_with(fields = {})
     form_checbox_check('Required', required) if [true, false].include?(required) && js_driver
   end
 end
-# rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
