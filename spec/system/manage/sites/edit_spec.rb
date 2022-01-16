@@ -84,4 +84,20 @@ RSpec.describe 'Manage Site #edit', type: :system do
       end
     end
   end
+
+  describe 'with `reader` role' do
+    before do
+      profile.user_site.update(role: 'reader')
+
+      visit '/manage/site/edit'
+    end
+
+    it 'returns an unauthorized status code' do
+      expect(page).to have_content('Unauthorized')
+    end
+
+    it 'returns an unauthorized error message' do
+      expect(page).to have_content('Error 401')
+    end
+  end
 end

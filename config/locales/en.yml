@@ -15,7 +15,7 @@ en:
     not_found: Not Found
     not_found_message: Error 404
     unauthorized: Unauthorized
-    unauthorized_message: Error 404
+    unauthorized_message: Error 401
   inputs:
     roles:
       admin: Administrator
