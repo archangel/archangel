@@ -4,6 +4,8 @@ RSpec.describe 'Manage Auth - Login', type: :system do
   let(:site) { create(:site) }
   let(:profile) { create(:user, email: 'me@email.com', password: 'my secure password') }
 
+  before { create(:user_site, user: profile, site: site) }
+
   describe 'accessing section when not logged in' do
     it 'redirects to login page' do
       visit '/manage/contents'
@@ -13,10 +15,6 @@ RSpec.describe 'Manage Auth - Login', type: :system do
   end
 
   describe 'with valid credentials' do
-    before do
-      create(:user_site, user: profile, site: site)
-    end
-
     it 'redirects to Dashboard' do
       visit '/manage/login'
 
@@ -48,11 +46,7 @@ RSpec.describe 'Manage Auth - Login', type: :system do
     let(:message) { 'You have a pending invitation, accept it to finish creating your account' }
     let(:profile) { create(:user, :invited, email: 'me@email.com', password: 'my secure password') }
 
-    before do
-      create(:user_site, user: profile, site: site)
-
-      visit '/manage/login'
-    end
+    before { visit '/manage/login' }
 
     it 'fails with error message' do
       fill_in_and_submit_login_form_with(email: 'me@email.com', password: 'my secure password')
@@ -64,11 +58,7 @@ RSpec.describe 'Manage Auth - Login', type: :system do
   describe 'with multiple failed login attempts' do
     let(:message) { 'You have one more attempt before your account is locked.' }
 
-    before do
-      create(:user_site, user: profile, site: site)
-
-      visit '/manage/login'
-    end
+    before { visit '/manage/login' }
 
     it 'sends a warning before locking account after 4 failed login attempts' do
       4.times do
@@ -90,11 +80,7 @@ RSpec.describe 'Manage Auth - Login', type: :system do
   describe 'with locked User' do
     let(:profile) { create(:user, locked_at: 59.minutes.ago, email: 'me@email.com', password: 'my secure password') }
 
-    before do
-      create(:user_site, user: profile, site: site)
-
-      visit '/manage/login'
-    end
+    before { visit '/manage/login' }
 
     it 'fails with error message before lock timeout expires' do
       fill_in_and_submit_login_form_with(email: 'me@email.com', password: 'my secure password')
