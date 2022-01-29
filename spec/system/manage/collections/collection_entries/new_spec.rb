@@ -85,8 +85,16 @@ RSpec.describe 'Manage Collection Entry #new', type: :system, js: true do
       expect(page.find('.email.collection_entry_email')).to have_content('is not a valid email')
     end
 
-    it 'fails when url field is not a url' do
+    it 'fails when url field is not a full url' do
       fill_in 'Field Url (url)', with: 'example.com'
+
+      submit_create_collection_entry_form
+
+      expect(page.find('.url.collection_entry_url')).to have_content('is not a valid URL')
+    end
+
+    it 'fails when url field is not a url' do
+      fill_in 'Field Url (url)', with: 'this is not a url'
 
       submit_create_collection_entry_form
 
