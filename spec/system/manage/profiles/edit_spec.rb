@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Manage Profile #edit', type: :system do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }

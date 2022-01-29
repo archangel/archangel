@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Manage Collection #new', type: :system, js: true do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe LinkToHelper, type: :helper do
   context 'with #link_to_delete' do
     it 'returns default button' do

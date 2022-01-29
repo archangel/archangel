@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Manage Auth - Login', type: :system do
   let(:site) { create(:site) }
   let(:profile) { create(:user, email: 'me@email.com', password: 'my secure password') }

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'API v1 User create', type: :request do
   let(:site) { create(:site) }
   let(:profile) { create(:user, email: 'me@example.com') }

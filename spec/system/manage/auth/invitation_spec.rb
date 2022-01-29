@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Manage Auth - Accept Invitation', type: :system do
   let(:site) { create(:site) }
   let(:resource_data) do

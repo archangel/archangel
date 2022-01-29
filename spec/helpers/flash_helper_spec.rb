@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe FlashHelper, type: :helper do
   context 'with #flash_class_for(obj)' do
     it 'returns `success` class' do

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Home #show', type: :system do
   describe 'when available' do
     it 'returns 200 status' do

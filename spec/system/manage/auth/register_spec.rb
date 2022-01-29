@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Manage Auth - Register', type: :system do
   let(:site) { create(:site) }
   let(:resource_data) do

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe ApplicationHelper, type: :helper do
   after do
     I18n.available_locales = %i[en]

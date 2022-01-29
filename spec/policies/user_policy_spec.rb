@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe UserPolicy, type: :policy do
   subject { described_class.new(user, resource) }
 
