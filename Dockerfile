@@ -1,10 +1,10 @@
-FROM ruby:3.0.2
+FROM ruby:3.0.3
 LABEL maintainer="dfreerksen@gmail.com"
 
 ENV RAILS_ROOT /var/www/archangel
 ENV PORT 3000
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
    echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
 

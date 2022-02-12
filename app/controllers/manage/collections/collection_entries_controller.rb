@@ -47,7 +47,8 @@ module Manage
                           notice: I18n.t('flash.collection_entries.update.success')
             end
             format.json do
-              render :show, status: :ok, location: manage_collection_collection_entry_path(@collection, @collection_entry)
+              render :show, status: :ok,
+                            location: manage_collection_collection_entry_path(@collection, @collection_entry)
             end
           else
             format.html { render :edit, status: :unprocessable_entity }

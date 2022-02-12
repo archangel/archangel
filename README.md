@@ -4,8 +4,8 @@ Archangel is a headless CMS.
 
 ## Requirements
 
-* Ruby 3.0.2 (see `.ruby-version`)
-* Node >=14.15.5 (see `package.json`)
+* Ruby 3.0.3 (see `.ruby-version`)
+* Node >=16.14.0 (see `package.json`)
   * Install using NVM with `nvm install && nvm use`
     * Install NVM using Homebrew with `brew install nvm`
 * Yarn >= 1.16.0 (see `package.json`)

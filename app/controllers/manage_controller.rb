@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ManageController < ApplicationController
-  include Pundit
+  include Pundit::Authorization
   include Controllers::ActionConcern
 
   rescue_from AbstractController::ActionNotFound,

@@ -3,6 +3,7 @@
 ##
 # Fill in Content form
 #
+# rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 def fill_in_content_form_with(fields = {})
   name = fields.fetch(:name, nil)
   slug = fields.fetch(:slug, nil)
@@ -18,6 +19,7 @@ def fill_in_content_form_with(fields = {})
   select_flatpickr_date(published_at, from: 'Publish Date') if published_at.present? && js_driver
   fill_in('Publish Date', with: published_at) if published_at.present? && !js_driver
 end
+# rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
 def fill_in_and_create_content_form_with(fields = {})
   fill_in_content_form_with(fields)

@@ -21,7 +21,9 @@ module Manage
     def create
       respond_to do |format|
         if @collection.save
-          format.html { redirect_to manage_collection_path(@collection), notice: I18n.t('flash.collections.create.success') }
+          format.html do
+            redirect_to manage_collection_path(@collection), notice: I18n.t('flash.collections.create.success')
+          end
           format.json { render :show, status: :created, location: manage_collection_path(@collection) }
         else
           nested_resource_build
@@ -38,7 +40,9 @@ module Manage
     def update
       respond_to do |format|
         if @collection.update(resource_params)
-          format.html { redirect_to manage_collection_path(@collection), notice: I18n.t('flash.collections.update.success') }
+          format.html do
+            redirect_to manage_collection_path(@collection), notice: I18n.t('flash.collections.update.success')
+          end
           format.json { render :show, status: :ok, location: manage_collection_path(@collection) }
         else
           nested_resource_build

@@ -7,8 +7,7 @@ Capybara.register_driver :selenium_chrome_headless do |app|
   Selenium::WebDriver.logger.level = :error
 
   options = Selenium::WebDriver::Chrome::Options.new(
-    args: %w[headless no-sandbox disable-gpu window-size=1920,1080],
-    log_level: :error
+    args: %w[headless no-sandbox disable-gpu window-size=1920,1080]
   )
 
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)

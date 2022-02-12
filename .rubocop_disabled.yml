@@ -2,5 +2,9 @@
 Rails/EnvironmentVariableAccess:
   Enabled: false
 
+# https://docs.rubocop.org/rubocop-rails/cops_rails.html#railsi18nlocaleassignment
+Rails/I18nLocaleAssignment:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
