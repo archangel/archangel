@@ -2,7 +2,7 @@
 
 module Manage
   class ProfilesController < ManageController
-    before_action :set_profile, only: %i[show edit update]
+    before_action :set_profile, only: %i[show edit update retoken]
 
     def show; end
 
@@ -22,6 +22,15 @@ module Manage
           format.html { render :edit, status: :unprocessable_entity }
           format.json { render json: @profile.errors, status: :unprocessable_entity }
         end
+      end
+    end
+
+    def retoken
+      @profile.update(auth_token: nil)
+
+      respond_to do |format|
+        format.html { redirect_to manage_profile_path, notice: I18n.t('flash.profiles.retoken.success') }
+        format.json { render :show, status: :ok, location: manage_profile_path }
       end
     end
 

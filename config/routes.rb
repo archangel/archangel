@@ -54,7 +54,10 @@ Rails.application.routes.draw do
   end
 
   namespace :manage do
-    resource :profile, only: %i[edit show update]
+    resource :profile, only: %i[edit show update] do
+      post :retoken, on: :member
+    end
+
     resource :site, only: %i[edit show update]
 
     resources :collections, concerns: %i[restoreable] do
@@ -64,8 +67,13 @@ Rails.application.routes.draw do
 
     resources :contents, concerns: %i[restoreable]
 
+    resources :sites, only: [] do
+      get :switch, on: :member
+    end
+
     resources :users do
       get :reinvite, on: :member
+      post :retoken, on: :member
       get :unlock, on: :member
     end
 

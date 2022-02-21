@@ -25,6 +25,10 @@ class UserPolicy < ApplicationPolicy
     editor? || admin?
   end
 
+  def retoken?
+    editor? || admin?
+  end
+
   def unlock?
     editor? || admin?
   end

@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  devise :confirmable, :database_authenticatable, :invitable, :lockable, :recoverable, :registerable, :rememberable,
-         :timeoutable, :trackable, :validatable
+  include AuthTokenConcern
 
-  before_create :create_auth_token
+  devise :confirmable, :database_authenticatable, :invitable, :lockable, :recoverable, :rememberable, :timeoutable,
+         :trackable, :validatable # :registerable
 
   has_one :user_site, dependent: :destroy
   has_many :sites, through: :user_site
+  has_many :user_sites, dependent: :destroy
 
   delegate :role, to: :user_site, allow_nil: true
 
@@ -25,17 +26,5 @@ class User < ApplicationRecord
 
   def invitation_pending?
     invitation_accepted_at.blank?
-  end
-
-  private
-
-  def create_auth_token
-    return if auth_token.present?
-
-    self.auth_token = generate_auth_token
-  end
-
-  def generate_auth_token
-    SecureRandom.hex(24)
   end
 end

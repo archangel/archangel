@@ -5,7 +5,7 @@ module Manage
     include Controllers::PaginationConcern
 
     before_action :set_users, only: %i[index]
-    before_action :set_user, only: %i[show edit update reinvite unlock]
+    before_action :set_user, only: %i[show edit update reinvite retoken unlock]
     before_action :set_new_user, only: %i[new]
     before_action :set_create_user, only: %i[create]
     before_action :set_destroy_user, only: %i[destroy]
@@ -65,6 +65,15 @@ module Manage
 
       respond_to do |format|
         format.html { redirect_to manage_user_path(@user), notice: I18n.t('flash.users.reinvite.success') }
+        format.json { render :show, status: :ok, location: manage_user_path(@user) }
+      end
+    end
+
+    def retoken
+      @user.update(auth_token: nil)
+
+      respond_to do |format|
+        format.html { redirect_to manage_user_path(@user), notice: I18n.t('flash.users.retoken.success') }
         format.json { render :show, status: :ok, location: manage_user_path(@user) }
       end
     end

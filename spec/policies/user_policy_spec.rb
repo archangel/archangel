@@ -13,6 +13,7 @@ RSpec.describe UserPolicy, type: :policy do
     it { is_expected.to permit_actions(%i[index show destroy]) }
     it { is_expected.to permit_new_and_create_actions }
     it { is_expected.to permit_edit_and_update_actions }
+    it { is_expected.to permit_actions(%i[reinvite retoken unlock]) }
   end
 
   context 'with User under the `editor` role' do
@@ -22,6 +23,7 @@ RSpec.describe UserPolicy, type: :policy do
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_edit_and_update_actions }
     it { is_expected.to forbid_actions(%i[destroy]) }
+    it { is_expected.to permit_actions(%i[reinvite retoken unlock]) }
   end
 
   context 'with User under the `reader` role' do
@@ -31,5 +33,6 @@ RSpec.describe UserPolicy, type: :policy do
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to forbid_edit_and_update_actions }
     it { is_expected.to forbid_actions(%i[destroy]) }
+    it { is_expected.to forbid_actions(%i[reinvite retoken unlock]) }
   end
 end

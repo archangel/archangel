@@ -14,6 +14,7 @@ RSpec.describe ProfilePolicy, type: :policy do
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_edit_and_update_actions }
     it { is_expected.to forbid_actions(%i[index destroy]) }
+    it { is_expected.to permit_actions(%i[retoken]) }
   end
 
   context 'with User under the `editor` role' do
@@ -23,6 +24,7 @@ RSpec.describe ProfilePolicy, type: :policy do
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_edit_and_update_actions }
     it { is_expected.to forbid_actions(%i[index destroy]) }
+    it { is_expected.to permit_actions(%i[retoken]) }
   end
 
   context 'with User under the `reader` role' do
@@ -32,5 +34,6 @@ RSpec.describe ProfilePolicy, type: :policy do
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_edit_and_update_actions }
     it { is_expected.to forbid_actions(%i[index destroy]) }
+    it { is_expected.to permit_actions(%i[retoken]) }
   end
 end

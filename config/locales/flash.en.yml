@@ -30,10 +30,15 @@ en:
         success: Content was successfully restored.
       update:
         success: Content was successfully updated.
+    no_assigned_sites: No available sites assigned to you.
     profiles:
+      retoken:
+        success: Personal authentication token has been successfully regenerated.
       update:
         success: Profile was successfully updated.
     sites:
+      switch:
+        success: Successfully switched site.
       update:
         success: Site was successfully updated.
     users:
@@ -43,6 +48,8 @@ en:
         success: User was successfully removed from this site.
       reinvite:
         success: User was successfully reinvited.
+      retoken:
+        success: User authentication token has been successfully regenerated.
       unlock:
         success: User was successfully unlocked.
       update:

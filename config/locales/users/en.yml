@@ -9,6 +9,7 @@ en:
       index: Back to Users
       new: New User
       reinvite: Reinvite User
+      retoken: Regenerate
       show: Show User
       unlock: Unlock User
     columns:
@@ -16,6 +17,8 @@ en:
       email: Email
       name: Name
       username: Username
+    retoken:
+      are_you_sure: Are you sure you want to generate a new API token for this user?
     submitting: Saving...
     titles:
       edit: Edit User

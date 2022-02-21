@@ -8,4 +8,8 @@ class ProfilePolicy < ApplicationPolicy
   def update?
     true
   end
+
+  def retoken?
+    true
+  end
 end

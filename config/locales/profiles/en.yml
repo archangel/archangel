@@ -4,7 +4,10 @@ en:
     actions: Actions
     buttons:
       edit: Edit Profile
+      retoken: Regenerate
       show: Profile
+    retoken:
+      are_you_sure: Are you sure you want to generate a new API token?
     submitting: Saving...
     titles:
       edit: Edit Profile

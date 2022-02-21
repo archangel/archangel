@@ -9,4 +9,8 @@
   <%= record.attribute :last_name %>
   <%= record.attribute :username %>
   <%= record.attribute :email %>
+
+  <%= record.attribute :auth_token do |token| %>
+    <%= token %> <%= link_to(t('profiles.buttons.retoken'), retoken_manage_profile_path, method: :post, data: { confirm: I18n.t('profiles.retoken.are_you_sure') }, class: 'btn btn-primary') %>
+  <% end %>
 <% end %>
