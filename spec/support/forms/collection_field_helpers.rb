@@ -27,8 +27,8 @@ def fill_in_collection_field_resource_form_with(fields = {})
     fill_in 'Label', with: label if label.present?
     fill_in 'Key', with: key if key.present?
 
-    (required ? check('Required') : uncheck('Required')) if [true, false].include?(required) && !js_driver
-    form_checbox_check('Required', required) if [true, false].include?(required) && js_driver
+    (required ? check('Required') : uncheck('Required')) if [true, false].include?(required) && !selenium?
+    form_checbox_check('Required', required) if [true, false].include?(required) && selenium?
   end
 end
 # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity

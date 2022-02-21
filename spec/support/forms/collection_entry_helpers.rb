@@ -6,8 +6,8 @@
 def fill_in_collection_entry_form_with(fields = {})
   published_at = fields.fetch(:published_at, nil)
 
-  select_flatpickr_date(published_at, from: 'Publish Date') if published_at.present? && js_driver
-  fill_in('Publish Date', with: published_at) if published_at.present? && !js_driver
+  select_flatpickr_date(published_at, from: 'Publish Date') if published_at.present? && selenium?
+  fill_in('Publish Date', with: published_at) if published_at.present? && !selenium?
 end
 
 def fill_in_and_create_collection_entry_form_with(fields = {})

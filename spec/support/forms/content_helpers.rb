@@ -13,11 +13,11 @@ def fill_in_content_form_with(fields = {})
   fill_in 'Name', with: name if name.present?
   fill_in 'Slug', with: slug if slug.present?
 
-  fill_in_jodit('Body', with: body) if body.present? && js_driver
-  fill_in('Body', with: body) if body.present? && !js_driver
+  fill_in_jodit('Body', with: body) if body.present? && selenium?
+  fill_in('Body', with: body) if body.present? && !selenium?
 
-  select_flatpickr_date(published_at, from: 'Publish Date') if published_at.present? && js_driver
-  fill_in('Publish Date', with: published_at) if published_at.present? && !js_driver
+  select_flatpickr_date(published_at, from: 'Publish Date') if published_at.present? && selenium?
+  fill_in('Publish Date', with: published_at) if published_at.present? && !selenium?
 end
 # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
