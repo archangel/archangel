@@ -24,10 +24,6 @@ module Archangel
       def within_row(num, &block)
         within("table.table tbody tr:nth-child(#{num})", match: :first, &block)
       end
-
-      def js_driver
-        Capybara.current_driver != :rack_test
-      end
     end
   end
 end
