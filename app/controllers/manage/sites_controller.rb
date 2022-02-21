@@ -20,6 +20,16 @@ module Manage
       end
     end
 
+    def switch
+      authorize %i[site]
+
+      resource_id = params.fetch(:id)
+
+      cookies[:_archangel_site] = { value: resource_id, expires: nil }
+
+      redirect_to manage_root_path, status: :moved_permanently, flash: { success: I18n.t('flash.sites.switch.success') }
+    end
+
     protected
 
     def permitted_attributes
@@ -31,9 +41,9 @@ module Manage
     end
 
     def set_site
-      @site = current_site
+      authorize %i[site]
 
-      authorize @site
+      @site = current_site
     end
 
     def site_params

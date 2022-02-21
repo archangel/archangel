@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Manage Auth - Register', type: :system do
+RSpec.describe 'Manage Auth - Register', type: :system, skip: true do
   let(:site) { create(:site) }
   let(:resource_data) do
     {

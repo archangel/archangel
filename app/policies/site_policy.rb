@@ -8,4 +8,8 @@ class SitePolicy < ApplicationPolicy
   def update?
     editor? || admin?
   end
+
+  def switch?
+    true
+  end
 end
