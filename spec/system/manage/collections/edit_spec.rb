@@ -59,9 +59,9 @@ RSpec.describe 'Manage Collection #edit', type: :system, js: true do
   end
 
   describe 'when not successful' do
-    xit 'fails with existing `slug`' do
-      create(:collection, site: site, slug: 'wonderful')
+    before { create(:collection, site: site, slug: 'wonderful') }
 
+    it 'fails with existing `slug`' do
       fill_in_and_update_collection_form_with(slug: 'wonderful')
 
       expect(page.find('.slug.collection_slug')).to have_content('has already been taken')

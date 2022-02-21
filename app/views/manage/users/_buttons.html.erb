@@ -6,6 +6,6 @@
     <%= link_to_show(t('users.buttons.show'), manage_user_path(@user)) if policy(:user).show? && update_actions? %>
     <%= link_to_new(t('users.buttons.new'), new_manage_user_path) if policy(:user).new? && (collection_action? || member_action?) %>
     <%= link_to_edit(t('users.buttons.edit'), edit_manage_user_path(@user)) if policy(:user).edit? && show_action? %>
-    <%= link_to_delete(t('users.buttons.delete'), manage_user_path(@user), data: { confirm: t('users.are_you_sure') }) if policy(:user).destroy? && member_action? %>
+    <%= link_to_delete(t('users.buttons.destroy'), manage_user_path(@user), data: { confirm: t('users.are_you_sure') }) if policy(:user).destroy? && member_action? %>
   </div>
 </div>
