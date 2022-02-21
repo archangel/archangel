@@ -1,4 +1,4 @@
-FROM ruby:3.0.3
+FROM --platform=linux/amd64 ruby:3.0.3
 LABEL maintainer="dfreerksen@gmail.com"
 
 ENV RAILS_ROOT /var/www/archangel
