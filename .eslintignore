@@ -3,6 +3,6 @@
 /node_modules
 /public/packs
 /public/packs-test
-
 /babel.config.js
 /postcss.config.js
+/RESOURCES
