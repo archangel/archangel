@@ -22,3 +22,5 @@ en:
       editor: Editor
       manager: Manager
       reader: Reader
+  'no': 'No'
+  not_accepted: Not Accepted

@@ -27,7 +27,9 @@ en:
       user:
         email: Email
         first_name: First Name
+        invitation_accepted_at: Invitation Accepted
         last_name: Last Name
+        locked_at: Locked
         name: Name
         password: Password
         password_confirmation: Password Confirmation

@@ -18,6 +18,8 @@ en:
       name: Name
       published_at: Publish Date
       slug: Slug
+    entry_count: Entries
+    field_count: Fields
     submitting: Saving...
     titles:
       edit: Edit Collection
