@@ -29,6 +29,7 @@ module Archangel
       def processed_date(value)
         format = '%m-%d-%Y %H:%M'
 
+        return if value.blank?
         return value.to_datetime.strftime(format) if value.respond_to?(:to_date)
 
         Time.zone.parse(value).strftime(format)
