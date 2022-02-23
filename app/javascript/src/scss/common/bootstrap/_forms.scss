@@ -1,0 +1,11 @@
+.was-validated {
+  .form-control {
+    &:valid,
+    &.is-valid,
+    &:invalid,
+    &.is-invalid {
+      padding: $input-padding-y $input-padding-x;
+      background-image: none;
+    }
+  }
+}
