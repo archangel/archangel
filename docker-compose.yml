@@ -21,14 +21,16 @@ services:
     volumes:
       - ./tmp/redis/redis.conf:/usr/local/etc/redis/redis.conf
   sidekiq:
-    build: .
+    build:
+      context: .
+      args:
+        - "RAILS_ENV=${RAILS_ENV:-development}"
+        - "NODE_ENV=${NODE_ENV:-development}"
     container_name: archangel_sidekiq
     command: bash -c 'rm -f tmp/pids/sidekiq.pid && bundle exec sidekiq'
     restart: always
     environment:
       JOB_QUEUE_ADAPTER: sidekiq
-      NODE_ENV: development
-      RAILS_ENV: development
       REDIS_PROVIDER: redis:6379
     depends_on:
       - db
@@ -36,21 +38,23 @@ services:
     volumes:
       - .:/var/www/archangel
   app:
-    build: .
+    build:
+      context: .
+      args:
+        - "RAILS_ENV=${RAILS_ENV:-development}"
+        - "NODE_ENV=${NODE_ENV:-development}"
     container_name: archangel_app
     restart: unless-stopped
     stdin_open: true
     tty: true
-    ports:
-      - '3000:3000'
-      - '3035:3035'
     environment:
       DB_HOST: db
       DB_PASSWORD: password
       JOB_QUEUE_ADAPTER: sidekiq
-      NODE_ENV: development
-      RAILS_ENV: development
       REDIS_PROVIDER: redis:6379
+    ports:
+      - '3000:3000'
+      - '3035:3035'
     depends_on:
       - db
       - redis
