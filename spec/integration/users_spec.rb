@@ -17,8 +17,8 @@ RSpec.describe 'Users API' do
     }
   end
 
-  let(:Authorization) { profile.auth_token }
-  let(:'X-Archangel-Site') { site.subdomain }
+  let(:Authorization) { profile.auth_token } # rubocop:disable RSpec/VariableName
+  let(:'X-Archangel-Site') { site.subdomain } # rubocop:disable RSpec/VariableName
   let(:page) { 1 }
   let(:per_page) { 24 }
 
@@ -56,7 +56,7 @@ RSpec.describe 'Users API' do
       response '401', 'unauthorized' do
         schema '$ref' => '#/components/schemas/unauthorized'
 
-        let(:Authorization) { '' }
+        let(:Authorization) { '' } # rubocop:disable RSpec/VariableName
 
         run_test!
       end
@@ -92,7 +92,7 @@ RSpec.describe 'Users API' do
       response '401', 'unauthorized' do
         schema '$ref' => '#/components/schemas/unauthorized'
 
-        let(:Authorization) { '' }
+        let(:Authorization) { '' } # rubocop:disable RSpec/VariableName
 
         run_test!
       end
@@ -132,7 +132,7 @@ RSpec.describe 'Users API' do
       response '401', 'unauthorized' do
         schema '$ref' => '#/components/schemas/unauthorized'
 
-        let(:Authorization) { '' }
+        let(:Authorization) { '' } # rubocop:disable RSpec/VariableName
 
         run_test!
       end
@@ -176,7 +176,7 @@ RSpec.describe 'Users API' do
       response '401', 'unauthorized' do
         schema '$ref' => '#/components/schemas/unauthorized'
 
-        let(:Authorization) { '' }
+        let(:Authorization) { '' } # rubocop:disable RSpec/VariableName
 
         run_test!
       end
@@ -219,7 +219,7 @@ RSpec.describe 'Users API' do
       response '401', 'unauthorized' do
         schema '$ref' => '#/components/schemas/unauthorized'
 
-        let(:Authorization) { '' }
+        let(:Authorization) { '' } # rubocop:disable RSpec/VariableName
 
         run_test!
       end
@@ -244,7 +244,7 @@ RSpec.describe 'Users API' do
       response '401', 'unauthorized' do
         schema '$ref' => '#/components/schemas/unauthorized'
 
-        let(:Authorization) { '' }
+        let(:Authorization) { '' } # rubocop:disable RSpec/VariableName
 
         run_test!
       end

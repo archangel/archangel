@@ -13,8 +13,8 @@ RSpec.describe 'Sites API' do
     }
   end
 
-  let(:Authorization) { profile.auth_token }
-  let(:'X-Archangel-Site') { site.subdomain }
+  let(:Authorization) { profile.auth_token } # rubocop:disable RSpec/VariableName
+  let(:'X-Archangel-Site') { site.subdomain } # rubocop:disable RSpec/VariableName
 
   before do
     create(:user_site, user: profile, site: site)
@@ -36,7 +36,7 @@ RSpec.describe 'Sites API' do
       response '401', 'unauthorized' do
         schema '$ref' => '#/components/schemas/unauthorized'
 
-        let(:Authorization) { '' }
+        let(:Authorization) { '' } # rubocop:disable RSpec/VariableName
 
         run_test!
       end
@@ -74,7 +74,7 @@ RSpec.describe 'Sites API' do
       response '401', 'unauthorized' do
         schema '$ref' => '#/components/schemas/unauthorized'
 
-        let(:Authorization) { '' }
+        let(:Authorization) { '' } # rubocop:disable RSpec/VariableName
 
         run_test!
       end

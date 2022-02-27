@@ -6,7 +6,7 @@ RSpec.describe 'Sessions API' do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
 
-  let(:'X-Archangel-Site') { site.subdomain }
+  let(:'X-Archangel-Site') { site.subdomain } # rubocop:disable RSpec/VariableName
 
   before do
     create(:user_site, user: profile, site: site)
@@ -46,24 +46,24 @@ RSpec.describe 'Sessions API' do
     end
 
     delete 'Log out' do
-     tags 'Session'
-     security [Bearer: [], Subdomain: []]
-     consumes 'application/json'
-     produces 'application/json'
+      tags 'Session'
+      security [Bearer: [], Subdomain: []]
+      consumes 'application/json'
+      produces 'application/json'
 
-     response '204', 'no_content' do
-       let(:Authorization) { profile.auth_token }
+      response '204', 'no_content' do
+        let(:Authorization) { profile.auth_token } # rubocop:disable RSpec/VariableName
 
-       run_test!
-     end
+        run_test!
+      end
 
-     response '401', 'unauthorized' do
-       schema '$ref' => '#/components/schemas/unauthorized'
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/unauthorized'
 
-       let(:Authorization) { '' }
+        let(:Authorization) { '' } # rubocop:disable RSpec/VariableName
 
-       run_test!
-     end
-   end
+        run_test!
+      end
+    end
   end
 end

@@ -26,7 +26,6 @@ RSpec.describe 'Manage User #destroy', type: :system do
     end
 
     it 'returns a success message' do
-
       expect(page).to have_content('User was successfully removed from this site.')
     end
   end

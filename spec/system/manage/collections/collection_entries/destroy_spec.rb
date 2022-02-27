@@ -49,7 +49,8 @@ RSpec.describe 'Manage Collection Entry #destroy', type: :system do
 
   describe 'when destroying' do
     before do
-      create(:collection_entry, :discarded, collection: parent_resource, content: { name: 'Destroy Me', slug: 'entrySlugA' })
+      create(:collection_entry, :discarded, collection: parent_resource,
+                                            content: { name: 'Destroy Me', slug: 'entrySlugA' })
       create(:collection_entry, collection: parent_resource, content: { name: 'Keep Me', slug: 'entrySlugB' })
 
       visit "/manage/collections/#{parent_resource.id}/collection_entries"
