@@ -37,6 +37,11 @@ RSpec.configure do |config|
             type: :apiKey,
             name: 'Authorization',
             in: :header
+          },
+          Subdomain: {
+            type: :apiKey,
+            name: 'X-Archangel-Site',
+            in: :header
           }
         },
         schemas: {
@@ -85,14 +90,14 @@ RSpec.configure do |config|
               errors: { type: :object }
             }
           },
-          auth_create_item: {
+          session_item: {
             type: :object,
-            required: %w[token],
+            required: %w[authToken],
             properties: {
-              token: { type: :string }
+              authToken: { type: :string }
             }
           },
-          auth_create: {
+          session: {
             type: :object,
             required: %w[success status data],
             properties: {
@@ -105,8 +110,72 @@ RSpec.configure do |config|
                 default: 202
               },
               data: {
-                '$ref' => '#/components/schemas/auth_create_item'
+                '$ref' => '#/components/schemas/session_item'
               }
+            }
+          },
+          collection_entry_item: {
+            type: :object,
+            required: %w[content],
+            properties: {
+              id: { type: :integer },
+              content: { type: :object },
+              position: { type: :integer },
+              publishedAt: {
+                type: :string,
+                nullable: true
+              },
+              deletedAt: {
+                type: :string,
+                nullable: true,
+                default: nil
+              }
+            }
+          },
+          collection_entry: {
+            type: :object,
+            required: %w[success status data],
+            properties: {
+              success: {
+                type: :boolean,
+                default: true
+              },
+              status: {
+                type: :integer,
+                default: 200
+              },
+              data: {
+                '$ref' => '#/components/schemas/collection_entry_item'
+              }
+            }
+          },
+          collection_entries: {
+            type: :object,
+            required: %w[success status data],
+            properties: {
+              success: {
+                type: :boolean,
+                default: true
+              },
+              status: {
+                type: :integer,
+                default: 200
+              },
+              data: {
+                type: :array,
+                items: { '$ref' => '#/components/schemas/collection_entry_item' }
+              }
+            }
+          },
+          collection_field_item: {
+            type: :object,
+            required: %w[label key classification required position],
+            properties: {
+              label: { type: :string },
+              key: { type: :string },
+              classification: { type: :string },
+              required: { type: :boolean },
+              position: { type: :integer }
             }
           },
           collection_item: {
@@ -123,6 +192,10 @@ RSpec.configure do |config|
                 type: :string,
                 nullable: true,
                 default: nil
+              },
+              fields: {
+                type: :array,
+                items: { '$ref' => '#/components/schemas/collection_field_item' }
               }
             }
           },
@@ -176,6 +249,10 @@ RSpec.configure do |config|
                 type: :string,
                 nullable: true,
                 default: nil
+              },
+              stores: {
+                type: :array,
+                items: { '$ref' => '#/components/schemas/store_item' }
               }
             }
           },
@@ -214,6 +291,53 @@ RSpec.configure do |config|
               }
             }
           },
+          site_item: {
+            type: :object,
+            required: %w[name subdomain],
+            properties: {
+              name: { type: :string },
+              subdomain: { type: :string },
+              body: { type: :string },
+              formatDate: { type: :string },
+              formatDatetime: { type: :string },
+              formatTime: { type: :string },
+              formatJsDate: { type: :string },
+              formatJsDatetime: { type: :string },
+              formatJsTime: { type: :string },
+              stores: {
+                type: :array,
+                items: { '$ref' => '#/components/schemas/store_item' }
+              }
+            }
+          },
+          site: {
+            type: :object,
+            required: %w[success status data],
+            properties: {
+              success: {
+                type: :boolean,
+                default: true
+              },
+              status: {
+                type: :integer,
+                default: 200
+              },
+              data: {
+                '$ref' => '#/components/schemas/site_item'
+              }
+            }
+          },
+          store_item: {
+            type: :object,
+            required: %w[key value],
+            properties: {
+              key: { type: :string },
+              value: {
+                type: :string,
+                nullable: true
+              }
+            }
+          },
           user_item: {
             type: :object,
             required: %w[email username firstName lastName name locked],
@@ -248,6 +372,24 @@ RSpec.configure do |config|
               },
               data: {
                 '$ref' => '#/components/schemas/user_item'
+              }
+            }
+          },
+          users: {
+            type: :object,
+            required: %w[success status data],
+            properties: {
+              success: {
+                type: :boolean,
+                default: true
+              },
+              status: {
+                type: :integer,
+                default: 200
+              },
+              data: {
+                type: :array,
+                items: { '$ref' => '#/components/schemas/user_item' }
               }
             }
           }

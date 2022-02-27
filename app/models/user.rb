@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include AuthTokenConcern
-
   devise :confirmable, :database_authenticatable, :invitable, :lockable, :recoverable, :rememberable, :timeoutable,
          :trackable, :validatable # :registerable
+
+  has_secure_token :auth_token
 
   has_one :user_site, dependent: :destroy
   has_many :sites, through: :user_site

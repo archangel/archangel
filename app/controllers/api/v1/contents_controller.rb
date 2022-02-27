@@ -4,11 +4,15 @@ module Api
   module V1
     class ContentsController < V1Controller
       before_action :resource_collection, only: %i[index]
-      before_action :resource_object, only: %i[show update destroy]
+      before_action :resource_object, only: %i[show update destroy restore]
       before_action :resource_create_object, only: %i[create]
 
+      # TODO: Filter; include unpublished, include deleted
+      # TODO: Query; name, slug, body
+      # TODO: Pagination; page, per_page
       def index; end
 
+      # TODO: Filter; include unpublished, include deleted
       def show; end
 
       def create
@@ -32,23 +36,33 @@ module Api
       end
 
       def destroy
-        @content.discard
+        @content.discarded? ? @content.destroy : @content.discard
 
         respond_to do |format|
           format.json { head :no_content }
         end
       end
 
+      def restore
+        @content.undiscard
+
+        respond_to do |format|
+          format.json { head :accepted }
+        end
+      end
+
       protected
 
       def resource_collection
-        @contents = current_site.contents.kept.order(name: :asc)
+        includes = %i[stores]
+
+        @contents = current_site.contents.includes(includes).order(name: :asc)
       end
 
       def resource_object
         content_id = params.fetch(:id, '')
 
-        @content = current_site.contents.kept.find_by!(slug: content_id)
+        @content = current_site.contents.find_by!(slug: content_id)
       rescue ActiveRecord::RecordNotFound
         render json: json_not_found(controller_name), status: :not_found
       end

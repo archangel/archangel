@@ -2,17 +2,23 @@
 
 require 'swagger_helper'
 
-RSpec.describe 'Contents API' do
+RSpec.describe 'Collection Entries API' do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
 
-  let(:content) { create(:content, site: site) }
-  let(:slug) { content.slug }
+  let(:collection_fields) do
+    [
+      build(:collection_field, :string, label: 'First Field', key: 'field1', required: true),
+      build(:collection_field, :string, label: 'Second Field', key: 'field2')
+    ]
+  end
+  let(:collection) { create(:collection, site: site, collection_fields: collection_fields) }
+  let(:slug) { collection.slug }
+  let(:entry) { create(:collection_entry, collection: collection, content: { field1: 'Field 1', field2: 'Field 2' }) }
+  let(:id) { entry.id }
   let(:body) do
     {
-      name: 'string',
-      slug: 'string',
-      body: 'string',
+      field1: 'string',
       published_at: 'string'
     }
   end
@@ -24,17 +30,21 @@ RSpec.describe 'Contents API' do
     create(:user_site, user: profile, site: site)
   end
 
-  path '/api/v1/contents' do
-    get 'Content listing' do
-      tags 'Contents'
+  path '/api/v1/collections/{slug}/entries' do
+    get 'Collection Entry listing' do
+      tags 'Collection Entries'
       security [Bearer: [], Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
 
-      response '200', 'success' do
-        schema '$ref' => '#/components/schemas/contents'
+      parameter name: :slug, in: :path, type: :string
 
-        let(:contents) { create_list(:content, 3, site: site) }
+      response '200', 'success' do
+        schema '$ref' => '#/components/schemas/collection_entries'
+
+        let(:collection_entries) do
+          create_list(:collection_entry, 3, collection: collection, content: { name: 'Entry Name', slug: 'entrySlug' })
+        end
 
         run_test!
       end
@@ -48,28 +58,22 @@ RSpec.describe 'Contents API' do
       end
     end
 
-    post 'Create a content' do
-      tags 'Contents'
+    post 'Create a collection entry' do
+      tags 'Collection Entries'
       security [Bearer: [], Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
 
+      parameter name: :slug, in: :path, type: :string
       parameter name: :body, in: :body, schema: {
         type: :object,
-        required: %w[name slug],
         properties: {
-          name: { type: :string },
-          slug: { type: :string },
-          body: { type: :string },
-          published_at: {
-            type: :string,
-            nullable: true
-          }
+          published_at: { type: :string }
         }
       }
 
       response '201', 'created' do
-        schema '$ref' => '#/components/schemas/content'
+        schema '$ref' => '#/components/schemas/collection_entry'
 
         run_test!
       end
@@ -87,29 +91,68 @@ RSpec.describe 'Contents API' do
 
         let(:body) do
           {
-            name: '',
-            slug: '',
-            body: '',
-            published_at: ''
+            first: ''
           }
         end
 
         run_test!
       end
     end
+
+    path '/api/v1/collections/{slug}/entries/reposition' do
+      post 'Reposition collection entries' do
+        tags 'Collection Entries'
+        security [Bearer: [], Subdomain: []]
+        consumes 'application/json'
+        produces 'application/json'
+
+        parameter name: :slug, in: :path, type: :string
+        parameter name: :body, in: :body, schema: {
+          type: :object,
+          required: %w[positions],
+          properties: {
+            positions: {
+              type: :array,
+              items: {
+                type: :integer
+              }
+            }
+          }
+        }
+
+        response '202', 'accepted' do
+          let(:body) do
+            {
+              positions: []
+            }
+          end
+
+          run_test!
+        end
+
+        response '401', 'unauthorized' do
+          schema '$ref' => '#/components/schemas/unauthorized'
+
+          let(:Authorization) { '' }
+
+          run_test!
+        end
+      end
+    end
   end
 
-  path '/api/v1/contents/{slug}' do
-    get 'Retrieve a content' do
-      tags 'Contents'
+  path '/api/v1/collections/{slug}/entries/{id}' do
+    get 'Retrieve a collection entry' do
+      tags 'Collection Entries'
       security [Bearer: [], Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
 
       parameter name: :slug, in: :path, type: :string
+      parameter name: :id, in: :path, type: :integer
 
       response '200', 'success' do
-        schema '$ref' => '#/components/schemas/content'
+        schema '$ref' => '#/components/schemas/collection_entry'
 
         run_test!
       end
@@ -125,19 +168,20 @@ RSpec.describe 'Contents API' do
       response '404', 'not found' do
         schema '$ref' => '#/components/schemas/not_found'
 
-        let(:slug) { 'unknown' }
+        let(:id) { 0 }
 
         run_test!
       end
     end
 
-    put 'Update a content' do
-      tags 'Contents'
+    put 'Update a collection entry' do
+      tags 'Collection Entries'
       security [Bearer: [], Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
 
       parameter name: :slug, in: :path, type: :string
+      parameter name: :id, in: :path, type: :integer
       parameter name: :body, in: :body, schema: {
         type: :object,
         required: %w[name],
@@ -147,7 +191,7 @@ RSpec.describe 'Contents API' do
       }
 
       response '202', 'accepted' do
-        schema '$ref' => '#/components/schemas/content'
+        schema '$ref' => '#/components/schemas/collection_entry'
 
         run_test!
       end
@@ -163,7 +207,7 @@ RSpec.describe 'Contents API' do
       response '404', 'not found' do
         schema '$ref' => '#/components/schemas/not_found'
 
-        let(:slug) { 'unknown' }
+        let(:id) { 0 }
 
         run_test!
       end
@@ -173,9 +217,7 @@ RSpec.describe 'Contents API' do
 
         let(:body) do
           {
-            name: '',
-            slug: '',
-            body: '',
+            field1: '',
             published_at: ''
           }
         end
@@ -184,14 +226,13 @@ RSpec.describe 'Contents API' do
       end
     end
 
-    delete 'Delete a content' do
-      tags 'Contents'
-      description 'Initially a soft delete. Hard delete when called a second time'
+    delete 'Delete a collection entry' do
+      tags 'Collection Entries'
       security [Bearer: [], Subdomain: []]
       consumes 'application/json'
-      produces 'application/json'
 
       parameter name: :slug, in: :path, type: :string
+      parameter name: :id, in: :path, type: :integer
 
       response '204', 'no content' do
         run_test!
@@ -206,14 +247,15 @@ RSpec.describe 'Contents API' do
       end
     end
 
-    path '/api/v1/contents/{slug}/restore' do
-      post 'Restore a content' do
-        tags 'Contents'
+    path '/api/v1/collections/{slug}/entries/{id}/restore' do
+      post 'Restore a collection entry' do
+        tags 'Collection Entries'
         security [Bearer: [], Subdomain: []]
         consumes 'application/json'
         produces 'application/json'
 
         parameter name: :slug, in: :path, type: :string
+        parameter name: :id, in: :path, type: :integer
 
         response '202', 'accepted' do
           run_test!
@@ -230,7 +272,7 @@ RSpec.describe 'Contents API' do
         response '404', 'not found' do
           schema '$ref' => '#/components/schemas/not_found'
 
-          let(:slug) { 'unknown' }
+          let(:id) { 0 }
 
           run_test!
         end

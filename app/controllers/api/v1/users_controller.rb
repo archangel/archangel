@@ -3,9 +3,16 @@
 module Api
   module V1
     class UsersController < V1Controller
-      before_action :resource_object, only: %i[show destroy unlock]
+      before_action :resource_collection, only: %i[index]
+      before_action :resource_object, only: %i[show update destroy unlock]
       before_action :resource_create_object, only: %i[create]
 
+      # TODO: Filter; include confirmed
+      # TODO: Query; first name, last name, username, email, confirmed
+      # TODO: Pagination; page, per_page
+      def index; end
+
+      # TODO: Filter; include confirmed
       def show; end
 
       def create
@@ -15,6 +22,16 @@ module Api
                         .create(user: @user, role: resource_params.fetch(:role, UserSite::ROLE_DEFAULT))
             # TODO: Generate starter content
             format.json { render :create, status: :created }
+          else
+            format.json { render json: json_unprocessable(@user), status: :unprocessable_entity }
+          end
+        end
+      end
+
+      def update
+        respond_to do |format|
+          if @user.update(resource_params)
+            format.json { render :update, status: :accepted }
           else
             format.json { render json: json_unprocessable(@user), status: :unprocessable_entity }
           end
@@ -38,6 +55,12 @@ module Api
       end
 
       protected
+
+      def resource_collection
+        @users = current_site.users
+                             .order(username: :asc)
+                             .where.not(id: current_user.id)
+      end
 
       def resource_object
         user_id = params.fetch(:id, '')

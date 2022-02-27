@@ -5,8 +5,9 @@ require 'swagger_helper'
 RSpec.describe 'Collections API' do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
+
   let(:collection) { create(:collection, site: site) }
-  let(:collectionSlug) { collection.slug }
+  let(:slug) { collection.slug }
   let(:body) do
     {
       name: 'string',
@@ -14,7 +15,9 @@ RSpec.describe 'Collections API' do
       published_at: 'string'
     }
   end
+
   let(:Authorization) { profile.auth_token }
+  let(:'X-Archangel-Site') { site.subdomain }
 
   before do
     create(:user_site, user: profile, site: site)
@@ -23,7 +26,7 @@ RSpec.describe 'Collections API' do
   path '/api/v1/collections' do
     get 'Collection listing' do
       tags 'Collections'
-      security [Bearer: {}]
+      security [Bearer: [], Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
 
@@ -46,7 +49,7 @@ RSpec.describe 'Collections API' do
 
     post 'Create a collection' do
       tags 'Collections'
-      security [Bearer: {}]
+      security [Bearer: [], Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
 
@@ -93,14 +96,14 @@ RSpec.describe 'Collections API' do
     end
   end
 
-  path '/api/v1/collections/{collectionSlug}' do
+  path '/api/v1/collections/{slug}' do
     get 'Retrieve a collection' do
       tags 'Collections'
-      security [Bearer: {}]
+      security [Bearer: [], Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :collectionSlug, in: :path, type: :string
+      parameter name: :slug, in: :path, type: :string
 
       response '200', 'success' do
         schema '$ref' => '#/components/schemas/collection'
@@ -119,7 +122,7 @@ RSpec.describe 'Collections API' do
       response '404', 'not found' do
         schema '$ref' => '#/components/schemas/not_found'
 
-        let(:collectionSlug) { 'unknown' }
+        let(:slug) { 'unknown' }
 
         run_test!
       end
@@ -127,11 +130,11 @@ RSpec.describe 'Collections API' do
 
     put 'Update a collection' do
       tags 'Collections'
-      security [Bearer: {}]
+      security [Bearer: [], Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :collectionSlug, in: :path, type: :string
+      parameter name: :slug, in: :path, type: :string
       parameter name: :body, in: :body, schema: {
         type: :object,
         required: %w[name],
@@ -157,7 +160,7 @@ RSpec.describe 'Collections API' do
       response '404', 'not found' do
         schema '$ref' => '#/components/schemas/not_found'
 
-        let(:collectionSlug) { 'unknown' }
+        let(:slug) { 'unknown' }
 
         run_test!
       end
@@ -179,12 +182,12 @@ RSpec.describe 'Collections API' do
 
     delete 'Delete a collection' do
       tags 'Collections'
-      security [Bearer: {}]
+      security [Bearer: [], Subdomain: []]
       consumes 'application/json'
 
-      parameter name: :collectionSlug, in: :path, type: :string
+      parameter name: :slug, in: :path, type: :string
 
-      response '204', 'no collection' do
+      response '204', 'no content' do
         run_test!
       end
 
@@ -194,6 +197,37 @@ RSpec.describe 'Collections API' do
         let(:Authorization) { '' }
 
         run_test!
+      end
+    end
+
+    path '/api/v1/collections/{slug}/restore' do
+      post 'Restore a collection' do
+        tags 'Collections'
+        security [Bearer: [], Subdomain: []]
+        consumes 'application/json'
+        produces 'application/json'
+
+        parameter name: :slug, in: :path, type: :string
+
+        response '202', 'accepted' do
+          run_test!
+        end
+
+        response '401', 'unauthorized' do
+          schema '$ref' => '#/components/schemas/unauthorized'
+
+          let(:Authorization) { '' }
+
+          run_test!
+        end
+
+        response '404', 'not found' do
+          schema '$ref' => '#/components/schemas/not_found'
+
+          let(:slug) { 'unknown' }
+
+          run_test!
+        end
       end
     end
   end

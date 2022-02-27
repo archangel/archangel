@@ -13,6 +13,10 @@ class Site < ApplicationRecord
     s.string :format_js_date, blank: false, default: 'MMMM Do YYYY'
     s.string :format_js_datetime, blank: false, default: 'MMMM Do YYYY @ h:mm a'
     s.string :format_js_time, blank: false, default: 'h:mm a'
+
+    # When to auto regenerate auth_token
+    s.boolean :regenerate_auth_token_on_login, default: false
+    s.boolean :regenerate_auth_token_on_logout, default: false
   end
 
   has_many :collections, dependent: :destroy

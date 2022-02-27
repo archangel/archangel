@@ -39,15 +39,25 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resource :auth, only: %i[create]
+      resource :session, only: %i[create destroy]
 
-      resources :collections, except: %i[new edit]
+      resource :site, only: %i[show update]
 
-      resources :contents, except: %i[new edit] do
-        post :restore
+      resources :collections, except: %i[new edit] do
+        post :restore, on: :member
+
+        resources :entries, controller: 'collections/collection_entries', except: %i[new edit] do
+          post :reposition, on: :collection
+
+          post :restore, on: :member
+        end
       end
 
-      resources :users, except: %i[index new edit update] do
+      resources :contents, except: %i[new edit] do
+        post :restore, on: :member
+      end
+
+      resources :users, except: %i[new edit] do
         post :unlock, on: :member
       end
     end

@@ -4,11 +4,15 @@ module Api
   module V1
     class CollectionsController < V1Controller
       before_action :resource_collection, only: %i[index]
-      before_action :resource_object, only: %i[show update destroy]
+      before_action :resource_object, only: %i[show update destroy restore]
       before_action :resource_create_object, only: %i[create]
 
+      # TODO: Filter; include unpublished, include deleted
+      # TODO: Query; name, slug
+      # TODO: Pagination; page, per_page
       def index; end
 
+      # TODO: Filter; include unpublished, include deleted
       def show; end
 
       def create
@@ -32,23 +36,33 @@ module Api
       end
 
       def destroy
-        @collection.discard
+        @collection.discarded? ? @collection.destroy : @collection.discard
 
         respond_to do |format|
           format.json { head :no_content }
         end
       end
 
+      def restore
+        @collection.undiscard
+
+        respond_to do |format|
+          format.json { head :accepted }
+        end
+      end
+
       protected
 
       def resource_collection
-        @collections = current_site.collections.kept.order(name: :asc)
+        includes = %i[collection_fields]
+
+        @collections = current_site.collections.includes(includes).order(name: :asc)
       end
 
       def resource_object
         collection_id = params.fetch(:id, '')
 
-        @collection = current_site.collections.kept.find_by!(slug: collection_id)
+        @collection = current_site.collections.find_by!(slug: collection_id)
       rescue ActiveRecord::RecordNotFound
         render json: json_not_found(controller_name), status: :not_found
       end
@@ -58,7 +72,12 @@ module Api
       end
 
       def permitted_attributes
-        %i[name published_at slug]
+        [
+          :name, :published_at, :slug,
+          {
+            collection_fields_attributes: %i[id _destroy classification key label required]
+          }
+        ]
       end
 
       def resource_params

@@ -16,6 +16,11 @@
     <%= f.input :format_js_time, wrapper_html: { class: 'col-md-4' } %>
   </div>
 
+  <div class="row">
+    <%= f.input :regenerate_auth_token_on_login, as: :boolean, wrapper_html: { class: 'col-md-6' } %>
+    <%= f.input :regenerate_auth_token_on_logout, as: :boolean, wrapper_html: { class: 'col-md-6' } %>
+  </div>
+
   <div id="site_stores">
     <%= f.simple_fields_for :stores do |store| %>
       <%= render 'store_fields', f: store %>

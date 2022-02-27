@@ -2,18 +2,20 @@
 
 require 'swagger_helper'
 
-RSpec.describe 'Auths API' do
+RSpec.describe 'Sessions API' do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
+
+  let(:'X-Archangel-Site') { site.subdomain }
 
   before do
     create(:user_site, user: profile, site: site)
   end
 
-  path '/api/v1/auth' do
-    post 'Retrieve authentication token' do
-      tags 'Auth'
-      security []
+  path '/api/v1/session' do
+    post 'Log in' do
+      tags 'Session'
+      security [Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
 
@@ -27,7 +29,7 @@ RSpec.describe 'Auths API' do
       }
 
       response '202', 'accepted' do
-        schema '$ref' => '#/components/schemas/auth_create'
+        schema '$ref' => '#/components/schemas/session'
 
         let(:body) { { email: profile.email, password: profile.password } }
 
@@ -37,10 +39,31 @@ RSpec.describe 'Auths API' do
       response '401', 'unauthorized' do
         schema '$ref' => '#/components/schemas/unauthorized'
 
-        let(:body) { { email: '', password: '' } }
+        let(:body) { { email: profile.email, password: '' } }
 
         run_test!
       end
     end
+
+    delete 'Log out' do
+     tags 'Session'
+     security [Bearer: [], Subdomain: []]
+     consumes 'application/json'
+     produces 'application/json'
+
+     response '204', 'no_content' do
+       let(:Authorization) { profile.auth_token }
+
+       run_test!
+     end
+
+     response '401', 'unauthorized' do
+       schema '$ref' => '#/components/schemas/unauthorized'
+
+       let(:Authorization) { '' }
+
+       run_test!
+     end
+   end
   end
 end

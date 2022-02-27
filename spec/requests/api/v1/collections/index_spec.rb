@@ -25,11 +25,11 @@ RSpec.describe 'API v1 Collection listing', type: :request do
     end
 
     it 'returns in specified order by `position`' do
-      expect(json_response[:data][0][:name]).to eq('Personal')
+      expect(json_response[:data][0][:name]).to eq('Deleted')
     end
 
     it 'does not return soft deleted items' do
-      expect(json_response[:data].size).to eq(2)
+      expect(json_response[:data].size).to eq(3)
     end
   end
 

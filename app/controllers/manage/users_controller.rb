@@ -70,7 +70,7 @@ module Manage
     end
 
     def retoken
-      @user.update(auth_token: nil)
+      @user.regenerate_auth_token
 
       respond_to do |format|
         format.html { redirect_to manage_user_path(@user), notice: I18n.t('flash.users.retoken.success') }

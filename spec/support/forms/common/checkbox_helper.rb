@@ -14,5 +14,5 @@ def form_checbox_check(label, checked)
 
   id = find('label', text: label)[:for]
 
-  find("label[for='#{id}'] input[type='checkbox']").set(checked)
+  find("label[for='#{id}'] + input[type='hidden'] + input[type='checkbox']").set(checked)
 end

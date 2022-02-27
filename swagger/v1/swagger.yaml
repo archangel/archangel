@@ -5,20 +5,90 @@ info:
   description: Headless CMS
   version: v1
 paths:
-  "/api/v1/auth":
-    post:
-      summary: Retrieve authentication token
+  "/api/v1/collections/{slug}/entries":
+    get:
+      summary: Collection Entry listing
       tags:
-      - Auth
-      security: []
-      parameters: []
+      - Collection Entries
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
-        '202':
-          description: accepted
+        '200':
+          description: success
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/auth_create"
+                "$ref": "#/components/schemas/collection_entries"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+    post:
+      summary: Create a collection entry
+      tags:
+      - Collection Entries
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/collection_entry"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '422':
+          description: unprocessable
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unprocessable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                published_at:
+                  type: string
+  "/api/v1/collections/{slug}/entries/reposition":
+    post:
+      summary: Reposition collection entries
+      tags:
+      - Collection Entries
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: accepted
         '401':
           description: unauthorized
           content:
@@ -31,20 +101,168 @@ paths:
             schema:
               type: object
               required:
-              - email
-              - password
+              - positions
               properties:
-                email:
+                positions:
+                  type: array
+                  items:
+                    type: integer
+  "/api/v1/collections/{slug}/entries/{id}":
+    get:
+      summary: Retrieve a collection entry
+      tags:
+      - Collection Entries
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/collection_entry"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+    put:
+      summary: Update a collection entry
+      tags:
+      - Collection Entries
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/collection_entry"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+        '422':
+          description: unprocessable
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unprocessable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
                   type: string
-                password:
-                  type: string
+    delete:
+      summary: Delete a collection entry
+      tags:
+      - Collection Entries
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: no content
+        '401':
+          description: unauthorized
+  "/api/v1/collections/{slug}/entries/{id}/restore":
+    post:
+      summary: Restore a collection entry
+      tags:
+      - Collection Entries
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '202':
+          description: accepted
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
   "/api/v1/collections":
     get:
       summary: Collection listing
       tags:
       - Collections
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       responses:
         '200':
           description: success
@@ -63,7 +281,8 @@ paths:
       tags:
       - Collections
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters: []
       responses:
         '201':
@@ -100,15 +319,16 @@ paths:
                 published_at:
                   type: string
                   nullable: true
-  "/api/v1/collections/{collectionSlug}":
+  "/api/v1/collections/{slug}":
     get:
       summary: Retrieve a collection
       tags:
       - Collections
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters:
-      - name: collectionSlug
+      - name: slug
         in: path
         required: true
         schema:
@@ -137,9 +357,10 @@ paths:
       tags:
       - Collections
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters:
-      - name: collectionSlug
+      - name: slug
         in: path
         required: true
         schema:
@@ -184,25 +405,56 @@ paths:
       tags:
       - Collections
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters:
-      - name: collectionSlug
+      - name: slug
         in: path
         required: true
         schema:
           type: string
       responses:
         '204':
-          description: no collection
+          description: no content
         '401':
           description: unauthorized
+  "/api/v1/collections/{slug}/restore":
+    post:
+      summary: Restore a collection
+      tags:
+      - Collections
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: accepted
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
   "/api/v1/contents":
     get:
       summary: Content listing
       tags:
       - Contents
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       responses:
         '200':
           description: success
@@ -221,7 +473,8 @@ paths:
       tags:
       - Contents
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters: []
       responses:
         '201':
@@ -260,15 +513,16 @@ paths:
                 published_at:
                   type: string
                   nullable: true
-  "/api/v1/contents/{contentSlug}":
+  "/api/v1/contents/{slug}":
     get:
       summary: Retrieve a content
       tags:
       - Contents
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters:
-      - name: contentSlug
+      - name: slug
         in: path
         required: true
         schema:
@@ -297,9 +551,10 @@ paths:
       tags:
       - Contents
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters:
-      - name: contentSlug
+      - name: slug
         in: path
         required: true
         schema:
@@ -343,10 +598,12 @@ paths:
       summary: Delete a content
       tags:
       - Contents
+      description: Initially a soft delete. Hard delete when called a second time
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters:
-      - name: contentSlug
+      - name: slug
         in: path
         required: true
         schema:
@@ -356,13 +613,178 @@ paths:
           description: no content
         '401':
           description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+  "/api/v1/contents/{slug}/restore":
+    post:
+      summary: Restore a content
+      tags:
+      - Contents
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: accepted
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+  "/api/v1/session":
+    post:
+      summary: Log in
+      tags:
+      - Session
+      security:
+      - Subdomain: []
+      parameters: []
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/session"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+    delete:
+      summary: Log out
+      tags:
+      - Session
+      security:
+      - Bearer: []
+        Subdomain: []
+      responses:
+        '204':
+          description: no_content
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+  "/api/v1/site":
+    get:
+      summary: Retrieve a site
+      tags:
+      - Site
+      security:
+      - Bearer: []
+        Subdomain: []
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/site"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+    put:
+      summary: Update a site
+      tags:
+      - Site
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters: []
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/site"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '422':
+          description: unprocessable
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unprocessable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - subdomain
+              properties:
+                name:
+                  type: string
+                subdomain:
+                  type: string
   "/api/v1/users":
+    get:
+      summary: User listing
+      tags:
+      - Users
+      security:
+      - Bearer: []
+        Subdomain: []
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/users"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
     post:
       summary: Create a user
       tags:
       - Users
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters: []
       responses:
         '201':
@@ -402,15 +824,16 @@ paths:
                 last_name:
                   type: string
                   nullable: true
-  "/api/v1/users/{userUsername}":
+  "/api/v1/users/{username}":
     get:
       summary: Retrieve a user
       tags:
       - Users
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters:
-      - name: userUsername
+      - name: username
         in: path
         required: true
         schema:
@@ -434,14 +857,72 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/not_found"
+    put:
+      summary: Update a user
+      tags:
+      - Users
+      security:
+      - Bearer: []
+        Subdomain: []
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/user"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorized"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/not_found"
+        '422':
+          description: unprocessable
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unprocessable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - username
+              - first_name
+              properties:
+                email:
+                  type: string
+                username:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                  nullable: true
     delete:
       summary: Delete a user
       tags:
       - Users
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters:
-      - name: userUsername
+      - name: username
         in: path
         required: true
         schema:
@@ -451,15 +932,16 @@ paths:
           description: no content
         '401':
           description: unauthorized
-  "/api/v1/users/{userUsername}/unlock":
+  "/api/v1/users/{username}/unlock":
     post:
       summary: Unlock a user
       tags:
       - Users
       security:
-      - Bearer: {}
+      - Bearer: []
+        Subdomain: []
       parameters:
-      - name: userUsername
+      - name: username
         in: path
         required: true
         schema:
@@ -488,11 +970,21 @@ servers:
   description: Local Development
 - url: https://archangel.local
   description: archangel.local
+- url: https://{subdomain}.archangel.local
+  description: Development
+  variables:
+    subdomain:
+      default: archangel
+      description: Subdomain of site
 components:
   securitySchemes:
     Bearer:
       type: apiKey
       name: Authorization
+      in: header
+    Subdomain:
+      type: apiKey
+      name: X-Archangel-Site
       in: header
   schemas:
     not_found:
@@ -540,14 +1032,14 @@ components:
           default: 422
         errors:
           type: object
-    auth_create_item:
+    session_item:
       type: object
       required:
-      - token
+      - authToken
       properties:
-        token:
+        authToken:
           type: string
-    auth_create:
+    session:
       type: object
       required:
       - success
@@ -561,7 +1053,76 @@ components:
           type: integer
           default: 202
         data:
-          "$ref": "#/components/schemas/auth_create_item"
+          "$ref": "#/components/schemas/session_item"
+    collection_entry_item:
+      type: object
+      required:
+      - content
+      properties:
+        id:
+          type: integer
+        content:
+          type: object
+        position:
+          type: integer
+        publishedAt:
+          type: string
+          nullable: true
+        deletedAt:
+          type: string
+          nullable: true
+          default:
+    collection_entry:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 200
+        data:
+          "$ref": "#/components/schemas/collection_entry_item"
+    collection_entries:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 200
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/collection_entry_item"
+    collection_field_item:
+      type: object
+      required:
+      - label
+      - key
+      - classification
+      - required
+      - position
+      properties:
+        label:
+          type: string
+        key:
+          type: string
+        classification:
+          type: string
+        required:
+          type: boolean
+        position:
+          type: integer
     collection_item:
       type: object
       required:
@@ -579,6 +1140,10 @@ components:
           type: string
           nullable: true
           default:
+        fields:
+          type: array
+          items:
+            "$ref": "#/components/schemas/collection_field_item"
     collection:
       type: object
       required:
@@ -631,6 +1196,10 @@ components:
           type: string
           nullable: true
           default:
+        stores:
+          type: array
+          items:
+            "$ref": "#/components/schemas/store_item"
     content:
       type: object
       required:
@@ -663,6 +1232,60 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/content_item"
+    site_item:
+      type: object
+      required:
+      - name
+      - subdomain
+      properties:
+        name:
+          type: string
+        subdomain:
+          type: string
+        body:
+          type: string
+        formatDate:
+          type: string
+        formatDatetime:
+          type: string
+        formatTime:
+          type: string
+        formatJsDate:
+          type: string
+        formatJsDatetime:
+          type: string
+        formatJsTime:
+          type: string
+        stores:
+          type: array
+          items:
+            "$ref": "#/components/schemas/store_item"
+    site:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 200
+        data:
+          "$ref": "#/components/schemas/site_item"
+    store_item:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+          nullable: true
     user_item:
       type: object
       required:
@@ -705,3 +1328,20 @@ components:
           default: 200
         data:
           "$ref": "#/components/schemas/user_item"
+    users:
+      type: object
+      required:
+      - success
+      - status
+      - data
+      properties:
+        success:
+          type: boolean
+          default: true
+        status:
+          type: integer
+          default: 200
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/user_item"

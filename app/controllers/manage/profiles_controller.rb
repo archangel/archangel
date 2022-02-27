@@ -26,7 +26,7 @@ module Manage
     end
 
     def retoken
-      @profile.update(auth_token: nil)
+      @profile.regenerate_auth_token
 
       respond_to do |format|
         format.html { redirect_to manage_profile_path, notice: I18n.t('flash.profiles.retoken.success') }

@@ -170,11 +170,23 @@ $ open coverage/index.html
 
 Swagger API documentation
 
+Test API integration
+
+```
+$ bundle exec rspec spec/integration
+```
+
+Generate Swagger documentation
+
 ```
 $ rake rswag:specs:swaggerize
 ```
 
-In your browser go to [http://localhost:3000/api-docs/index.html](http://localhost:3000/api-docs/index.html)
+In your browser go to [http://localhost:3000/api-docs/index.html](http://localhost:3000/api-docs/index.html) or [https://archangel.local/api-docs/index.html](https://archangel.local/api-docs/index.html)
+
+### Validate
+
+Swagger validate can be found at [https://editor.swagger.io/](https://editor.swagger.io/). Paste the contents of `swagger/v1/swagger.yml` into the validator to find any issues.
 
 ## Linting
 

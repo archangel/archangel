@@ -2,11 +2,9 @@
 en:
   api:
     not_found:
+      collection_entries: Collection Entry not found
       collections: Collection not found
       contents: Content not found
       users: User not found
     unauthorized:
-      invalid: Invalid user credentials
       not_authorized: Not authorized
-      token_invalid: Invalid authorization token
-      token_missing: Authorization token is missing
