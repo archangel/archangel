@@ -3,13 +3,14 @@
 module Api
   module V1
     class ContentsController < V1Controller
+      include ::Controllers::Api::V1::PaginationConcern
+
       before_action :resource_collection, only: %i[index]
       before_action :resource_object, only: %i[show update destroy restore]
       before_action :resource_create_object, only: %i[create]
 
       # TODO: Filter; include unpublished, include deleted
       # TODO: Query; name, slug, body
-      # TODO: Pagination; page, per_page
       def index; end
 
       # TODO: Filter; include unpublished, include deleted
@@ -56,7 +57,7 @@ module Api
       def resource_collection
         includes = %i[stores]
 
-        @contents = current_site.contents.includes(includes).order(name: :asc)
+        @contents = current_site.contents.includes(includes).order(name: :asc).page(page_num).per(per_page)
       end
 
       def resource_object
@@ -73,7 +74,7 @@ module Api
 
       def permitted_attributes
         [
-          :body, :name, :slug,
+          :body, :name, :published_at, :slug,
           { stores_attributes: %i[id _destroy key value] }
         ]
       end

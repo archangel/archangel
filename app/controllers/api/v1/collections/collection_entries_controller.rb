@@ -4,6 +4,8 @@ module Api
   module V1
     module Collections
       class CollectionEntriesController < V1Controller
+        include ::Controllers::Api::V1::PaginationConcern
+
         before_action :parent_resource
         before_action :resource_collection, only: %i[index]
         before_action :resource_object, only: %i[show update destroy restore]
@@ -12,7 +14,6 @@ module Api
 
         # TODO: Filter; include unpublished, include deleted, include Collection and Field info
         # TODO: Random sample by count
-        # TODO: Pagination; page, per_page
         def index; end
 
         # TODO: Filter; include unpublished, include deleted, include Collection and Field info
@@ -78,7 +79,7 @@ module Api
         end
 
         def resource_collection
-          @collection_entries = @collection.collection_entries.order(position: :asc)
+          @collection_entries = @collection.collection_entries.order(position: :asc).page(page_num).per(per_page)
         end
 
         def resource_object

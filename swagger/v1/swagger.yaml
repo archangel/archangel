@@ -19,6 +19,16 @@ paths:
         required: true
         schema:
           type: string
+      - name: page
+        in: query
+        description: Page number of results
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Number of records for page
+        schema:
+          type: integer
       responses:
         '200':
           description: success
@@ -72,6 +82,7 @@ paths:
               properties:
                 published_at:
                   type: string
+                  nullable: true
   "/api/v1/collections/{slug}/entries/reposition":
     post:
       summary: Reposition collection entries
@@ -193,11 +204,10 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-              - name
               properties:
-                name:
+                published_at:
                   type: string
+                  nullable: true
     delete:
       summary: Delete a collection entry
       tags:
@@ -263,6 +273,18 @@ paths:
       security:
       - Bearer: []
         Subdomain: []
+      description: This is a description
+      parameters:
+      - name: page
+        in: query
+        description: Page number of results
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Number of records for page
+        schema:
+          type: integer
       responses:
         '200':
           description: success
@@ -395,11 +417,14 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-              - name
               properties:
                 name:
                   type: string
+                slug:
+                  type: string
+                published_at:
+                  type: string
+                  nullable: true
     delete:
       summary: Delete a collection
       tags:
@@ -455,6 +480,17 @@ paths:
       security:
       - Bearer: []
         Subdomain: []
+      parameters:
+      - name: page
+        in: query
+        description: Page number of results
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Number of records for page
+        schema:
+          type: integer
       responses:
         '200':
           description: success
@@ -589,11 +625,16 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-              - name
               properties:
                 name:
                   type: string
+                slug:
+                  type: string
+                body:
+                  type: string
+                published_at:
+                  type: string
+                  nullable: true
     delete:
       summary: Delete a content
       tags:
@@ -757,6 +798,22 @@ paths:
                   type: string
                 subdomain:
                   type: string
+                format_date:
+                  type: string
+                format_datetime:
+                  type: string
+                format_time:
+                  type: string
+                format_js_date:
+                  type: string
+                format_js_datetime:
+                  type: string
+                format_js_time:
+                  type: string
+                regenerate_auth_token_on_login:
+                  type: boolean
+                regenerate_auth_token_on_logout:
+                  type: boolean
   "/api/v1/users":
     get:
       summary: User listing
@@ -765,6 +822,17 @@ paths:
       security:
       - Bearer: []
         Subdomain: []
+      parameters:
+      - name: page
+        in: query
+        description: Page number of results
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Number of records for page
+        schema:
+          type: integer
       responses:
         '200':
           description: success
@@ -816,6 +884,8 @@ paths:
               - first_name
               properties:
                 email:
+                  type: string
+                role:
                   type: string
                 username:
                   type: string
@@ -900,12 +970,10 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-              - email
-              - username
-              - first_name
               properties:
                 email:
+                  type: string
+                role:
                   type: string
                 username:
                   type: string

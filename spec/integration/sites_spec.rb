@@ -53,7 +53,15 @@ RSpec.describe 'Sites API' do
         required: %w[name subdomain],
         properties: {
           name: { type: :string },
-          subdomain: { type: :string }
+          subdomain: { type: :string },
+          format_date: { type: :string },
+          format_datetime: { type: :string },
+          format_time: { type: :string },
+          format_js_date: { type: :string },
+          format_js_datetime: { type: :string },
+          format_js_time: { type: :string },
+          regenerate_auth_token_on_login: { type: :boolean },
+          regenerate_auth_token_on_logout: { type: :boolean }
         }
       }
 

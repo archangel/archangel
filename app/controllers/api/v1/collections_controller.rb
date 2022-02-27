@@ -3,13 +3,14 @@
 module Api
   module V1
     class CollectionsController < V1Controller
+      include ::Controllers::Api::V1::PaginationConcern
+
       before_action :resource_collection, only: %i[index]
       before_action :resource_object, only: %i[show update destroy restore]
       before_action :resource_create_object, only: %i[create]
 
       # TODO: Filter; include unpublished, include deleted
       # TODO: Query; name, slug
-      # TODO: Pagination; page, per_page
       def index; end
 
       # TODO: Filter; include unpublished, include deleted
@@ -56,7 +57,7 @@ module Api
       def resource_collection
         includes = %i[collection_fields]
 
-        @collections = current_site.collections.includes(includes).order(name: :asc)
+        @collections = current_site.collections.includes(includes).order(name: :asc).page(page_num).per(per_page)
       end
 
       def resource_object

@@ -3,13 +3,14 @@
 module Api
   module V1
     class UsersController < V1Controller
+      include ::Controllers::Api::V1::PaginationConcern
+
       before_action :resource_collection, only: %i[index]
       before_action :resource_object, only: %i[show update destroy unlock]
       before_action :resource_create_object, only: %i[create]
 
       # TODO: Filter; include confirmed
       # TODO: Query; first name, last name, username, email, confirmed
-      # TODO: Pagination; page, per_page
       def index; end
 
       # TODO: Filter; include confirmed
@@ -60,6 +61,7 @@ module Api
         @users = current_site.users
                              .order(username: :asc)
                              .where.not(id: current_user.id)
+                             .page(page_num).per(per_page)
       end
 
       def resource_object

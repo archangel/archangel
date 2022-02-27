@@ -25,6 +25,8 @@ RSpec.describe 'Collection Entries API' do
 
   let(:Authorization) { profile.auth_token }
   let(:'X-Archangel-Site') { site.subdomain }
+  let(:page) { 1 }
+  let(:per_page) { 24 }
 
   before do
     create(:user_site, user: profile, site: site)
@@ -38,6 +40,8 @@ RSpec.describe 'Collection Entries API' do
       produces 'application/json'
 
       parameter name: :slug, in: :path, type: :string
+      parameter name: :page, in: :query, type: :integer, description: 'Page number of results'
+      parameter name: :per_page, in: :query, type: :integer, description: 'Number of records for page'
 
       response '200', 'success' do
         schema '$ref' => '#/components/schemas/collection_entries'
@@ -68,7 +72,10 @@ RSpec.describe 'Collection Entries API' do
       parameter name: :body, in: :body, schema: {
         type: :object,
         properties: {
-          published_at: { type: :string }
+          published_at: {
+            type: :string,
+            nullable: true
+          }
         }
       }
 
@@ -184,9 +191,11 @@ RSpec.describe 'Collection Entries API' do
       parameter name: :id, in: :path, type: :integer
       parameter name: :body, in: :body, schema: {
         type: :object,
-        required: %w[name],
         properties: {
-          name: { type: :string }
+          published_at: {
+            type: :string,
+            nullable: true
+          }
         }
       }
 

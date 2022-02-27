@@ -19,6 +19,8 @@ RSpec.describe 'Users API' do
 
   let(:Authorization) { profile.auth_token }
   let(:'X-Archangel-Site') { site.subdomain }
+  let(:page) { 1 }
+  let(:per_page) { 24 }
 
   before do
     create(:user_site, user: profile, site: site)
@@ -31,6 +33,9 @@ RSpec.describe 'Users API' do
       security [Bearer: [], Subdomain: []]
       consumes 'application/json'
       produces 'application/json'
+
+      parameter name: :page, in: :query, type: :integer, description: 'Page number of results'
+      parameter name: :per_page, in: :query, type: :integer, description: 'Number of records for page'
 
       response '200', 'success' do
         schema '$ref' => '#/components/schemas/users'
@@ -68,6 +73,7 @@ RSpec.describe 'Users API' do
         required: %w[email username first_name],
         properties: {
           email: { type: :string },
+          role: { type: :string },
           username: { type: :string },
           first_name: { type: :string },
           last_name: {
@@ -149,9 +155,9 @@ RSpec.describe 'Users API' do
       parameter name: :username, in: :path, type: :string
       parameter name: :body, in: :body, schema: {
         type: :object,
-        required: %w[email username first_name],
         properties: {
           email: { type: :string },
+          role: { type: :string },
           username: { type: :string },
           first_name: { type: :string },
           last_name: {
