@@ -273,7 +273,6 @@ paths:
       security:
       - Bearer: []
         Subdomain: []
-      description: This is a description
       parameters:
       - name: page
         in: query

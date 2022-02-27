@@ -1,5 +1,7 @@
+// Header
 $header-height: 70px;
 
+// Sidebar
 $sidebar-width: 260px;
 $sidebar-min-width: 70px;
 $sidebar-font-size-sm: 26px;
@@ -13,12 +15,16 @@ $sidebar-link-hover-color: $white;
 $sidebar-link-active-hover-background-color: $blue;
 $sidebar-link-active-hover-color: $white;
 
+// Footer
 $footer-height: 60px;
 
+// Main
 $main-margin-bottom: 70px;
 
+// Section
 $section-max-width: none;
 
+// Flash
 $flash-container-top: calc($header-height + $spacer);
 $flash-container-right: $spacer;
 $flash-container-width: 375px;
