@@ -19,7 +19,15 @@ en:
         published_at: Publish Date
         slug: Slug
       site:
+        format_date: Format Date
+        format_datetime: Format Datetime
+        format_js_date: Format JS Date
+        format_js_datetime: Format JS Datetime
+        format_js_time: Format JS Time
+        format_time: Format Time
         name: Name
+        regenerate_auth_token_on_login: Regenerate auth token on log in
+        regenerate_auth_token_on_logout: Regenerate auth token on log out
         subdomain: Subdomain
       store:
         key: Key

@@ -10,8 +10,16 @@ en:
   simple_form:
     error_notification:
       default_message: 'Please review the problems below:'
+    hints:
+      site:
+        format_date: Using <a href="https://apidock.com/ruby/DateTime/strftime" target="_blank">Ruby</a> formatting
+        format_datetime: Using <a href="https://apidock.com/ruby/DateTime/strftime" target="_blank">Ruby</a> formatting
+        format_js_date: Using <a href="https://momentjs.com/docs/#/displaying/" target="_blank">Moment.js</a> formatting
+        format_js_datetime: Using <a href="https://momentjs.com/docs/#/displaying/" target="_blank">Moment.js</a> formatting
+        format_js_time: Using <a href="https://momentjs.com/docs/#/displaying/" target="_blank">Moment.js</a> formatting
+        format_time: Using <a href="https://apidock.com/ruby/DateTime/strftime" target="_blank">Ruby</a> formatting
     'no': 'No'
     required:
       mark: "*"
-      text: required
+      text: Required
     'yes': 'Yes'

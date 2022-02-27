@@ -970,12 +970,6 @@ servers:
   description: Local Development
 - url: https://archangel.local
   description: archangel.local
-- url: https://{subdomain}.archangel.local
-  description: Development
-  variables:
-    subdomain:
-      default: archangel
-      description: Subdomain of site
 components:
   securitySchemes:
     Bearer:
