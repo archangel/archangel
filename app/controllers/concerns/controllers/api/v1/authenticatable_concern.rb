@@ -48,6 +48,7 @@ module Controllers
 
         def identify_user
           request.headers.fetch('Authorization', nil) ||
+            request.headers.fetch('X-Authorization-Token', nil) ||
             request.headers.fetch('X-Auth-Token', nil)
         end
 
