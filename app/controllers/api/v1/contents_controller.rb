@@ -3,7 +3,11 @@
 module Api
   module V1
     class ContentsController < V1Controller
+      include Toller
       include ::Controllers::Api::V1::PaginationConcern
+
+      sort_on :name, type: :scope, scope_name: :sort_on_name, default: true
+      sort_on :slug, type: :scope, scope_name: :sort_on_slug
 
       before_action :resource_collection, only: %i[index]
       before_action :resource_object, only: %i[show update destroy restore]
@@ -57,7 +61,9 @@ module Api
       def resource_collection
         includes = %i[stores]
 
-        @contents = current_site.contents.includes(includes).order(name: :asc).page(page_num).per(per_page)
+        @contents = retrieve(
+          current_site.contents.includes(includes)
+        ).page(page_num).per(per_page)
       end
 
       def resource_object

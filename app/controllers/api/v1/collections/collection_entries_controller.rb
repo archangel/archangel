@@ -4,6 +4,7 @@ module Api
   module V1
     module Collections
       class CollectionEntriesController < V1Controller
+        include Toller
         include ::Controllers::Api::V1::PaginationConcern
 
         before_action :parent_resource
@@ -13,7 +14,6 @@ module Api
         before_action :resource_reposition_collection, only: %i[reposition]
 
         # TODO: Filter; include unpublished, include deleted, include Collection and Field info
-        # TODO: Random sample by count
         def index; end
 
         # TODO: Filter; include unpublished, include deleted, include Collection and Field info

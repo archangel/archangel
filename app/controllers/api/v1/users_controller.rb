@@ -3,7 +3,10 @@
 module Api
   module V1
     class UsersController < V1Controller
+      include Toller
       include ::Controllers::Api::V1::PaginationConcern
+
+      sort_on :username, type: :scope, scope_name: :sort_on_username, default: true
 
       before_action :resource_collection, only: %i[index]
       before_action :resource_object, only: %i[show update destroy unlock]
@@ -58,10 +61,9 @@ module Api
       protected
 
       def resource_collection
-        @users = current_site.users
-                             .order(username: :asc)
-                             .where.not(id: current_user.id)
-                             .page(page_num).per(per_page)
+        @users = retrieve(
+          current_site.users.where.not(id: current_user.id)
+        ).page(page_num).per(per_page)
       end
 
       def resource_object

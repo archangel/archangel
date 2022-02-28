@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :confirmable, :database_authenticatable, :invitable, :lockable, :recoverable, :rememberable, :timeoutable,
          :trackable, :validatable # :registerable
 
+  scope :sort_on_username, ->(direction) { order(username: direction) }
+
   has_secure_token :auth_token
 
   has_one :user_site, dependent: :destroy
