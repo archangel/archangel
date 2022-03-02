@@ -47,7 +47,8 @@ module Controllers
         end
 
         def identify_user
-          request.headers.fetch('Authorization', nil) ||
+          identify_bearer_user ||
+            request.headers.fetch('Authorization', nil) ||
             request.headers.fetch('X-Authorization-Token', nil) ||
             request.headers.fetch('X-Auth-Token', nil)
         end
@@ -57,6 +58,16 @@ module Controllers
             request.headers.fetch('X-Archangel-Site', nil) ||
             request.headers.fetch('X-Site-Subdomain', nil) ||
             current_user&.user_sites&.first&.site&.subdomain
+        end
+
+        def identify_bearer_user
+          token = request.headers.fetch('Authorization', '').split.last
+
+          begin
+            JsonWebToken.decode(token)['sub']
+          rescue JWT::DecodeError
+            nil
+          end
         end
       end
     end

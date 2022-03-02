@@ -1,4 +1,5 @@
 # frozen_string_literal: true
 
 object @user
-attributes :auth_token
+node(:token) { @token }
+node(:exp) { @exp.strftime('%FT%T.%LZ') }

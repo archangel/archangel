@@ -92,9 +92,10 @@ RSpec.configure do |config|
           },
           session_item: {
             type: :object,
-            required: %w[authToken],
+            required: %w[token exp],
             properties: {
-              authToken: { type: :string }
+              token: { type: :string },
+              exp: { type: :string }
             }
           },
           session: {

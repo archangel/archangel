@@ -10,6 +10,9 @@ module Api
       def create
         respond_to do |format|
           if @user.present?
+            @exp = 24.hours.from_now
+            @token = JsonWebToken.encode(sub: @user.auth_token, exp: @exp.to_i)
+
             format.json { render :create, status: :accepted }
           else
             format.json { render json: json_unauthorized('Error with your login or password'), status: :unauthorized }
