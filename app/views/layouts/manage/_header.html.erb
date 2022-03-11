@@ -11,7 +11,7 @@
       <li class="nav-item dropdown">
         <%= link_to('#', class: 'nav-link dropdown-toggle', role: 'button', aria: { expanded: false }, data: { 'bs-toggle' => 'dropdown' }) do %>
           <i class="bi bi-shield-fill-x"></i>
-          <%= current_site.name %>
+          <span><%= current_site.name %></span>
         <% end %>
         <ul class="dropdown-menu">
           <% current_user_sites.each do |current_user_site| %>
@@ -27,20 +27,20 @@
       <li class="nav-item">
         <%= link_to(manage_site_path, class: 'nav-link') do %>
           <i class="bi bi-shield-fill-x"></i>
-          <%= current_site.name %>
+          <span><%= current_site.name %></span>
         <% end %>
       </li>
     <% end %>
     <li class="nav-item">
       <%= link_to(manage_profile_path, class: 'nav-link') do %>
         <i class="bi bi-person-fill"></i>
-        <%= t('layout.header.profile') %>
+        <span><%= t('layout.header.profile') %></span>
       <% end %>
     </li>
     <li class="nav-item">
       <%= link_to(destroy_user_session_path, class: 'nav-link', method: :delete) do %>
         <i class="bi bi-power"></i>
-        <%= t('layout.header.logout') %>
+        <span><%= t('layout.header.logout') %></span>
       <% end %>
     </li>
   </ul>

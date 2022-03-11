@@ -13,6 +13,6 @@ function initializeSlugifyOnUsernameInputs () {
   })
 }
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   initializeSlugifyOnUsernameInputs()
 })

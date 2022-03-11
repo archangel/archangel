@@ -39,7 +39,7 @@ function initializeCamelizeOnCocoonCamelCaseInputs () {
   })
 }
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   initializeCamelizeOnCamelCaseInputs()
   initializeCamelizeOnCocoonCamelCaseInputs()
 })

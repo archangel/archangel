@@ -1,6 +1,9 @@
 // Variables
 @import "./application/variables";
 
+// 3rd party overrides
+@import "./common/turbo/progress_bar";
+
 body {
   background-color: $white;
 }

@@ -9,6 +9,6 @@ function bootstrapAlertInit () {
   })
 }
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   bootstrapAlertInit()
 })

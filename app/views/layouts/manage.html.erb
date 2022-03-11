@@ -11,10 +11,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'manage', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'manage', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'manage', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_pack_tag 'manage', 'data-turbo-track': 'reload' %>
   </head>
   <body>
+    <div class="turbo-progress-bar"></div>
 
     <%= render 'layouts/manage/header' %>
 

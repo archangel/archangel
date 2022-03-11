@@ -27,6 +27,6 @@ function initializeJoditWysiwygOnInputs () {
   })
 }
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   initializeJoditWysiwygOnInputs()
 })

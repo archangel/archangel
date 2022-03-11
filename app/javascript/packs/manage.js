@@ -4,8 +4,8 @@
 // that code so it'll be compiled.
 
 require('@rails/ujs').start()
-require('turbolinks').start()
 require('@rails/activestorage').start()
+require('@hotwired/turbo-rails')
 
 require('@oddcamp/cocoon-vanilla-js')
 require('bootstrap')

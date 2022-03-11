@@ -45,6 +45,6 @@ function initializeSortableOnCollectionEntries () {
   })
 }
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   initializeSortableOnCollectionEntries()
 })

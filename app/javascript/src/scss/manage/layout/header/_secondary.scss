@@ -1,0 +1,17 @@
+ul#secondary-menu {
+  li.nav-item {
+    span {
+      display: none;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  ul#secondary-menu {
+    li.nav-item {
+      span {
+        display: initial;
+      }
+    }
+  }
+}

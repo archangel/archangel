@@ -12,6 +12,6 @@ function bootstrapTooltipInit () {
   })
 }
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   bootstrapTooltipInit()
 })

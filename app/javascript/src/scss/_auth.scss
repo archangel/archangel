@@ -1,6 +1,9 @@
 // Variables
 @import "./auth/variables";
 
+// 3rd party overrides
+@import "./common/turbo/progress_bar";
+
 html,
 body {
   height: 100%;

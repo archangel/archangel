@@ -20,10 +20,10 @@ function activeNavItem () {
   })
 }
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   activeNavItem()
 })
 
-document.addEventListener('turbolinks:render', () => {
+document.addEventListener('turbo:render', () => {
   activeNavItem()
 })

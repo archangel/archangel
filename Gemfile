@@ -35,7 +35,7 @@ gem 'show_for', '~> 0.8.0'
 gem 'sidekiq', '~> 6.4.1'
 gem 'simple_form', '~> 5.1.0'
 gem 'toller', '~> 0.5.0'
-gem 'turbolinks', '~> 5.2.1'
+gem 'turbo-rails', '~> 1.0.1'
 gem 'validates_timeliness', '~> 6.0.0.beta2'
 
 gem 'tzinfo-data', platforms: %i[jruby mingw mswin x64_mingw]

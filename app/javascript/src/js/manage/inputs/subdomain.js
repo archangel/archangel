@@ -13,6 +13,6 @@ function initializeSlugifyOnSubdomainInputs () {
   })
 }
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   initializeSlugifyOnSubdomainInputs()
 })

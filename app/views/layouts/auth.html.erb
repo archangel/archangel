@@ -1,17 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html dir="<%= html_dir %>" lang="<%= html_lang %>">
   <head>
-    <title>Archangel Auth</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
 
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Archangel Auth</title>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'auth', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'auth', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'auth', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_pack_tag 'auth', 'data-turbo-track': 'reload' %>
   </head>
   <body class="text-center">
+    <div class="turbo-progress-bar"></div>
+
     <%= render 'layouts/shared/flash_messages' %>
 
     <main class="form-auth">

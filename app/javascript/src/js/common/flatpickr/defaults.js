@@ -6,6 +6,6 @@ function flatpickrInit () {
   // flatpickr.defaultConfig.static = true
 }
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   flatpickrInit()
 })
