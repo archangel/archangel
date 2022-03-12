@@ -11,14 +11,6 @@ ActiveStorage::Attachment:
 ActiveStorage::Blob:
   enabled: false
 
-Site:
-  index_sites_on_token:
-    UniqueIndexChecker:
-      enabled: false
-  token:
-    NullConstraintChecker:
-      enabled: false
-
 User:
   auth_token:
     NullConstraintChecker:
@@ -29,9 +21,15 @@ User:
   index_users_on_confirmation_token:
     UniqueIndexChecker:
       enabled: false
+  index_users_on_invitation_token:
+    UniqueIndexChecker:
+      enabled: false
   index_users_on_reset_password_token:
     UniqueIndexChecker:
       enabled: false
   index_users_on_unlock_token:
     UniqueIndexChecker:
+      enabled: false
+  password:
+    ColumnPresenceChecker:
       enabled: false

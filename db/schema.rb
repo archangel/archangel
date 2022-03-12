@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_25_102902) do
+ActiveRecord::Schema.define(version: 2022_03_11_184248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "collection_entries", force: :cascade do |t|
-    t.bigint "collection_id"
+    t.bigint "collection_id", null: false
     t.jsonb "content", default: "{}", null: false
     t.integer "position", default: 0
     t.datetime "published_at"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_07_25_102902) do
   create_table "collection_fields", force: :cascade do |t|
     t.string "label", null: false
     t.string "key", null: false
-    t.bigint "collection_id"
+    t.bigint "collection_id", null: false
     t.integer "classification", default: 0, null: false
     t.boolean "required", default: false
     t.integer "position", default: 0
@@ -41,12 +41,13 @@ ActiveRecord::Schema.define(version: 2021_07_25_102902) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["collection_id"], name: "index_collection_fields_on_collection_id"
     t.index ["key", "collection_id"], name: "index_collection_fields_on_key_and_collection_id", unique: true
+    t.index ["label", "collection_id"], name: "index_collection_fields_on_label_and_collection_id", unique: true
   end
 
   create_table "collections", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
-    t.bigint "site_id"
+    t.bigint "site_id", null: false
     t.datetime "published_at"
     t.datetime "discarded_at"
     t.datetime "created_at", precision: 6, null: false
@@ -60,7 +61,7 @@ ActiveRecord::Schema.define(version: 2021_07_25_102902) do
   create_table "contents", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
-    t.bigint "site_id"
+    t.bigint "site_id", null: false
     t.text "body"
     t.datetime "published_at"
     t.datetime "discarded_at"
@@ -87,7 +88,7 @@ ActiveRecord::Schema.define(version: 2021_07_25_102902) do
 
   create_table "stores", force: :cascade do |t|
     t.string "storable_type"
-    t.bigint "storable_id"
+    t.bigint "storable_id", null: false
     t.string "key", null: false
     t.string "value"
     t.datetime "created_at", precision: 6, null: false
@@ -104,7 +105,6 @@ ActiveRecord::Schema.define(version: 2021_07_25_102902) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["site_id"], name: "index_user_sites_on_site_id"
     t.index ["user_id", "site_id"], name: "index_user_sites_on_user_id_and_site_id"
-    t.index ["user_id"], name: "index_user_sites_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -156,4 +156,6 @@ ActiveRecord::Schema.define(version: 2021_07_25_102902) do
   add_foreign_key "collection_fields", "collections"
   add_foreign_key "collections", "sites"
   add_foreign_key "contents", "sites"
+  add_foreign_key "user_sites", "sites"
+  add_foreign_key "user_sites", "users"
 end
