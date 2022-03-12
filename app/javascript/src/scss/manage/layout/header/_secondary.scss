@@ -1,8 +1,16 @@
 ul#secondary-menu {
+  font-size: $font-size-base - .15;
+
   li.nav-item {
     span {
       display: none;
     }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  ul#secondary-menu {
+    font-size: $font-size-base;
   }
 }
 

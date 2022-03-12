@@ -126,7 +126,7 @@ To run the entire test suite, run
 $ bin/test
 ```
 
-This will drop the test database, recreate it then run the [Rspec](https://github.com/rspec/rspec-rails) test suite.
+This will drop the test database, recreate it then run the [RSpec](https://github.com/rspec/rspec-rails) test suite.
 
 It is not always necessary to drop and recreate the database as the schema does not often change. To run the test suite without dropping and recreating the database, you can simply run
 
