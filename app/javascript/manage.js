@@ -35,3 +35,6 @@ require('src/js/manage/navigation')
 
 // Sections
 require('src/js/manage/collections/collection_entries/sortable')
+
+// Images
+require.context('./images', true)

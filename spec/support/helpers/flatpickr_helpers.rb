@@ -18,7 +18,7 @@ module Archangel
         return unless page.has_css?('label', text: from)
 
         id = find('label', text: from)[:for]
-        selector = "label[for='#{id}'] + input[type='hidden'] + input"
+        selector = "label[for='#{id}'] ~ input[type='text']"
 
         find(selector).set(value)
         page.execute_script("document.querySelector('.flatpickr-calendar.open').classList.remove('open')")

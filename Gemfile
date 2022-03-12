@@ -15,7 +15,7 @@ gem 'pg', '~> 1.3.1'
 gem 'puma', '~> 5.6.2'
 gem 'rack-cors', '~> 1.1.1'
 gem 'rails', '~> 6.1.4'
-gem 'webpacker', '~> 5.4.3'
+gem 'shakapacker', '~> 6.1.1'
 
 gem 'activerecord-typedstore', '~> 1.4.0'
 gem 'acts_as_list', '~> 1.0.4'
@@ -45,7 +45,6 @@ group :development do
 
   gem 'letter_opener', '~> 1.7.0'
   gem 'listen', '~> 3.7.1'
-  gem 'rack-mini-profiler', '~> 2.3.3'
   gem 'spring', '~> 4.0.0'
   gem 'web-console', '~> 4.2.0'
 end

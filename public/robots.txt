@@ -1,1 +1,11 @@
 # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+
+User-agent: *
+Disallow: /api/
+Disallow: /api-docs/
+Disallow: /manage/
+Disallow: /sidekiq/
+Disallow: /recede_historical_location
+Disallow: /resume_historical_location
+Disallow: /refresh_historical_location
+Disallow: /rails/

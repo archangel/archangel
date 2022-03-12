@@ -3,8 +3,8 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <%= link_to(t('layout.header.name'), manage_root_path, class: 'navbar-brand d-sm-none d-lg-block col-lg-2 px-3') %>
-  <%= link_to(t('layout.header.name_short'), manage_root_path, class: 'navbar-brand d-none d-sm-block d-lg-none col-md-3 px-3') %>
+  <%= link_to(image_pack_tag('logo.png', alt: t('archangel')), manage_root_path, class: 'navbar-brand d-sm-none d-lg-block col-lg-2 px-3') %>
+  <%= link_to(image_pack_tag('logo-small.png', alt: t('archangel')), manage_root_path, class: 'navbar-brand d-none d-sm-block d-lg-none col-md-3 px-3') %>
 
   <ul id="secondary-menu" class="nav justify-content-end">
     <% if current_user_sites.count > 1 %>
