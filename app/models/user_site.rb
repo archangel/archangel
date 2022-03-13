@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# UserSite model
 class UserSite < ApplicationRecord
   after_initialize :assign_default_values
 

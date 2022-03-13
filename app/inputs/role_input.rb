@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
-##
-# Role select custom input for SimpleForm
-#
+# Role select custom input type for SimpleForm
 class RoleInput < SimpleForm::Inputs::CollectionSelectInput
-  ##
   # Do not include blank select option
   #
-  # @return [Boolean] to skip blank select option
-  #
+  # @return [Boolean] skip blank select option
   def skip_include_blank?
     true
   end

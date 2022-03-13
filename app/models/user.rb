@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# User model
 class User < ApplicationRecord
   devise :confirmable, :database_authenticatable, :invitable, :lockable, :recoverable, :rememberable, :timeoutable,
          :trackable, :validatable # :registerable
@@ -18,14 +19,29 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :username, presence: true, slug: true, uniqueness: true
 
+  # Full name
+  #
+  # First name and last name to make the full name
+  #
+  # @return [String] the full name of the user
   def name
     [first_name, last_name].join(' ')
   end
 
+  # Locked
+  #
+  # Check if User is locked from logging in from too many failed login attempts
+  #
+  # @return [Boolean] if locked
   def locked?
     locked_at.present?
   end
 
+  # Invitation pending
+  #
+  # Check if User has accepted the invitation to join
+  #
+  # @return [Boolean] if invitation pending
   def invitation_pending?
     invitation_accepted_at.blank?
   end

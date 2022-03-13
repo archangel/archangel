@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Collection model
 class Collection < ApplicationRecord
   include DeleteConcern
   include PublishConcern

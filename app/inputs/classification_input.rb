@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
-##
-# Classification select custom input for SimpleForm
-#
+# Classification select custom input type for SimpleForm
 class ClassificationInput < SimpleForm::Inputs::CollectionSelectInput
-  ##
   # Do not include blank select option
   #
-  # @return [Boolean] to skip blank select option
-  #
+  # @return [Boolean] skip blank select option
   def skip_include_blank?
     true
   end

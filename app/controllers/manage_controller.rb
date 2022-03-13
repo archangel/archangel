@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Base admin controller
 class ManageController < ApplicationController
   include Pundit::Authorization
   include Controllers::ActionConcern

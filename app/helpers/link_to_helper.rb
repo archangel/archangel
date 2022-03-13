@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Custom link_to helpers
 module LinkToHelper
   ##
   # "Index" button using `link_to`

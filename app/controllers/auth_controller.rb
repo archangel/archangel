@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Base Auth controller
 class AuthController < ApplicationController
   layout 'auth'
 

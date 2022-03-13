@@ -1,6 +1,23 @@
 # frozen_string_literal: true
 
+# Collection Entry helpers
 module CollectionEntriesHelper
+  # Collection Entry status
+  #
+  # @example With Collection Entry resource that is discarded
+  #   <%= collection_entry_status(resource) %> #=> 'deleted'
+  #
+  # @example With Collection Entry resource that has not been published
+  #   <%= collection_entry_status(resource) %> #=> 'draft'
+  #
+  # @example With Collection Entry resource that is published but not available
+  #   <%= collection_entry_status(resource) %> #=> 'scheduled'
+  #
+  # @example With Collection Entry resource that is currently available
+  #   <%= collection_entry_status(resource) %> #=> 'available'
+  #
+  # @param [Object] resource Collection Entry object
+  # @return [String] status name
   def collection_entry_status(resource)
     return 'deleted' if resource.discarded?
     return 'draft' if resource.unpublished?

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# CollectionEntry model
 class CollectionEntry < ApplicationRecord
   include EntryValidatableConcern
   include DeleteConcern

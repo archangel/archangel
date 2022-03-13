@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Content model
 class Content < ApplicationRecord
   include DeleteConcern
   include PublishConcern

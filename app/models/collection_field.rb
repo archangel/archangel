@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# CollectionField model
 class CollectionField < ApplicationRecord
   acts_as_list scope: :collection, top_of_list: 0
 
