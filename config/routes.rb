@@ -60,7 +60,11 @@ Rails.application.routes.draw do
       resources :users, except: %i[new edit] do
         post :unlock, on: :member
       end
+
+      root to: 'roots#show', as: ''
     end
+
+    root to: 'roots#show', as: ''
   end
 
   namespace :manage do
