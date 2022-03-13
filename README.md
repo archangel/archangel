@@ -166,11 +166,27 @@ View coverage with
 $ open coverage/index.html
 ```
 
+## Documentation
+
+[Yard](https://github.com/lsegal/yard) is used to generate documentation.
+
+Build the documentation
+
+```
+$ yard doc
+```
+
+Build the documentation and list all undocumented objects
+
+```
+$ yard stats --list-undoc
+```
+
 ## Swagger
 
 Swagger API documentation
 
-Test API integration
+Test API integrations
 
 ```
 $ bundle exec rspec spec/integration

@@ -1,0 +1,9 @@
+--no-private
+--title "Archangel Documentation (archangel/archangel)"
+--exclude spec
+app/**/*.rb
+lib/**/*.rb
+-
+README.md
+LICENSE
+docs/**/*.md
