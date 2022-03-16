@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+# API
 module Api
+  # API v1
   module V1
+    # Collection API v1
     module Collections
+      # Collection Entries API v1
       class CollectionEntriesController < V1Controller
         include Toller
         include ::Controllers::Api::V1::PaginationConcern
@@ -13,12 +17,30 @@ module Api
         before_action :resource_create_object, only: %i[create]
         before_action :resource_reposition_collection, only: %i[reposition]
 
-        # TODO: Filter; include unpublished, include deleted, include Collection and Field info
+        # All resources
+        #
+        # @todo Filter; include unpublished, include deleted, include Collection and Field info
+        #
+        # @example All resources
+        #   GET /api/v1/collections/{slug}/entries
+        #
+        # @example All resources paginated
+        #   GET /api/v1/collections/{slug}/entries?per=100
+        #   GET /api/v1/collections/{slug}/entries?page=2&per=12
         def index; end
 
-        # TODO: Filter; include unpublished, include deleted, include Collection and Field info
+        # Show resource
+        #
+        # @todo Filter; include unpublished, include deleted, include Collection and Field info
+        #
+        # @example Show resource
+        #   GET /api/v1/collections/{slug}/entries/{id}
         def show; end
 
+        # Create resource
+        #
+        # @example Create resource
+        #   POST /api/v1/collections/{slug}/entries
         def create
           respond_to do |format|
             if @collection_entry.save
@@ -29,6 +51,10 @@ module Api
           end
         end
 
+        # Update resource
+        #
+        # @example Update resource
+        #   PUT /api/v1/collections/{slug}/entries/{id}
         def update
           respond_to do |format|
             if @collection_entry.update(resource_params)
@@ -39,6 +65,13 @@ module Api
           end
         end
 
+        # Delete or destroy resource
+        #
+        # When the resource has not been discarded (soft deleted), the record will be marked as discarded. When the
+        # resource is already discarded, the record will be hard deleted
+        #
+        # @example Delete or destroy resource
+        #   DELETE /api/v1/collections/{slug}/entries/{id}
         def destroy
           @collection_entry.discarded? ? @collection_entry.destroy : @collection_entry.discard
 
@@ -47,6 +80,10 @@ module Api
           end
         end
 
+        # Reposition resource
+        #
+        # @example Reposition resource
+        #   POST /api/v1/collections/{slug}/entries/reposition
         def reposition
           new_positions = params.fetch(:positions, [])
           positions = {}.tap do |option|
@@ -60,6 +97,12 @@ module Api
           end
         end
 
+        # Restore resource
+        #
+        # When a resource has been discarded (soft deleted), the record will be marked as undiscarded
+        #
+        # @example Restore resource
+        #   POST /api/v1/collections/{slug}/entries/{id}/restore
         def restore
           @collection_entry.undiscard
 

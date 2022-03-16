@@ -1,12 +1,19 @@
 # frozen_string_literal: true
 
+# API
 module Api
+  # API v1
   module V1
+    # Sessions API v1
     class SessionsController < V1Controller
       skip_before_action :authenticate_user!, only: %i[create]
 
       before_action :resource_create_object, only: %i[create]
 
+      # Create session
+      #
+      # @example Create session
+      #   POST /api/v1/session
       def create
         respond_to do |format|
           if @user.present?
@@ -20,6 +27,10 @@ module Api
         end
       end
 
+      # Destroy session
+      #
+      # @example Destroy session
+      #   DELETE /api/v1/session
       def destroy
         current_user.regenerate_auth_token if current_user.present? && current_site.regenerate_auth_token_on_logout?
 

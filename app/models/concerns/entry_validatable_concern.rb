@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Collection Entry validation concern
 module EntryValidatableConcern
   extend ActiveSupport::Concern
 
@@ -40,6 +41,11 @@ module EntryValidatableConcern
     end
   end
 
+  # Add store accessors to Collection Entry fields
+  #
+  # Add store accessors and presence validator (when required) to Collection Entry fields
+  #
+  # @return [void]
   def add_accessor_and_validator_for_entry_fields
     (resource_value_fields || []).each do |field|
       singleton_class.class_eval do
@@ -50,6 +56,11 @@ module EntryValidatableConcern
     end
   end
 
+  # Add classification validation to Collection Entry fields
+  #
+  # Add classification validation to Collection Entry fields based on classification type
+  #
+  # @return [void]
   def add_classification_validator_for_entry_fields
     classifications = %w[boolean date datetime email integer time url]
 

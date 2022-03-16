@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+# API
 module Api
+  # API v1
   module V1
+    # Users API v1
     class UsersController < V1Controller
       include Toller
       include ::Controllers::Api::V1::PaginationConcern
@@ -12,13 +15,35 @@ module Api
       before_action :resource_object, only: %i[show update destroy unlock]
       before_action :resource_create_object, only: %i[create]
 
-      # TODO: Filter; include confirmed
-      # TODO: Query; first name, last name, username, email, confirmed
+      # All resources
+      #
+      # @todo Filter; include confirmed
+      # @todo Query; first name, last name, username, email, confirmed
+      #
+      # @example All resources
+      #   GET /api/v1/users
+      #
+      # @example All resources sorted by username
+      #   GET /api/v1/users?sort=username
+      #   GET /api/v1/users?sort=-username
+      #
+      # @example All resources paginated
+      #   GET /api/v1/users?per=100
+      #   GET /api/v1/users?page=2&per=12
       def index; end
 
-      # TODO: Filter; include confirmed
+      # Show resource
+      #
+      # @todo Filter; include confirmed
+      #
+      # @example Show resource
+      #   GET /api/v1/users/{username}
       def show; end
 
+      # Create resource
+      #
+      # @example Create resource
+      #   POST /api/v1/users
       def create
         respond_to do |format|
           if @user.persisted?
@@ -32,6 +57,10 @@ module Api
         end
       end
 
+      # Update resource
+      #
+      # @example Update resource
+      #   PUT /api/v1/users/{username}
       def update
         respond_to do |format|
           if @user.update(resource_params)
@@ -42,6 +71,10 @@ module Api
         end
       end
 
+      # Destroy resource
+      #
+      # @example Destroy resource
+      #   DELETE /api/v1/users/{username}
       def destroy
         @user.destroy
 
@@ -50,6 +83,10 @@ module Api
         end
       end
 
+      # Unlock resource
+      #
+      # @example Unlock resource
+      #   POST /api/v1/users/{username}/unlock
       def unlock
         @user.unlock_access!
 

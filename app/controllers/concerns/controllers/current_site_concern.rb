@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
+# Controller concern
 module Controllers
+  # Current site helpers
+  #
+  # Helpers for identifying the current site
+  #
+  # Example
+  #   class ExamplesController < ApplicationController
+  #     include Controllers::CurrentSiteConcern
+  #   end
   module CurrentSiteConcern
     extend ActiveSupport::Concern
 

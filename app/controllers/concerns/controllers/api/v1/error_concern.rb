@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+# Controller concern
 module Controllers
+  # Controller API concern
   module Api
+    # Controller API v1 concern
     module V1
+      # Controller API v1 error concern
       module ErrorConcern
         extend ActiveSupport::Concern
 

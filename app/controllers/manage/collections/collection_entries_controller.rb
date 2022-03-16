@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+# Manage (admin)
 module Manage
+  # Collection
   module Collections
+    # Collection Entry
     class CollectionEntriesController < ManageController
       include Controllers::PaginationConcern
 
@@ -13,12 +16,28 @@ module Manage
       before_action :set_restore_collection_entry, only: %i[restore]
       before_action :set_reposition_collection_entry, only: %i[reposition]
 
+      # All resources
+      #
+      # @example All resources
+      #   GET /manage/collections/{id}/collection_entries
       def index; end
 
+      # Show resource
+      #
+      # @example Show resource
+      #   GET /manage/collections/{id}/collection_entries/{id}
       def show; end
 
+      # New resource
+      #
+      # @example New resource
+      #   GET /manage/collections/{id}/collection_entries/new
       def new; end
 
+      # Create resource
+      #
+      # @example Create resource
+      #   POST /manage/collections/{id}/collection_entries
       def create
         respond_to do |format|
           if @collection_entry.save
@@ -37,8 +56,16 @@ module Manage
         end
       end
 
+      # Edit resource
+      #
+      # @example Edit resource
+      #   GET /manage/collections/{id}/collection_entries/{id}/edit
       def edit; end
 
+      # Update resource
+      #
+      # @example Update resource
+      #   PUT /manage/collections/{id}/collection_entries/{id}
       def update
         respond_to do |format|
           if @collection_entry.update(resource_params)
@@ -57,6 +84,13 @@ module Manage
         end
       end
 
+      # Delete or destroy resource
+      #
+      # When the resource has not been discarded (soft deleted), the record will be marked as discarded. When the
+      # resource is already discarded, the record will be hard deleted
+      #
+      # @example Delete or destroy resource
+      #   DELETE /manage/collections/{id}/collection_entries/{id}
       def destroy
         @collection_entry.discarded? ? @collection_entry.destroy : @collection_entry.discard
 
@@ -69,6 +103,27 @@ module Manage
         end
       end
 
+      # Reposition resource
+      #
+      # @example Reposition resource
+      #   POST /manage/collections/{id}/collection_entries/reposition
+      def reposition
+        new_positions = params.fetch(:collection_entry).fetch(:positions, [])
+        positions = {}.tap do |option|
+          new_positions.each.with_index { |id, index| option[id] = { position: index } }
+        end
+
+        @collection.collection_entries.with_discarded.update(positions.keys, positions.values)
+
+        render json: { message: I18n.t('flash.collection_entries.reposition.success') }
+      end
+
+      # Restore resource
+      #
+      # When a resource has been discarded (soft deleted), the record will be marked as undiscarded
+      #
+      # @example Restore resource
+      #   POST /manage/collections/{id}/collection_entries/{id}/restore
       def restore
         @collection_entry.undiscard
 
@@ -79,17 +134,6 @@ module Manage
           end
           format.json { head :no_content }
         end
-      end
-
-      def reposition
-        new_positions = params.fetch(:collection_entry).fetch(:positions, [])
-        positions = {}.tap do |option|
-          new_positions.each.with_index { |id, index| option[id] = { position: index } }
-        end
-
-        @collection.collection_entries.with_discarded.update(positions.keys, positions.values)
-
-        render json: { message: I18n.t('flash.collection_entries.reposition.success') }
       end
 
       protected

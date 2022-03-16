@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# Manage (admin)
 module Manage
+  # Content
   class ContentsController < ManageController
     include Controllers::PaginationConcern
 
@@ -10,12 +12,28 @@ module Manage
     before_action :set_create_content, only: %i[create]
     before_action :set_restore_content, only: %i[restore]
 
+    # All resources
+    #
+    # @example All resources
+    #   GET /manage/contents
     def index; end
 
+    # Show resource
+    #
+    # @example Show resource
+    #   GET /manage/contents/{id}
     def show; end
 
+    # New resource
+    #
+    # @example New resource
+    #   GET /manage/contents/new
     def new; end
 
+    # Create resource
+    #
+    # @example Create resource
+    #   POST /manage/contents
     def create
       respond_to do |format|
         if @content.save
@@ -28,8 +46,16 @@ module Manage
       end
     end
 
+    # Edit resource
+    #
+    # @example Edit resource
+    #   GET /manage/contents/{id}/edit
     def edit; end
 
+    # Update resource
+    #
+    # @example Update resource
+    #   PUT /manage/contents/{id}
     def update
       respond_to do |format|
         if @content.update(resource_params)
@@ -42,6 +68,13 @@ module Manage
       end
     end
 
+    # Delete or destroy resource
+    #
+    # When the resource has not been discarded (soft deleted), the record will be marked as discarded. When the
+    # resource is already discarded, the record will be hard deleted
+    #
+    # @example Delete or destroy resource
+    #   DELETE /manage/contents/{id}
     def destroy
       @content.discarded? ? @content.destroy : @content.discard
 
@@ -51,6 +84,12 @@ module Manage
       end
     end
 
+    # Restore resource
+    #
+    # When a resource has been discarded (soft deleted), the record will be marked as undiscarded
+    #
+    # @example Restore resource
+    #   POST /manage/contents/{id}/restore
     def restore
       @content.undiscard
 

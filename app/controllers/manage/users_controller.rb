@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# Manage (admin)
 module Manage
+  # User
   class UsersController < ManageController
     include Controllers::PaginationConcern
 
@@ -10,12 +12,28 @@ module Manage
     before_action :set_create_user, only: %i[create]
     before_action :set_destroy_user, only: %i[destroy]
 
+    # All resources
+    #
+    # @example All resources
+    #   GET /manage/users
     def index; end
 
+    # Show resource
+    #
+    # @example Show resource
+    #   GET /manage/users/{id}
     def show; end
 
+    # New resource
+    #
+    # @example New resource
+    #   GET /manage/users/new
     def new; end
 
+    # Create resource
+    #
+    # @example Create resource
+    #   POST /manage/users
     def create
       respond_to do |format|
         if @user.persisted?
@@ -31,8 +49,16 @@ module Manage
       end
     end
 
+    # Edit resource
+    #
+    # @example Edit resource
+    #   GET /manage/users/{id}/edit
     def edit; end
 
+    # Update resource
+    #
+    # @example Update resource
+    #   PUT /manage/users/{id}
     def update
       respond_to do |format|
         managed_resource_params = resource_params.except(:role)
@@ -51,6 +77,10 @@ module Manage
       end
     end
 
+    # Destroy resource
+    #
+    # @example Destroy resource
+    #   DELETE /manage/users/{id}
     def destroy
       @user_site.destroy
 
@@ -60,6 +90,10 @@ module Manage
       end
     end
 
+    # Reinvite resource
+    #
+    # @example Reinvite resource
+    #   GET /manage/users/{id}/reinvite
     def reinvite
       @user.deliver_invitation
 
@@ -69,6 +103,10 @@ module Manage
       end
     end
 
+    # Retoken resource
+    #
+    # @example Retoken resource
+    #   POST /manage/users/{id}/retoken
     def retoken
       @user.regenerate_auth_token
 
@@ -78,6 +116,10 @@ module Manage
       end
     end
 
+    # Unlock resource
+    #
+    # @example Unlock resource
+    #   GET /manage/users/{id}/unlock
     def unlock
       @user.unlock_access!
 

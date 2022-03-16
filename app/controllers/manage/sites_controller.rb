@@ -1,13 +1,27 @@
 # frozen_string_literal: true
 
+# Manage (admin)
 module Manage
+  # Site
   class SitesController < ManageController
     before_action :set_site, only: %i[show edit update]
 
+    # Show resource
+    #
+    # @example Show resource
+    #   GET /manage/site
     def show; end
 
+    # Edit resource
+    #
+    # @example Edit resource
+    #   GET /manage/site/edit
     def edit; end
 
+    # Update resource
+    #
+    # @example Update resource
+    #   PUT /manage/site
     def update
       respond_to do |format|
         if @site.update(site_params)
@@ -20,6 +34,10 @@ module Manage
       end
     end
 
+    # Switch site
+    #
+    # @example Switch site
+    #   POST /manage/sites/{id}/switch
     def switch
       authorize %i[site]
 

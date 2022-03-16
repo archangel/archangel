@@ -6,10 +6,9 @@ RSpec.configure do |config|
     config.after { Bullet.end_request }
   end
 
-  ##
   # Disable Bullet for example
   #
-  # Disable Bullet for specific examples, contexts or runner. Bullet will be re-enabled after the example runs.
+  # Disable Bullet for specific examples, contexts or runner. Bullet will be re-enabled after the example runs
   #
   # Example
   #   # For entire test
@@ -26,7 +25,6 @@ RSpec.configure do |config|
   #   it 'does something', bullet: false do
   #     ...
   #   end
-  #
   config.around(:each, bullet: false) do |example|
     config.mock_with :rspec do |_mocks|
       previous_value = Bullet.enable?

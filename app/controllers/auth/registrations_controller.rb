@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# Auth
 module Auth
+  # Devise registration
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_permitted_parameters
 

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
+# Auth
 module Auth
+  # Devise session
   class SessionsController < Devise::SessionsController
-    ##
     # Remove double flash message
     #
     # Devise sends a success (notice) message when logging in. Responders sends a success (success) message when
     # logging in. Only one needs to be sent.
-    #
     def create
       super
 

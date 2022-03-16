@@ -6,6 +6,9 @@ class CollectionField < ApplicationRecord
 
   after_initialize :assign_default_values
 
+  # Classification types
+  #
+  # All available classification types
   CLASSIFICATIONS = {
     string: 0,
     text: 1,
@@ -18,6 +21,9 @@ class CollectionField < ApplicationRecord
     time: 8
   }.freeze
 
+  # Default classification type
+  #
+  # Default classification type `string` when one has not been selected
   CLASSIFICATION_DEFAULT = 0
 
   enum classification: CLASSIFICATIONS

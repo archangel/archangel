@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# Manage (admin)
 module Manage
+  # Collection
   class CollectionsController < ManageController
     include Controllers::PaginationConcern
 
@@ -10,14 +12,30 @@ module Manage
     before_action :set_create_collection, only: %i[create]
     before_action :set_restore_collection, only: %i[restore]
 
+    # All resources
+    #
+    # @example All resources
+    #   GET /manage/collections
     def index; end
 
+    # Show resource
+    #
+    # @example Show resource
+    #   GET /manage/collections/{id}
     def show; end
 
+    # New resource
+    #
+    # @example New resource
+    #   GET /manage/collections/new
     def new
       nested_resource_build
     end
 
+    # Create resource
+    #
+    # @example Create resource
+    #   POST /manage/collections
     def create
       respond_to do |format|
         if @collection.save
@@ -33,10 +51,18 @@ module Manage
       end
     end
 
+    # Edit resource
+    #
+    # @example Edit resource
+    #   GET /manage/collections/{id}/edit
     def edit
       nested_resource_build
     end
 
+    # Update resource
+    #
+    # @example Update resource
+    #   PUT /manage/collections/{id}
     def update
       respond_to do |format|
         if @collection.update(resource_params)
@@ -52,6 +78,13 @@ module Manage
       end
     end
 
+    # Delete or destroy resource
+    #
+    # When the resource has not been discarded (soft deleted), the record will be marked as discarded. When the
+    # resource is already discarded, the record will be hard deleted
+    #
+    # @example Delete or destroy resource
+    #   DELETE /manage/collections/{id}
     def destroy
       @collection.discarded? ? @collection.destroy : @collection.discard
 
@@ -61,6 +94,12 @@ module Manage
       end
     end
 
+    # Restore resource
+    #
+    # When a resource has been discarded (soft deleted), the record will be marked as undiscarded
+    #
+    # @example Restore resource
+    #   POST /manage/collections/{id}/restore
     def restore
       @collection.undiscard
 

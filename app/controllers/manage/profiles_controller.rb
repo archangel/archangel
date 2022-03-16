@@ -1,13 +1,27 @@
 # frozen_string_literal: true
 
+# Manage (admin)
 module Manage
+  # Profile
   class ProfilesController < ManageController
     before_action :set_profile, only: %i[show edit update retoken]
 
+    # Show resource
+    #
+    # @example Show resource
+    #   GET /manage/profile
     def show; end
 
+    # Edit resource
+    #
+    # @example Edit resource
+    #   GET /manage/profile/edit
     def edit; end
 
+    # Update resource
+    #
+    # @example Update resource
+    #   PUT /manage/profile
     def update
       update_resource_params = resource_params
       update_resource_params = update_resource_params.except(:password, :password_confirmation) unless needs_password?
@@ -25,6 +39,10 @@ module Manage
       end
     end
 
+    # Retoken resource
+    #
+    # @example Retoken resource
+    #   POST /manage/profile/retoken
     def retoken
       @profile.regenerate_auth_token
 
