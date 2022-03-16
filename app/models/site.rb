@@ -2,7 +2,7 @@
 
 # Site model
 class Site < ApplicationRecord
-  include DeleteConcern
+  include Models::DeleteConcern
 
   typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
     # Date formats for Ruby

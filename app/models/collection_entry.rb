@@ -2,9 +2,9 @@
 
 # CollectionEntry model
 class CollectionEntry < ApplicationRecord
-  include EntryValidatableConcern
-  include DeleteConcern
-  include PublishConcern
+  include Models::EntryValidatableConcern
+  include Models::DeleteConcern
+  include Models::PublishConcern
 
   acts_as_list scope: :collection, top_of_list: 0, add_new_at: :top
 

@@ -2,8 +2,8 @@
 
 # Content model
 class Content < ApplicationRecord
-  include DeleteConcern
-  include PublishConcern
+  include Models::DeleteConcern
+  include Models::PublishConcern
 
   scope :sort_on_name, ->(direction) { order(name: direction) }
   scope :sort_on_slug, ->(direction) { order(slug: direction) }
