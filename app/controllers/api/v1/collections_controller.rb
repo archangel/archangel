@@ -110,30 +110,29 @@ module Api
         @collections = retrieve(
           current_site.collections.includes(includes)
         ).page(page_num).per(per_page)
+
+        authorize @collections
       end
 
       def resource_object
         collection_id = params.fetch(:id, '')
 
         @collection = current_site.collections.find_by!(slug: collection_id)
+
+        authorize @collection
       rescue ActiveRecord::RecordNotFound
         render json: json_not_found(controller_name), status: :not_found
       end
 
       def resource_create_object
         @collection = current_site.collections.new(resource_params)
-      end
 
-      def permitted_attributes
-        [
-          :name, :published_at, :slug,
-          {
-            collection_fields_attributes: %i[id _destroy classification key label required]
-          }
-        ]
+        authorize @collection
       end
 
       def resource_params
+        permitted_attributes = policy(:collection).permitted_attributes
+
         params.permit(permitted_attributes)
       end
     end

@@ -51,4 +51,11 @@ class ContentPolicy < ApplicationPolicy
   def restore?
     admin?
   end
+
+  def permitted_attributes
+    [
+      :body, :name, :published_at, :slug,
+      { stores_attributes: %i[id _destroy key value] }
+    ]
+  end
 end

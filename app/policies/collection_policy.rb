@@ -51,4 +51,13 @@ class CollectionPolicy < ApplicationPolicy
   def restore?
     admin?
   end
+
+  def permitted_attributes
+    [
+      :name, :published_at, :slug,
+      {
+        collection_fields_attributes: %i[id _destroy classification key label required]
+      }
+    ]
+  end
 end

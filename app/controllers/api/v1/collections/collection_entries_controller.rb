@@ -123,12 +123,16 @@ module Api
 
         def resource_collection
           @collection_entries = @collection.collection_entries.order(position: :asc).page(page_num).per(per_page)
+
+          authorize @collection_entries
         end
 
         def resource_object
           resource_id = params.fetch(:id, '')
 
           @collection_entry = @collection.collection_entries.find_by!(id: resource_id)
+
+          authorize @collection_entry
         rescue ActiveRecord::RecordNotFound
           render json: json_not_found(controller_name), status: :not_found
         end
@@ -143,10 +147,14 @@ module Api
           entry_resource[:published_at] = resource_params.fetch(:published_at, nil)
 
           @collection_entry = entry_resource
+
+          authorize @collection_entry
         end
 
         def resource_reposition_collection
           @collection_entries = @collection.collection_entries.all
+
+          authorize @collection_entries
         end
 
         def permitted_attributes

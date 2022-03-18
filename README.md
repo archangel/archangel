@@ -198,7 +198,7 @@ Generate Swagger documentation
 $ rake rswag:specs:swaggerize
 ```
 
-In your browser go to [http://localhost:3000/api-docs/index.html](http://localhost:3000/api-docs/index.html) or [https://archangel.local/api-docs/index.html](https://archangel.local/api-docs/index.html)
+In your browser go to [http://localhost:3000/swagger/index.html](http://localhost:3000/swagger/index.html) or [https://archangel.local/swagger/index.html](https://archangel.local/swagger/index.html)
 
 ### Validate
 

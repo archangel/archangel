@@ -111,15 +111,6 @@ module Manage
 
     protected
 
-    def permitted_attributes
-      [
-        :name, :published_at, :slug,
-        {
-          collection_fields_attributes: %i[id _destroy classification key label required]
-        }
-      ]
-    end
-
     def nested_resource_build
       @collection.collection_fields.build if @collection.collection_fields.blank?
     end
@@ -159,6 +150,8 @@ module Manage
     end
 
     def resource_params
+      permitted_attributes = policy(:collection).permitted_attributes
+
       params.require(:collection).permit(permitted_attributes)
     end
   end

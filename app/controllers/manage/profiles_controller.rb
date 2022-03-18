@@ -54,10 +54,6 @@ module Manage
 
     protected
 
-    def permitted_attributes
-      %i[email first_name last_name password password_confirmation username]
-    end
-
     def set_profile
       @profile = current_user
 
@@ -65,6 +61,8 @@ module Manage
     end
 
     def resource_params
+      permitted_attributes = policy(:profile).permitted_attributes
+
       params.require(:profile).permit(permitted_attributes)
     end
 

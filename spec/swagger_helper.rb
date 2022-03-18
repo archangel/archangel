@@ -16,7 +16,7 @@ RSpec.configure do |config|
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'Archangel API V1',
+        title: 'Archangel API',
         description: 'Headless CMS',
         version: 'v1'
       },
@@ -289,6 +289,284 @@ RSpec.configure do |config|
               data: {
                 type: :array,
                 items: { '$ref' => '#/components/schemas/content_item' }
+              }
+            }
+          },
+          profile_item: {
+            type: :object,
+            required: %w[email username firstName lastName name locked],
+            properties: {
+              email: { type: :string },
+              username: { type: :string },
+              firstName: { type: :string },
+              lastName: { type: :string },
+              name: { type: :string },
+              locked: {
+                type: :boolean,
+                default: false
+              },
+              deletedAt: {
+                type: :string,
+                nullable: true,
+                default: nil
+              }
+            }
+          },
+          profile: {
+            type: :object,
+            required: %w[success status data],
+            properties: {
+              success: {
+                type: :boolean,
+                default: true
+              },
+              status: {
+                type: :integer,
+                default: 200
+              },
+              data: {
+                '$ref' => '#/components/schemas/profile_item'
+              }
+            }
+          },
+          profile_permission_item: {
+            type: :object,
+            required: %w[collection collectionEntry content profile site user],
+            properties: {
+              collection: {
+                '$ref' => '#/components/schemas/profile_permission_item_collection'
+              },
+              collectionEntry: {
+                '$ref' => '#/components/schemas/profile_permission_item_collection_entry'
+              },
+              content: {
+                '$ref' => '#/components/schemas/profile_permission_item_content'
+              },
+              profile: {
+                '$ref' => '#/components/schemas/profile_permission_item_profile'
+              },
+              site: {
+                '$ref' => '#/components/schemas/profile_permission_item_site'
+              },
+              user: {
+                '$ref' => '#/components/schemas/profile_permission_item_user'
+              }
+            }
+          },
+          profile_permission_item_collection: {
+            type: :object,
+            required: %w[index show new create edit update destroy restore],
+            properties: {
+              index: {
+                type: :boolean,
+                default: false
+              },
+              show: {
+                type: :boolean,
+                default: false
+              },
+              new: {
+                type: :boolean,
+                default: false
+              },
+              create: {
+                type: :boolean,
+                default: false
+              },
+              edit: {
+                type: :boolean,
+                default: false
+              },
+              update: {
+                type: :boolean,
+                default: false
+              },
+              destroy: {
+                type: :boolean,
+                default: false
+              },
+              restore: {
+                type: :boolean,
+                default: false
+              }
+            }
+          },
+          profile_permission_item_collection_entry: {
+            type: :object,
+            required: %w[index show new create edit update destroy restore reposition],
+            properties: {
+              index: {
+                type: :boolean,
+                default: false
+              },
+              show: {
+                type: :boolean,
+                default: false
+              },
+              new: {
+                type: :boolean,
+                default: false
+              },
+              create: {
+                type: :boolean,
+                default: false
+              },
+              edit: {
+                type: :boolean,
+                default: false
+              },
+              update: {
+                type: :boolean,
+                default: false
+              },
+              destroy: {
+                type: :boolean,
+                default: false
+              },
+              restore: {
+                type: :boolean,
+                default: false
+              },
+              reposition: {
+                type: :boolean,
+                default: false
+              }
+            }
+          },
+          profile_permission_item_content: {
+            type: :object,
+            required: %w[index show new create edit update destroy restore],
+            properties: {
+              index: {
+                type: :boolean,
+                default: false
+              },
+              show: {
+                type: :boolean,
+                default: false
+              },
+              new: {
+                type: :boolean,
+                default: false
+              },
+              create: {
+                type: :boolean,
+                default: false
+              },
+              edit: {
+                type: :boolean,
+                default: false
+              },
+              update: {
+                type: :boolean,
+                default: false
+              },
+              destroy: {
+                type: :boolean,
+                default: false
+              },
+              restore: {
+                type: :boolean,
+                default: false
+              }
+            }
+          },
+          profile_permission_item_profile: {
+            type: :object,
+            required: %w[show edit update],
+            properties: {
+              show: {
+                type: :boolean,
+                default: false
+              },
+              edit: {
+                type: :boolean,
+                default: false
+              },
+              update: {
+                type: :boolean,
+                default: false
+              }
+            }
+          },
+          profile_permission_item_site: {
+            type: :object,
+            required: %w[show edit update],
+            properties: {
+              show: {
+                type: :boolean,
+                default: false
+              },
+              edit: {
+                type: :boolean,
+                default: false
+              },
+              update: {
+                type: :boolean,
+                default: false
+              }
+            }
+          },
+          profile_permission_item_user: {
+            type: :object,
+            required: %w[index show new create edit update destroy reinvite retoken unlock],
+            properties: {
+              index: {
+                type: :boolean,
+                default: false
+              },
+              show: {
+                type: :boolean,
+                default: false
+              },
+              new: {
+                type: :boolean,
+                default: false
+              },
+              create: {
+                type: :boolean,
+                default: false
+              },
+              edit: {
+                type: :boolean,
+                default: false
+              },
+              update: {
+                type: :boolean,
+                default: false
+              },
+              destroy: {
+                type: :boolean,
+                default: false
+              },
+              reinvite: {
+                type: :boolean,
+                default: false
+              },
+              retoken: {
+                type: :boolean,
+                default: false
+              },
+              unlock: {
+                type: :boolean,
+                default: false
+              }
+            }
+          },
+          profile_permission: {
+            type: :object,
+            required: %w[success status data],
+            properties: {
+              success: {
+                type: :boolean,
+                default: true
+              },
+              status: {
+                type: :integer,
+                default: 200
+              },
+              data: {
+                '$ref' => '#/components/schemas/profile_permission_item'
               }
             }
           },

@@ -101,13 +101,6 @@ module Manage
 
     protected
 
-    def permitted_attributes
-      [
-        :body, :name, :published_at, :slug,
-        { stores_attributes: %i[id _destroy key value] }
-      ]
-    end
-
     def set_contents
       @contents = current_site.contents.with_discarded.order(name: :asc).page(page_num).per(per_page)
 
@@ -143,6 +136,8 @@ module Manage
     end
 
     def resource_params
+      permitted_attributes = policy(:content).permitted_attributes
+
       params.require(:content).permit(permitted_attributes)
     end
   end

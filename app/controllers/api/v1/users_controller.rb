@@ -101,12 +101,16 @@ module Api
         @users = retrieve(
           current_site.users.where.not(id: current_user.id)
         ).page(page_num).per(per_page)
+
+        authorize @users
       end
 
       def resource_object
         user_id = params.fetch(:id, '')
 
         @user = current_site.users.where.not(id: current_user.id).find_by!(username: user_id)
+
+        authorize @user
       rescue ActiveRecord::RecordNotFound
         render json: json_not_found(controller_name), status: :not_found
       end
@@ -115,13 +119,13 @@ module Api
         create_resource_params = resource_params.except(:role)
 
         @user = User.invite!(create_resource_params, current_user)
-      end
 
-      def permitted_attributes
-        %i[email first_name last_name role username]
+        authorize @user
       end
 
       def resource_params
+        permitted_attributes = policy(:user).permitted_attributes
+
         params.permit(permitted_attributes)
       end
     end

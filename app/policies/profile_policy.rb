@@ -22,4 +22,17 @@ class ProfilePolicy < ApplicationPolicy
   def retoken?
     true
   end
+
+  # Permissions listing
+  #
+  # Used in API
+  #
+  # @return [Boolean] if authorized
+  def permissions?
+    true
+  end
+
+  def permitted_attributes
+    %i[email first_name last_name password password_confirmation username]
+  end
 end

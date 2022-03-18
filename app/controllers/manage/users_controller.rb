@@ -131,10 +131,6 @@ module Manage
 
     protected
 
-    def permitted_attributes
-      %i[email first_name last_name role username]
-    end
-
     def set_users
       @users = current_site.users
                            .includes(%i[user_site])
@@ -179,6 +175,8 @@ module Manage
     end
 
     def resource_params
+      permitted_attributes = policy(:user).permitted_attributes
+
       params.require(:user).permit(permitted_attributes)
     end
   end

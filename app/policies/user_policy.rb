@@ -69,4 +69,8 @@ class UserPolicy < ApplicationPolicy
   def unlock?
     editor? || admin?
   end
+
+  def permitted_attributes
+    %i[email first_name last_name role username]
+  end
 end

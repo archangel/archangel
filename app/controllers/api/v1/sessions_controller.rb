@@ -7,6 +7,7 @@ module Api
     # Sessions API v1
     class SessionsController < V1Controller
       skip_before_action :authenticate_user!, only: %i[create]
+      skip_after_action :verify_authorized, only: %i[create]
 
       before_action :resource_create_object, only: %i[create]
 
@@ -32,6 +33,12 @@ module Api
       # @example Destroy session
       #   DELETE /api/v1/session
       def destroy
+        if @user.present?
+          authorize @user
+        else
+          skip_authorization
+        end
+
         current_user.regenerate_auth_token if current_user.present? && current_site.regenerate_auth_token_on_logout?
 
         head :no_content
@@ -51,11 +58,9 @@ module Api
         end
       end
 
-      def permitted_attributes
-        %i[email password]
-      end
-
       def resource_params
+        permitted_attributes = %i[email password]
+
         params.permit(permitted_attributes)
       end
     end

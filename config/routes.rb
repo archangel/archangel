@@ -15,8 +15,8 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
+  mount Rswag::Ui::Engine => '/swagger'
 
   devise_for :users,
              module: :devise,
@@ -40,6 +40,10 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resource :session, only: %i[create destroy]
+
+      resource :profile, only: %i[show update] do
+        get :permissions, on: :member
+      end
 
       resource :site, only: %i[show update]
 

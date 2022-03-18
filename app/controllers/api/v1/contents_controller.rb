@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# API 
+# API
 module Api
   # API v1
   module V1
@@ -110,28 +110,29 @@ module Api
         @contents = retrieve(
           current_site.contents.includes(includes)
         ).page(page_num).per(per_page)
+
+        authorize @contents
       end
 
       def resource_object
         content_id = params.fetch(:id, '')
 
         @content = current_site.contents.find_by!(slug: content_id)
+
+        authorize @content
       rescue ActiveRecord::RecordNotFound
         render json: json_not_found(controller_name), status: :not_found
       end
 
       def resource_create_object
         @content = current_site.contents.new(resource_params)
-      end
 
-      def permitted_attributes
-        [
-          :body, :name, :published_at, :slug,
-          { stores_attributes: %i[id _destroy key value] }
-        ]
+        authorize @content
       end
 
       def resource_params
+        permitted_attributes = policy(:content).permitted_attributes
+
         params.permit(permitted_attributes)
       end
     end
