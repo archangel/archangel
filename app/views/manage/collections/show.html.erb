@@ -9,6 +9,6 @@
   <%= record.attribute :slug %>
   <%= record.attribute :published_at, format: current_site.format_datetime, if_blank: '' %>
 
-  <%= record.attribute t('collections.field_count'), value: @collection.collection_fields.count %>
-  <%= record.attribute t('collections.entry_count'), value: @collection.collection_entries.count %>
+  <%= record.attribute t('collections.field_count'), value: record.object.collection_fields.count %>
+  <%= record.attribute t('collections.entry_count'), value: record.object.collection_entries.count %>
 <% end %>

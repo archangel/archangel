@@ -13,7 +13,9 @@
   <%= record.attribute :locked_at, if_blank: t('no') %>
   <%= record.attribute :invitation_accepted_at, format: current_site.format_datetime, if_blank: t('not_accepted') %>
 
-  <%= record.attribute :auth_token do |token| %>
-    <%= token %> <%= link_to(t('users.buttons.retoken'), retoken_manage_user_path(@user), method: :post, data: { confirm: I18n.t('users.retoken.are_you_sure') }, class: 'btn btn-primary') %>
+  <% if policy(:user).retoken? %>
+    <%= record.attribute :auth_token do |token| %>
+      <%= token %> <%= link_to(t('users.buttons.retoken'), retoken_manage_user_path(record.object), method: :post, data: { confirm: I18n.t('users.retoken.are_you_sure') }, class: 'btn btn-primary') %>
+    <% end %>
   <% end %>
 <% end %>

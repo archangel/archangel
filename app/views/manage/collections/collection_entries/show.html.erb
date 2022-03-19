@@ -5,9 +5,9 @@
 <% end %>
 
 <%= show_for @collection_entry do |record| %>
-  <% @collection.collection_fields.each do |field| %>
+  <% record.object.collection.collection_fields.each do |field| %>
     <%= record.attribute "#{field.label} (#{field.key})", if_blank: '' do %>
-      <%= collection_entry_value(@collection_entry, field.classification, field.key) %>
+      <%= collection_entry_value(record.object, field.classification, field.key) %>
     <% end %>
   <% end %>
 
