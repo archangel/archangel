@@ -52,6 +52,7 @@ services:
       DB_PASSWORD: password
       JOB_QUEUE_ADAPTER: sidekiq
       REDIS_PROVIDER: redis:6379
+      DEFAULT_URL_HOST: archangel.local
     ports:
       - '3000:3000'
       - '3035:3035'
