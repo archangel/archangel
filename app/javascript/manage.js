@@ -30,6 +30,9 @@ require('src/js/manage/inputs/time_picker')
 require('src/js/manage/inputs/username')
 require('src/js/manage/inputs/wysiwyg')
 
+// Switcher
+require('src/js/manage/switcher')
+
 // Navigation
 require('src/js/manage/navigation')
 

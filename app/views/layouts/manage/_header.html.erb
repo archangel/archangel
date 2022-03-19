@@ -13,12 +13,12 @@
           <i class="bi bi-shield-fill-x"></i>
           <span><%= current_site.name %></span>
         <% end %>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu switcher">
           <% current_user_sites.each do |current_user_site| %>
             <% if current_site.id == current_user_site.site_id %>
-              <li><a class="dropdown-item active" aria-current="page" href="<%= switch_manage_site_path(current_user_site.site.id) %>"><%= current_user_site.site.name %></a></li>
+              <li class="switcher-item"><a class="dropdown-item active" aria-current="page" href="<%= switch_manage_site_path(current_user_site.site.id) %>"><%= current_user_site.site.name %></a></li>
             <% else %>
-              <li><a class="dropdown-item" href="<%= switch_manage_site_path(current_user_site.site.id) %>"><%= current_user_site.site.name %></a></li>
+              <li class="switcher-item"><a class="dropdown-item" href="<%= switch_manage_site_path(current_user_site.site.id) %>"><%= current_user_site.site.name %></a></li>
             <% end %>
           <% end %>
         </ul>
