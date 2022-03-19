@@ -1,5 +1,7 @@
 # Archangel
 
+[![CircleCI](https://circleci.com/gh/archangel/archangel/tree/master.svg?style=shield)](https://circleci.com/gh/archangel/archangel/tree/master)
+
 Archangel is a headless CMS.
 
 ## Requirements
