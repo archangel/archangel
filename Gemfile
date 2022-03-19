@@ -14,7 +14,7 @@ gem 'nokogiri', '~> 1.13.3'
 gem 'pg', '~> 1.3.1'
 gem 'puma', '~> 5.6.2'
 gem 'rack-cors', '~> 1.1.1'
-gem 'rails', '~> 6.1.4'
+gem 'rails', '~> 6.1.5'
 gem 'shakapacker', '~> 6.1.1'
 
 gem 'activerecord-typedstore', '~> 1.4.0'
