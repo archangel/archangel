@@ -1,0 +1,45 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.4.0
+  node: circleci/node@5.0.1
+jobs:
+  rspec:
+    docker:
+      - image: cimg/ruby:3.0.3-node
+      - image: cimg/postgres:13.3
+        environment:
+          POSTGRES_DB: archangel_test
+          POSTGRES_PASSWORD: archangel_pass
+          POSTGRES_USER: archangel_user
+    environment:
+      BUNDLE_JOBS: '3'
+      BUNDLE_RETRY: '3'
+      DB_NAME: archangel_test
+      DB_PASSWORD: archangel_pass
+      DB_USERNAME: archangel_user
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install:
+          install-yarn: true
+          node-version: '16.14'
+          yarn-version: '1.22'
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: ruby --version
+      - run: node --version
+      - run: yarn --version
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: |
+            bundle exec rails db:create --trace
+            bundle exec rails db:schema:load --trace
+      - ruby/rspec-test
+workflows:
+  test:
+    jobs:
+      - rspec
