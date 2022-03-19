@@ -4,16 +4,23 @@
 class Site < ApplicationRecord
   include Models::DeleteConcern
 
+  FORMAT_DATE_JS_DEFAULT = 'MMMM Do YYYY'
+  FORMAT_DATETIME_JS_DEFAULT = 'MMMM Do YYYY @ h:mm a'
+  FORMAT_TIME_JS_DEFAULT = 'h:mm a'
+  FORMAT_DATE_RUBY_DEFAULT = '%B %-d, %Y'
+  FORMAT_DATETIME_RUBY_DEFAULT = '%B %-d, %Y @ %I:%M %p'
+  FORMAT_TIME_RUBY_DEFAULT = '%I:%M %p'
+
   typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
     # Date formats for Ruby
-    s.string :format_date, blank: false, default: '%B %-d, %Y'
-    s.string :format_datetime, blank: false, default: '%B %-d, %Y @ %I:%M %p'
-    s.string :format_time, blank: false, default: '%I:%M %p'
+    s.string :format_date, blank: false, default: FORMAT_DATE_RUBY_DEFAULT
+    s.string :format_datetime, blank: false, default: FORMAT_DATETIME_RUBY_DEFAULT
+    s.string :format_time, blank: false, default: FORMAT_TIME_RUBY_DEFAULT
 
     # Date formats for Javascript (using Moment.js formatting)
-    s.string :format_js_date, blank: false, default: 'MMMM Do YYYY'
-    s.string :format_js_datetime, blank: false, default: 'MMMM Do YYYY @ h:mm a'
-    s.string :format_js_time, blank: false, default: 'h:mm a'
+    s.string :format_js_date, blank: false, default: FORMAT_DATE_JS_DEFAULT
+    s.string :format_js_datetime, blank: false, default: FORMAT_DATETIME_JS_DEFAULT
+    s.string :format_js_time, blank: false, default: FORMAT_TIME_JS_DEFAULT
 
     # When to auto regenerate auth_token
     s.boolean :regenerate_auth_token_on_login, default: false

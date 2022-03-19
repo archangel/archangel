@@ -33,3 +33,33 @@
 
   <%= f.button :submit, data: { disable_with: t('sites.submitting') } %>
 <% end %>
+
+<% content_for :modal do %>
+  <div class="modal fade" id="formatDateRuby" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="formatDateRubyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formatDateRubyLabel"><%= t('modal.title.ruby') %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('modal.close') %>"></button>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'modal_ruby' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="formatDateJs" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="formatDateJsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formatDateJsLabel"><%= t('modal.title.js') %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('modal.close') %>"></button>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'modal_js' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

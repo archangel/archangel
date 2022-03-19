@@ -1,0 +1,270 @@
+<p><%= t('modal.description.ruby') %></p>
+
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <td><b><%= t('modal.defaults.date') %></b></td>
+      <td><%= Site::FORMAT_DATE_RUBY_DEFAULT %></td>
+    </tr>
+    <tr>
+      <td><b><%= t('modal.defaults.datetime') %></b></td>
+      <td><%= Site::FORMAT_DATETIME_RUBY_DEFAULT %></td>
+    </tr>
+    <tr>
+      <td><b><%= t('modal.defaults.time') %></b></td>
+      <td><%= Site::FORMAT_TIME_RUBY_DEFAULT %></td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t('modal.table.title.type') %></th>
+      <th><%= t('modal.table.title.token') %></th>
+      <th><%= t('modal.table.title.output') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Month</b></td>
+      <td>%m</td>
+      <td>zero-padded (01..12)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%_m</td>
+      <td>blank-padded ( 1..12)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%-m</td>
+      <td>no-padded (1..12)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%B</td>
+      <td>month name January February ... November December</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%^B</td>
+      <td>uppercased JANUARY FEBRUARY ... NOVEMBER DECEMBER</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%b</td>
+      <td>abbreviated month name Jan Feb ... Nov Dec</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%^b</td>
+      <td>uppercased uppercased JAN FEB ... NOV DEC</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%h</td>
+      <td>Equivalent to %b</td>
+    </tr>
+    <tr>
+      <td><b>Day of Month</b></td>
+      <td>%d</td>
+      <td>zero-padded (01..31)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%-d</td>
+      <td>no-padded (1..31)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%e</td>
+      <td>blank-padded ( 1..31)</td>
+    </tr>
+    <tr>
+      <td><b>Day of Year</b></td>
+      <td>%j</td>
+      <td>(001..366)</td>
+    </tr>
+    <tr>
+      <td><b>Day of Week</b></td>
+      <td>%u</td>
+      <td>(Monday is 1, 1..7)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%w</td>
+      <td>(Sunday is 0, 0..6)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%A</td>
+      <td>The full weekday name (Sunday Monday ... Friday Saturday)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%^A</td>
+      <td>The full weekday name uppercased (SUNDAY MONDAY ... FRIDAY SATURDAY)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%a</td>
+      <td>The abbreviated name (Sun Mon ... Fri Sat)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%^a</td>
+      <td>The abbreviated name uppercased (SUN MON ... FRI SAT)</td>
+    </tr>
+    <tr>
+      <td><b>Year</b></td>
+      <td>%Y</td>
+      <td>-0001, 0000, 1995, 2009, 14292</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%C</td>
+      <td>year / 100 (round down.  20 in 2009)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%y</td>
+      <td>year % 100 (00..99)</td>
+    </tr>
+    <tr>
+      <td><b>Week of Year</b></td>
+      <td>%U</td>
+      <td>The week starts with Sunday.  (00..53)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%W</td>
+      <td>The week starts with Monday.  (00..53)</td>
+    </tr>
+    <tr>
+      <td><b>AM/PM</b></td>
+      <td>%P</td>
+      <td>am or pm</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%p</td>
+      <td>AM or PM</td>
+    </tr>
+    <tr>
+      <td><b>Hour</b></td>
+      <td>%H</td>
+      <td>24-hour clock, zero-padded (00..23)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%k</td>
+      <td>24-hour clock, blank-padded ( 0..23)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%I</td>
+      <td>12-hour clock, zero-padded (01..12)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%l</td>
+      <td>12-hour clock, blank-padded ( 1..12)</td>
+    </tr>
+    <tr>
+      <td><b>Minute</b></td>
+      <td>%M</td>
+      <td>Minute of the hour (00..59)</td>
+    </tr>
+    <tr>
+      <td><b>Second</b></td>
+      <td>%S</td>
+      <td>Second of the minute (00..59)</td>
+    </tr>
+    <tr>
+      <td><b>Fractional Second</b></td>
+      <td>%L</td>
+      <td>milliseconds (000..999)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%N</td>
+      <td>nanoseconds (9 digits)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%3N</td>
+      <td>millisecond (3 digits)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%6N</td>
+      <td>microsecond (6 digits)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%9N</td>
+      <td>nanosecond  (9 digits)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%12N</td>
+      <td>picosecond (12 digits)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%15N</td>
+      <td>%15N femtosecond (15 digits)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%18N</td>
+      <td>%18N attosecond  (18 digits)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%21N</td>
+      <td>%21N zeptosecond (21 digits)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%24N</td>
+      <td>yoctosecond (24 digits)</td>
+    </tr>
+    <tr>
+      <td><b>Time Zone</b></td>
+      <td>%z</td>
+      <td>hour and minute offset from UTC (e.g. +0900)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%:z</td>
+      <td>hour and minute offset from UTC with a colon (e.g. +09:00)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%::z</td>
+      <td>hour, minute and second offset from UTC (e.g. +09:00:00)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%:::z</td>
+      <td>hour, minute and second offset from UTC (e.g. +09, +09:30, +09:30:30)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>%Z</td>
+      <td>Equivalent to %:z (e.g. +09:00)</td>
+    </tr>
+    <tr>
+      <td><b>Unix Timestamp</b></td>
+      <td>%s</td>
+      <td>Number of seconds since 1970-01-01 00:00:00 UTC</td>
+    </tr>
+    <tr>
+      <td><b>Unix Millisecond Timestamp</b></td>
+      <td>%Q</td>
+      <td>Number of milliseconds since 1970-01-01 00:00:00 UTC</td>
+    </tr>
+  </tbody>
+</table>

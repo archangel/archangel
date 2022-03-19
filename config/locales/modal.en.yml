@@ -1,0 +1,19 @@
+---
+en:
+  modal:
+    close: Close
+    defaults:
+      date: Default date format
+      datetime: Default datetime format
+      time: Default time format
+    description:
+      js: Formatting used for date pickers on in the admin area
+      ruby: Formatting used for displaying dates in the browser and in the API
+    table:
+      title:
+        output: Output
+        token: Token
+        type: ''
+    title:
+      js: Javascript
+      ruby: Ruby
