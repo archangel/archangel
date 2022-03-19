@@ -19,7 +19,7 @@ module LinkToHelper
   def link_to_index(name = nil, link = nil, options = {})
     options = options.reverse_merge(
       class: 'btn btn-secondary btn-action btn-index',
-      icon: 'bi bi-collection'
+      icon: 'bi bi-chevron-left'
     )
 
     link_to_custom(name, link, options)

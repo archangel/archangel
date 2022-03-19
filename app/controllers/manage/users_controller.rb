@@ -5,12 +5,14 @@ module Manage
   # User
   class UsersController < ManageController
     include Controllers::PaginationConcern
+    include Controllers::PaperTrailConcern
 
     before_action :set_users, only: %i[index]
     before_action :set_user, only: %i[show edit update reinvite retoken unlock]
     before_action :set_new_user, only: %i[new]
     before_action :set_create_user, only: %i[create]
     before_action :set_destroy_user, only: %i[destroy]
+    before_action :set_history_user, only: %i[history]
 
     # All resources
     #
@@ -90,6 +92,12 @@ module Manage
       end
     end
 
+    # History resource
+    #
+    # @example History resource
+    #   GET /manage/users/{id}/history
+    def history; end
+
     # Reinvite resource
     #
     # @example Reinvite resource
@@ -138,7 +146,7 @@ module Manage
                            .where.not(id: current_user.id)
                            .page(page_num).per(per_page)
 
-      authorize @users
+      authorize :user
     end
 
     def set_user
@@ -146,13 +154,13 @@ module Manage
 
       @user = current_site.users.where.not(id: current_user.id).find(resource_id)
 
-      authorize @user
+      authorize :user
     end
 
     def set_new_user
       @user = current_site.users.new
 
-      authorize @user
+      authorize :user
     end
 
     def set_create_user
@@ -160,7 +168,7 @@ module Manage
 
       @user = User.invite!(managed_resource_params, current_user)
 
-      authorize @user
+      authorize :user
     end
 
     def set_destroy_user
@@ -171,7 +179,16 @@ module Manage
                                .where(site_id: current_site.id, user_id: resource_id)
                                .first
 
-      authorize @user_site
+      authorize :user_site
+    end
+
+    def set_history_user
+      resource_id = params.fetch(:id, nil)
+
+      @user = current_site.users.where.not(id: current_user.id).find(resource_id)
+      @versions = @user.versions.includes(%i[user])
+
+      authorize :user
     end
 
     def resource_params

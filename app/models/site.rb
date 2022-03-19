@@ -3,6 +3,7 @@
 # Site model
 class Site < ApplicationRecord
   include Models::DeleteConcern
+  include Models::PaperTrailConcern
 
   FORMAT_DATE_JS_DEFAULT = 'MMMM Do YYYY'
   FORMAT_DATETIME_JS_DEFAULT = 'MMMM Do YYYY @ h:mm a'
@@ -30,9 +31,9 @@ class Site < ApplicationRecord
   has_many :collections, dependent: :destroy
   has_many :contents, dependent: :destroy
   has_many :stores, as: :storable, dependent: :destroy
-
   has_many :user_sites, dependent: :destroy
   has_many :users, through: :user_sites
+  has_many :versions, class_name: 'PaperTrail::Version', foreign_key: :item_id, dependent: :destroy
 
   accepts_nested_attributes_for :stores, reject_if: :all_blank, allow_destroy: true
 

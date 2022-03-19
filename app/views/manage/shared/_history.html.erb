@@ -1,0 +1,16 @@
+<div id="version_history" class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= t('versions.columns.event') %></th>
+        <th><%= t('versions.columns.changes') %></th>
+        <th><%= t('versions.columns.author') %></th>
+        <th><%= t('versions.columns.created_at') %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render partial: 'manage/shared/history_item', collection: versions, as: :history %>
+    </tbody>
+  </table>
+</div>

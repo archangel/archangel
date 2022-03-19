@@ -4,8 +4,12 @@ en:
     actions: Actions
     buttons:
       edit: Edit Site
+      history: Site History
       show: Site
     submitting: Saving...
     titles:
       edit: Edit Site
+      history: Site History
       show: Site
+    versions:
+      zero: No site versions available

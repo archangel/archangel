@@ -91,7 +91,7 @@ RSpec.describe LinkToHelper, type: :helper do
     end
 
     it 'has correct icon value' do
-      expect(helper.link_to_index('Index', '/foo')).to have_css('a i.bi.bi-collection')
+      expect(helper.link_to_index('Index', '/foo')).to have_css('a i.bi.bi-chevron-left')
     end
 
     it 'allows custom `class`' do

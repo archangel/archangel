@@ -7,7 +7,8 @@ module Api
     # Users API v1
     class UsersController < V1Controller
       include Toller
-      include ::Controllers::Api::V1::PaginationConcern
+      include Controllers::Api::V1::PaginationConcern
+      include Controllers::Api::V1::PaperTrailConcern
 
       sort_on :username, type: :scope, scope_name: :sort_on_username, default: true
 

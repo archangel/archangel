@@ -18,6 +18,15 @@ class SitePolicy < ApplicationPolicy
     editor? || admin?
   end
 
+  # Can history record
+  #
+  # Only the `admin` role can view record history
+  #
+  # @return [Boolean] if authorized
+  def history?
+    admin?
+  end
+
   # Can switch record
   #
   # @return [Boolean] if authorized

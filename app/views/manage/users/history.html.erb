@@ -1,0 +1,15 @@
+<% content_for :section do %>
+  <h1 class="h2"><%= t('users.titles.history') %></h1>
+
+  <%= render partial: 'buttons' %>
+<% end %>
+
+<% if @versions.present? %>
+
+  <%= render partial: 'manage/shared/history', locals: { versions: @versions } %>
+
+<% else %>
+
+  <p><%= t('users.versions.zero') %></p>
+
+<% end %>

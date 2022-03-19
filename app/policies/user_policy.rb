@@ -43,6 +43,15 @@ class UserPolicy < ApplicationPolicy
     admin?
   end
 
+  # Can history record
+  #
+  # Only the `admin` role can view record history
+  #
+  # @return [Boolean] if authorized
+  def history?
+    admin?
+  end
+
   # Can reinvite record
   #
   # Only the `editor` or `admin` role can reinvite a record

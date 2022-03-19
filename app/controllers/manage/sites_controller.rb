@@ -4,7 +4,10 @@
 module Manage
   # Site
   class SitesController < ManageController
+    include Controllers::PaperTrailConcern
+
     before_action :set_site, only: %i[show edit update]
+    before_action :set_history_site, only: %i[history]
 
     # Show resource
     #
@@ -34,12 +37,18 @@ module Manage
       end
     end
 
+    # History resource
+    #
+    # @example History resource
+    #   GET /manage/site/history
+    def history; end
+
     # Switch site
     #
     # @example Switch site
     #   POST /manage/sites/{id}/switch
     def switch
-      authorize %i[site]
+      authorize :site
 
       resource_id = params.fetch(:id)
 
@@ -51,9 +60,16 @@ module Manage
     protected
 
     def set_site
-      authorize %i[site]
-
       @site = current_site
+
+      authorize :site
+    end
+
+    def set_history_site
+      @site = current_site
+      @versions = @site.versions.includes(%i[user])
+
+      authorize :site
     end
 
     def site_params

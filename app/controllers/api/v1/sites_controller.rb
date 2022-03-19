@@ -6,6 +6,8 @@ module Api
   module V1
     # Sites API v1
     class SitesController < V1Controller
+      include Controllers::Api::V1::PaperTrailConcern
+
       before_action :resource_object, only: %i[show update]
 
       # Show resource

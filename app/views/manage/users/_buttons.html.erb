@@ -1,11 +1,12 @@
 <div class="title-toolbar btn-toolbar mb-2 mb-md-0">
   <div class="btn-group" role="group" aria-label="<%= t('users.actions') %>">
-    <%= link_to_index(t('users.buttons.index'), manage_users_path) if policy(:user).index? && (member_action? || create_actions?) %>
-    <%= link_to_custom(t('users.buttons.reinvite'), reinvite_manage_user_path(@user), class: 'btn btn-secondary btn-action', icon: 'bi bi-unlock') if policy(:user).reinvite? && member_action? && @user.invitation_pending? %>
-    <%= link_to_custom(t('users.buttons.unlock'), unlock_manage_user_path(@user), class: 'btn btn-secondary btn-action', icon: 'bi bi-envelope-exclamation') if policy(:user).unlock? && member_action? && @user.locked? %>
-    <%= link_to_show(t('users.buttons.show'), manage_user_path(@user)) if policy(:user).show? && update_actions? %>
+    <%= link_to_index(t('users.buttons.index'), manage_users_path) if policy(:user).index? && (member_action? || create_actions? || action?(:history)) %>
+    <%= link_to_custom(t('users.buttons.reinvite'), reinvite_manage_user_path(@user), class: 'btn btn-secondary btn-action', icon: 'bi bi-unlock') if policy(:user).reinvite? && (member_action? || action?(:history)) && @user.invitation_pending? %>
+    <%= link_to_custom(t('users.buttons.unlock'), unlock_manage_user_path(@user), class: 'btn btn-secondary btn-action', icon: 'bi bi-envelope-exclamation') if policy(:user).unlock? && (member_action? || action?(:history)) && @user.locked? %>
+    <%= link_to_custom(t('users.buttons.history'), history_manage_user_path(@user), class: 'btn btn-warning btn-action', icon: 'bi bi-hourglass-split') if policy(:user).history? && (member_action? || update_actions?) %>
+    <%= link_to_show(t('users.buttons.show'), manage_user_path(@user)) if policy(:user).show? && (update_actions? || action?(:history)) %>
     <%= link_to_new(t('users.buttons.new'), new_manage_user_path) if policy(:user).new? && (collection_action? || member_action?) %>
-    <%= link_to_edit(t('users.buttons.edit'), edit_manage_user_path(@user)) if policy(:user).edit? && show_action? %>
-    <%= link_to_delete(t('users.buttons.destroy'), manage_user_path(@user), data: { confirm: t('users.are_you_sure') }) if policy(:user).destroy? && member_action? %>
+    <%= link_to_edit(t('users.buttons.edit'), edit_manage_user_path(@user)) if policy(:user).edit? && (show_action? || action?(:history)) %>
+    <%= link_to_delete(t('users.buttons.destroy'), manage_user_path(@user), data: { confirm: t('users.are_you_sure') }) if policy(:user).destroy? && (member_action? || action?(:history)) %>
   </div>
 </div>

@@ -10,30 +10,21 @@ RSpec.describe SitePolicy, type: :policy do
   context 'with User under the `admin` role' do
     before { create(:user_site, :admin_role, user: user, site: site) }
 
-    it { is_expected.to permit_actions(%i[show]) }
-    it { is_expected.to forbid_new_and_create_actions }
-    it { is_expected.to permit_edit_and_update_actions }
-    it { is_expected.to forbid_actions(%i[index destroy]) }
-    it { is_expected.to permit_actions(%i[switch]) }
+    it { is_expected.to permit_actions(%i[show edit update history switch]) }
+    it { is_expected.to forbid_actions(%i[index new create destroy]) }
   end
 
   context 'with User under the `editor` role' do
     before { create(:user_site, :editor_role, user: user, site: site) }
 
-    it { is_expected.to permit_actions(%i[show]) }
-    it { is_expected.to forbid_new_and_create_actions }
-    it { is_expected.to permit_edit_and_update_actions }
-    it { is_expected.to forbid_actions(%i[index destroy]) }
-    it { is_expected.to permit_actions(%i[switch]) }
+    it { is_expected.to permit_actions(%i[show edit update switch]) }
+    it { is_expected.to forbid_actions(%i[index new create destroy history]) }
   end
 
   context 'with User under the `reader` role' do
     before { create(:user_site, :reader_role, user: user, site: site) }
 
-    it { is_expected.to permit_actions(%i[show]) }
-    it { is_expected.to forbid_new_and_create_actions }
-    it { is_expected.to forbid_edit_and_update_actions }
-    it { is_expected.to forbid_actions(%i[index destroy]) }
-    it { is_expected.to permit_actions(%i[switch]) }
+    it { is_expected.to permit_actions(%i[show switch]) }
+    it { is_expected.to forbid_actions(%i[index new create edit update destroy history]) }
   end
 end

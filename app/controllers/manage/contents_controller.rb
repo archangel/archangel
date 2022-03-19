@@ -5,11 +5,13 @@ module Manage
   # Content
   class ContentsController < ManageController
     include Controllers::PaginationConcern
+    include Controllers::PaperTrailConcern
 
     before_action :set_contents, only: %i[index]
     before_action :set_content, only: %i[show edit update destroy]
     before_action :set_new_content, only: %i[new]
     before_action :set_create_content, only: %i[create]
+    before_action :set_history_content, only: %i[history]
     before_action :set_restore_content, only: %i[restore]
 
     # All resources
@@ -84,6 +86,12 @@ module Manage
       end
     end
 
+    # History resource
+    #
+    # @example History resource
+    #   GET /manage/contents/{id}/history
+    def history; end
+
     # Restore resource
     #
     # When a resource has been discarded (soft deleted), the record will be marked as undiscarded
@@ -104,7 +112,7 @@ module Manage
     def set_contents
       @contents = current_site.contents.with_discarded.order(name: :asc).page(page_num).per(per_page)
 
-      authorize @contents
+      authorize :content
     end
 
     def set_content
@@ -112,19 +120,28 @@ module Manage
 
       @content = current_site.contents.with_discarded.find(resource_id)
 
-      authorize @content
+      authorize :content
     end
 
     def set_new_content
       @content = current_site.contents.new
 
-      authorize @content
+      authorize :content
     end
 
     def set_create_content
       @content = current_site.contents.new(resource_params)
 
-      authorize @content
+      authorize :content
+    end
+
+    def set_history_content
+      resource_id = params.fetch(:id, nil)
+
+      @content = current_site.contents.with_discarded.find(resource_id)
+      @versions = @content.versions.includes(%i[user])
+
+      authorize :content
     end
 
     def set_restore_content
@@ -132,7 +149,7 @@ module Manage
 
       @content = current_site.contents.with_discarded.find(resource_id)
 
-      authorize @content
+      authorize :content
     end
 
     def resource_params

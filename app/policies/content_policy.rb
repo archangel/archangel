@@ -43,6 +43,15 @@ class ContentPolicy < ApplicationPolicy
     admin?
   end
 
+  # Can history record
+  #
+  # Only the `admin` role can view record history
+  #
+  # @return [Boolean] if authorized
+  def history?
+    admin?
+  end
+
   # Can restore record
   #
   # Only the `admin` role can restore a record

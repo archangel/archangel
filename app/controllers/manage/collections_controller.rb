@@ -5,11 +5,13 @@ module Manage
   # Collection
   class CollectionsController < ManageController
     include Controllers::PaginationConcern
+    include Controllers::PaperTrailConcern
 
     before_action :set_collections, only: %i[index]
     before_action :set_collection, only: %i[show edit update destroy]
     before_action :set_new_collection, only: %i[new]
     before_action :set_create_collection, only: %i[create]
+    before_action :set_history_collection, only: %i[history]
     before_action :set_restore_collection, only: %i[restore]
 
     # All resources
@@ -94,6 +96,12 @@ module Manage
       end
     end
 
+    # History resource
+    #
+    # @example History resource
+    #   GET /manage/collections/{id}/history
+    def history; end
+
     # Restore resource
     #
     # When a resource has been discarded (soft deleted), the record will be marked as undiscarded
@@ -118,7 +126,7 @@ module Manage
     def set_collections
       @collections = current_site.collections.with_discarded.order(name: :asc).page(page_num).per(per_page)
 
-      authorize @collections
+      authorize :collection
     end
 
     def set_collection
@@ -126,19 +134,28 @@ module Manage
 
       @collection = current_site.collections.with_discarded.find(resource_id)
 
-      authorize @collection
+      authorize :collection
     end
 
     def set_new_collection
       @collection = current_site.collections.new
 
-      authorize @collection
+      authorize :collection
     end
 
     def set_create_collection
       @collection = current_site.collections.new(resource_params)
 
-      authorize @collection
+      authorize :collection
+    end
+
+    def set_history_collection
+      resource_id = params.fetch(:id, nil)
+
+      @collection = current_site.collections.with_discarded.find(resource_id)
+      @versions = @collection.versions.includes(%i[user])
+
+      authorize :collection
     end
 
     def set_restore_collection
@@ -146,7 +163,7 @@ module Manage
 
       @collection = current_site.collections.with_discarded.find(resource_id)
 
-      authorize @collection
+      authorize :collection
     end
 
     def resource_params

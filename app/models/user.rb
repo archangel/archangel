@@ -2,6 +2,8 @@
 
 # User model
 class User < ApplicationRecord
+  include Models::PaperTrailConcern
+
   devise :confirmable, :database_authenticatable, :invitable, :lockable, :recoverable, :rememberable, :timeoutable,
          :trackable, :validatable # :registerable
 
@@ -12,6 +14,7 @@ class User < ApplicationRecord
   has_one :user_site, dependent: :destroy
   has_many :sites, through: :user_site
   has_many :user_sites, dependent: :destroy
+  has_many :versions, class_name: 'PaperTrail::Version', foreign_key: :item_id, dependent: :destroy
 
   delegate :role, to: :user_site, allow_nil: true
 

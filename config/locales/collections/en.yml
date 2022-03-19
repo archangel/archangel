@@ -9,6 +9,7 @@ en:
       destroy: Destroy Collection
       edit: Edit Collection
       entries: Collection Entries
+      history: Collection History
       index: Back to Collections
       new: New Collection
       restore: Restore Collection
@@ -23,7 +24,10 @@ en:
     submitting: Saving...
     titles:
       edit: Edit Collection
+      history: Collection History
       index: Collections
       new: New Collection
       show: Collection
+    versions:
+      zero: No collection versions available
     zero: No collections available

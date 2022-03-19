@@ -9,7 +9,8 @@ module Api
       # Collection Entries API v1
       class CollectionEntriesController < V1Controller
         include Toller
-        include ::Controllers::Api::V1::PaginationConcern
+        include Controllers::Api::V1::PaginationConcern
+        include Controllers::Api::V1::PaperTrailConcern
 
         before_action :parent_resource
         before_action :resource_collection, only: %i[index]

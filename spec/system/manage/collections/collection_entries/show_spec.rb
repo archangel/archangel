@@ -44,17 +44,17 @@ RSpec.describe 'Manage Collection Entry #show', type: :system do
     end
   end
 
-  # describe 'when not available' do
-  #   it 'returns 404 status' do
-  #     visit '/manage/collections/0'
-  #
-  #     expect(page.status_code).to eq(404)
-  #   end
-  #
-  #   it 'returns 404 when it does not exist' do
-  #     visit '/manage/collections/0'
-  #
-  #     expect(page).to have_content('Error 404')
-  #   end
-  # end
+  describe 'when not available' do
+    xit 'returns 404 status' do
+      visit '/manage/collections/0'
+
+      expect(page.status_code).to eq(404)
+    end
+
+    xit 'returns 404 when it does not exist' do
+      visit '/manage/collections/0'
+
+      expect(page).to have_content('Error 404')
+    end
+  end
 end

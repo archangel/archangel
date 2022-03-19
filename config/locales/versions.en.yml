@@ -1,0 +1,12 @@
+---
+en:
+  versions:
+    columns:
+      author: Author
+      changes: Changes
+      created_at: Modified At
+      event: Event
+    event:
+      create: New Record
+      destroy: Deleted
+      update: Update

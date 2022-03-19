@@ -7,7 +7,8 @@ module Api
     # Collections API v1
     class CollectionsController < V1Controller
       include Toller
-      include ::Controllers::Api::V1::PaginationConcern
+      include Controllers::Api::V1::PaginationConcern
+      include Controllers::Api::V1::PaperTrailConcern
 
       sort_on :name, type: :scope, scope_name: :sort_on_name, default: true
       sort_on :slug, type: :scope, scope_name: :sort_on_slug

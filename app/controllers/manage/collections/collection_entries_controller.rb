@@ -7,12 +7,14 @@ module Manage
     # Collection Entry
     class CollectionEntriesController < ManageController
       include Controllers::PaginationConcern
+      include Controllers::PaperTrailConcern
 
       before_action :set_collection
       before_action :set_collection_entries, only: %i[index]
       before_action :set_collection_entry, only: %i[show edit update destroy]
       before_action :set_new_collection_entry, only: %i[new]
       before_action :set_create_collection_entry, only: %i[create]
+      before_action :set_history_collection_entry, only: %i[history]
       before_action :set_restore_collection_entry, only: %i[restore]
       before_action :set_reposition_collection_entry, only: %i[reposition]
 
@@ -103,6 +105,12 @@ module Manage
         end
       end
 
+      # History resource
+      #
+      # @example History resource
+      #   GET /manage/collections/{id}/collection_entries/{id}/history
+      def history; end
+
       # Reposition resource
       #
       # @example Reposition resource
@@ -155,7 +163,7 @@ module Manage
       def set_collection_entries
         @collection_entries = @collection.collection_entries.page(page_num).per(per_page)
 
-        authorize @collection_entries
+        authorize :collection_entry
       end
 
       def set_collection_entry
@@ -163,13 +171,13 @@ module Manage
 
         @collection_entry = @collection.collection_entries.with_discarded.find(resource_id)
 
-        authorize @collection_entry
+        authorize :collection_entry
       end
 
       def set_new_collection_entry
         @collection_entry = @collection.collection_entries.new
 
-        authorize @collection_entry
+        authorize :collection_entry
       end
 
       def set_create_collection_entry
@@ -181,7 +189,18 @@ module Manage
 
         entry_resource[:published_at] = resource_params.fetch(:published_at, nil)
 
-        authorize @collection_entry = entry_resource
+        @collection_entry = entry_resource
+
+        authorize :collection_entry
+      end
+
+      def set_history_collection_entry
+        resource_id = params.fetch(:id, nil)
+
+        @collection_entry = @collection.collection_entries.with_discarded.find(resource_id)
+        @versions = @collection_entry.versions.includes(%i[user])
+
+        authorize :collection_entry
       end
 
       def set_restore_collection_entry
@@ -189,13 +208,13 @@ module Manage
 
         @collection_entry = @collection.collection_entries.with_discarded.find(resource_id)
 
-        authorize @collection_entry
+        authorize :collection_entry
       end
 
       def set_reposition_collection_entry
         @collection_entries = @collection.collection_entries.with_discarded
 
-        authorize @collection_entries
+        authorize :collection_entry
       end
 
       def resource_params

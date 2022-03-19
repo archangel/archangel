@@ -1,0 +1,31 @@
+<tr>
+  <td><%= t("versions.event.#{history.event}") %></td>
+  <td>
+    <% if history.event == 'create' %>
+      New Record
+    <% else %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Field</th>
+            <th scope="col">Original</th>
+            <th scope="col">New</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% history.object_changes.each do |change| %>
+            <tr>
+              <th scope="row"><%= change['field'] %></th>
+              <td><%= change['old'] %></td>
+              <td><%= change['new'] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </td>
+  <td>
+    <%= history.user.present? ? history.user.name : nil %>
+  </td>
+  <td><%= l(history.created_at, format: current_site.format_datetime, default: nil) %></td>
+</tr>

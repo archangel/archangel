@@ -6,6 +6,7 @@ en:
     buttons:
       destroy: Delete User
       edit: Edit User
+      history: User History
       index: Back to Users
       new: New User
       reinvite: Reinvite User
@@ -22,7 +23,10 @@ en:
     submitting: Saving...
     titles:
       edit: Edit User
+      history: User History
       index: Users
       new: New User
       show: User
+    versions:
+      zero: No user versions available
     zero: No users available

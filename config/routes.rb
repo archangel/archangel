@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  concern :history do
+    get :history, on: :member
+  end
+
   concern :repositionable do
     post :reposition, on: :collection
   end
@@ -76,20 +80,20 @@ Rails.application.routes.draw do
       post :retoken, on: :member
     end
 
-    resource :site, only: %i[edit show update]
+    resource :site, only: %i[edit show update], concerns: %i[history]
 
-    resources :collections, concerns: %i[restoreable] do
+    resources :collections, concerns: %i[history restoreable] do
       resources :collection_entries, controller: 'collections/collection_entries',
-                                     concerns: %i[restoreable repositionable]
+                                     concerns: %i[history restoreable repositionable]
     end
 
-    resources :contents, concerns: %i[restoreable]
+    resources :contents, concerns: %i[history restoreable]
 
     resources :sites, only: [] do
       get :switch, on: :member
     end
 
-    resources :users do
+    resources :users, concerns: %i[history] do
       get :reinvite, on: :member
       post :retoken, on: :member
       get :unlock, on: :member

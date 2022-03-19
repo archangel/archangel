@@ -8,6 +8,7 @@ en:
       delete: Delete Content
       destroy: Destroy Content
       edit: Edit Content
+      history: Content History
       index: Back to Contents
       new: New Content
       restore: Restore Content
@@ -20,7 +21,10 @@ en:
     submitting: Saving...
     titles:
       edit: Edit Content
+      history: Content History
       index: Contents
       new: New Content
       show: Content
+    versions:
+      zero: No content versions available
     zero: No contents available

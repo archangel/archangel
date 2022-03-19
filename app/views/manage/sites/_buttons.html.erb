@@ -1,6 +1,7 @@
 <div class="title-toolbar btn-toolbar mb-2 mb-md-0">
   <div class="btn-group" role="group" aria-label="<%= t('sites.actions') %>">
-    <%= link_to_show(t('sites.buttons.show'), manage_site_path) if policy(:site).show? && update_actions? %>
-    <%= link_to_edit(t('sites.buttons.edit'), edit_manage_site_path) if policy(:site).edit? && show_action? %>
+    <%= link_to_custom(t('sites.buttons.history'), history_manage_site_path, class: 'btn btn-warning btn-action', icon: 'bi bi-hourglass-split') if policy(:site).history? && (show_action? || update_actions?) %>
+    <%= link_to_show(t('sites.buttons.show'), manage_site_path) if policy(:site).show? && (update_actions? || action?(:history)) %>
+    <%= link_to_edit(t('sites.buttons.edit'), edit_manage_site_path) if policy(:site).edit? && (show_action? || action?(:history)) %>
   </div>
 </div>
