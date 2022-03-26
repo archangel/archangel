@@ -3,7 +3,6 @@
 # Site model
 class Site < ApplicationRecord
   include Models::DeleteConcern
-  include Models::PaperTrailConcern
 
   FORMAT_DATE_JS_DEFAULT = 'MMMM Do YYYY'
   FORMAT_DATETIME_JS_DEFAULT = 'MMMM Do YYYY @ h:mm a'
@@ -11,6 +10,8 @@ class Site < ApplicationRecord
   FORMAT_DATE_RUBY_DEFAULT = '%B %-d, %Y'
   FORMAT_DATETIME_RUBY_DEFAULT = '%B %-d, %Y @ %I:%M %p'
   FORMAT_TIME_RUBY_DEFAULT = '%I:%M %p'
+
+  has_paper_trail ignore: %i[updated_at]
 
   typed_store :settings, coder: ActiveRecord::TypedStore::IdentityCoder do |s|
     # Date formats for Ruby
@@ -33,7 +34,8 @@ class Site < ApplicationRecord
   has_many :stores, as: :storable, dependent: :destroy
   has_many :user_sites, dependent: :destroy
   has_many :users, through: :user_sites
-  has_many :versions, class_name: 'PaperTrail::Version', foreign_key: :item_id, dependent: :destroy
+  has_many :versions, -> { where(item_type: 'Site').order(created_at: :desc) },
+           foreign_key: :item_id, inverse_of: :site, dependent: :destroy
 
   accepts_nested_attributes_for :stores, reject_if: :all_blank, allow_destroy: true
 

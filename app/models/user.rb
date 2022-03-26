@@ -2,10 +2,14 @@
 
 # User model
 class User < ApplicationRecord
-  include Models::PaperTrailConcern
-
   devise :confirmable, :database_authenticatable, :invitable, :lockable, :recoverable, :rememberable, :timeoutable,
          :trackable, :validatable # :registerable
+
+  has_paper_trail ignore: %i[confirmation_sent_at confirmation_token current_sign_in_at current_sign_in_ip
+                             failed_attempts invitation_created_at invitation_sent_at invitation_accepted_at
+                             invitation_limit invited_by_type invited_by_id invitations_count invitation_token
+                             last_sign_in_at last_sign_in_ip locked_at reset_password_token sign_in_count unlock_token
+                             updated_at]
 
   scope :sort_on_username, ->(direction) { order(username: direction) }
 
@@ -14,7 +18,8 @@ class User < ApplicationRecord
   has_one :user_site, dependent: :destroy
   has_many :sites, through: :user_site
   has_many :user_sites, dependent: :destroy
-  has_many :versions, class_name: 'PaperTrail::Version', foreign_key: :item_id, dependent: :destroy
+  has_many :versions, -> { where(item_type: 'User').order(created_at: :desc) },
+           foreign_key: :item_id, inverse_of: :user, dependent: :destroy
 
   delegate :role, to: :user_site, allow_nil: true
 

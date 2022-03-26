@@ -4,7 +4,8 @@
 class Collection < ApplicationRecord
   include Models::DeleteConcern
   include Models::PublishConcern
-  include Models::PaperTrailConcern
+
+  has_paper_trail ignore: %i[updated_at]
 
   scope :sort_on_name, ->(direction) { order(name: direction) }
   scope :sort_on_slug, ->(direction) { order(slug: direction) }
@@ -13,7 +14,8 @@ class Collection < ApplicationRecord
 
   has_many :collection_entries, -> { order(position: :asc) }, inverse_of: :collection, dependent: :destroy
   has_many :collection_fields, -> { order(position: :asc) }, inverse_of: :collection, dependent: :destroy
-  has_many :versions, class_name: 'PaperTrail::Version', foreign_key: :item_id, dependent: :destroy
+  has_many :versions, -> { where(item_type: 'Collection').order(created_at: :desc) },
+           foreign_key: :item_id, inverse_of: :collection, dependent: :destroy
 
   accepts_nested_attributes_for :collection_fields, reject_if: :all_blank, allow_destroy: true
 
