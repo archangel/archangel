@@ -202,6 +202,8 @@ $ rake rswag:specs:swaggerize
 
 In your browser go to [http://localhost:3000/swagger/index.html](http://localhost:3000/swagger/index.html) or [https://archangel.local/swagger/index.html](https://archangel.local/swagger/index.html)
 
+> NOTE: When changes are made to the API and therefore any integrations in `spec/integration`, you will need to test the integrations and generate a new Swagger definition. A bin script has been created for this. Test integrations and build a Swagger definition by running `bin/swag`
+
 ### Validate
 
 Swagger validate can be found at [https://editor.swagger.io/](https://editor.swagger.io/). Paste the contents of `swagger/v1/swagger.yml` into the validator to find any issues.
