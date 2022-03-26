@@ -27,6 +27,10 @@ RSpec.describe 'Sites API' do
       consumes 'application/json'
       produces 'application/json'
 
+      parameter name: :includes, in: :query, type: :string, required: false,
+                enum: %w[stores],
+                description: "Include associated data\n * `stores` Store data\n"
+
       response '200', 'success' do
         schema '$ref' => '#/components/schemas/site'
 

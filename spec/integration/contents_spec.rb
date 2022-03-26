@@ -33,8 +33,12 @@ RSpec.describe 'Contents API' do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :page, in: :query, type: :integer, description: 'Page number of results'
-      parameter name: :per_page, in: :query, type: :integer, description: 'Number of records for page'
+      parameter name: :page, in: :query, type: :integer, required: false, description: 'Page number of results'
+      parameter name: :per_page, in: :query, type: :integer, required: false, description: 'Number of records for page'
+
+      parameter name: :includes, in: :query, type: :string, required: false,
+                enum: %w[stores],
+                description: "Include associated data\n * `stores` Store data\n"
 
       response '200', 'success' do
         schema '$ref' => '#/components/schemas/contents'
@@ -112,6 +116,10 @@ RSpec.describe 'Contents API' do
       produces 'application/json'
 
       parameter name: :slug, in: :path, type: :string
+
+      parameter name: :includes, in: :query, type: :string, required: false,
+                enum: %w[stores],
+                description: "Include associated data\n * `stores` Store data\n"
 
       response '200', 'success' do
         schema '$ref' => '#/components/schemas/content'

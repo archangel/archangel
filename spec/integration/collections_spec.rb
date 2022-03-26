@@ -32,8 +32,12 @@ RSpec.describe 'Collections API' do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :page, in: :query, type: :integer, description: 'Page number of results'
-      parameter name: :per_page, in: :query, type: :integer, description: 'Number of records for page'
+      parameter name: :page, in: :query, type: :integer, required: false, description: 'Page number of results'
+      parameter name: :per_page, in: :query, type: :integer, required: false, description: 'Number of records for page'
+
+      parameter name: :includes, in: :query, type: :string, required: false,
+                enum: %w[collection_fields collection_entries],
+                description: "Include associated data\n * `collection_fields` Collection Field data\n * `collection_entries` Collection Entry data\n"
 
       response '200', 'success' do
         schema '$ref' => '#/components/schemas/collections'

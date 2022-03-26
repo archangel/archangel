@@ -21,11 +21,13 @@ paths:
           type: string
       - name: page
         in: query
+        required: false
         description: Page number of results
         schema:
           type: integer
       - name: per_page
         in: query
+        required: false
         description: Number of records for page
         schema:
           type: integer
@@ -276,14 +278,28 @@ paths:
       parameters:
       - name: page
         in: query
+        required: false
         description: Page number of results
         schema:
           type: integer
       - name: per_page
         in: query
+        required: false
         description: Number of records for page
         schema:
           type: integer
+      - name: includes
+        in: query
+        required: false
+        enum:
+        - collection_fields
+        - collection_entries
+        description: |
+          Include associated data
+           * `collection_fields` Collection Field data
+           * `collection_entries` Collection Entry data
+        schema:
+          type: string
       responses:
         '200':
           description: success
@@ -482,14 +498,26 @@ paths:
       parameters:
       - name: page
         in: query
+        required: false
         description: Page number of results
         schema:
           type: integer
       - name: per_page
         in: query
+        required: false
         description: Number of records for page
         schema:
           type: integer
+      - name: includes
+        in: query
+        required: false
+        enum:
+        - stores
+        description: |
+          Include associated data
+           * `stores` Store data
+        schema:
+          type: string
       responses:
         '200':
           description: success
@@ -560,6 +588,16 @@ paths:
       - name: slug
         in: path
         required: true
+        schema:
+          type: string
+      - name: includes
+        in: query
+        required: false
+        enum:
+        - stores
+        description: |
+          Include associated data
+           * `stores` Store data
         schema:
           type: string
       responses:
@@ -832,6 +870,17 @@ paths:
       security:
       - Bearer: []
         Subdomain: []
+      parameters:
+      - name: includes
+        in: query
+        required: false
+        enum:
+        - stores
+        description: |
+          Include associated data
+           * `stores` Store data
+        schema:
+          type: string
       responses:
         '200':
           description: success
@@ -912,11 +961,13 @@ paths:
       parameters:
       - name: page
         in: query
+        required: false
         description: Page number of results
         schema:
           type: integer
       - name: per_page
         in: query
+        required: false
         description: Number of records for page
         schema:
           type: integer
@@ -1296,6 +1347,10 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/collection_field_item"
+        entries:
+          type: array
+          items:
+            "$ref": "#/components/schemas/collection_entry_item"
     collection:
       type: object
       required:

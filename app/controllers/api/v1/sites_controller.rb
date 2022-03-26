@@ -14,6 +14,9 @@ module Api
       #
       # @example Show resource
       #   GET /api/v1/site
+      #
+      # @example Include associated content
+      #   GET /api/v1/site?includes=stores
       def show; end
 
       # Update resource
@@ -33,7 +36,9 @@ module Api
       protected
 
       def resource_object
-        @site = current_site
+        includes = %w[show].include?(action_name) ? object_include_associations : nil
+
+        @site = Site.where(subdomain: current_site.subdomain).includes(includes).references(includes).first
 
         authorize :site
       end
@@ -42,6 +47,22 @@ module Api
         permitted_attributes = policy(:site).permitted_attributes
 
         params.permit(permitted_attributes)
+      end
+
+      private
+
+      def object_include_associations
+        include_associations
+      end
+
+      def include_associations
+        known_includes = %w[stores]
+        default_includes = %w[]
+
+        params.fetch(:includes, default_includes.join(','))
+              .split(',')
+              .map(&:strip)
+              .keep_if { |inc| known_includes.include?(inc) }
       end
     end
   end

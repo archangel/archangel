@@ -33,6 +33,9 @@ module Api
       #   GET /api/v1/contents?sort=slug
       #   GET /api/v1/contents?sort=-slug
       #
+      # @example Include associated content
+      #   GET /api/v1/contents?includes=stores
+      #
       # @example All resources paginated
       #   GET /api/v1/contents?per=100
       #   GET /api/v1/contents?page=2&per=12
@@ -44,6 +47,9 @@ module Api
       #
       # @example Show resource
       #   GET /api/v1/contents/{slug}
+      #
+      # @example Include associated content
+      #   GET /api/v1/contents/{slug}?includes=stores
       def show; end
 
       # Create resource
@@ -106,10 +112,9 @@ module Api
       protected
 
       def resource_collection
-        includes = %i[stores]
-
         @contents = retrieve(
-          current_site.contents.includes(includes)
+          current_site.contents
+                      .includes(collection_include_associations).references(collection_include_associations)
         ).page(page_num).per(per_page)
 
         authorize :content
@@ -117,8 +122,11 @@ module Api
 
       def resource_object
         content_id = params.fetch(:id, '')
+        includes = %w[show].include?(action_name) ? object_include_associations : nil
 
-        @content = current_site.contents.find_by!(slug: content_id)
+        @content = current_site.contents
+                               .includes(includes).references(includes)
+                               .find_by!(slug: content_id)
 
         authorize :content
       rescue ActiveRecord::RecordNotFound
@@ -135,6 +143,26 @@ module Api
         permitted_attributes = policy(:content).permitted_attributes
 
         params.permit(permitted_attributes)
+      end
+
+      private
+
+      def collection_include_associations
+        include_associations
+      end
+
+      def object_include_associations
+        include_associations
+      end
+
+      def include_associations
+        known_includes = %w[stores]
+        default_includes = %w[]
+
+        params.fetch(:includes, default_includes.join(','))
+              .split(',')
+              .map(&:strip)
+              .keep_if { |inc| known_includes.include?(inc) }
       end
     end
   end

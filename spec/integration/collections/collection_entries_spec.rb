@@ -40,8 +40,8 @@ RSpec.describe 'Collection Entries API' do
       produces 'application/json'
 
       parameter name: :slug, in: :path, type: :string
-      parameter name: :page, in: :query, type: :integer, description: 'Page number of results'
-      parameter name: :per_page, in: :query, type: :integer, description: 'Number of records for page'
+      parameter name: :page, in: :query, type: :integer, required: false, description: 'Page number of results'
+      parameter name: :per_page, in: :query, type: :integer, required: false, description: 'Number of records for page'
 
       response '200', 'success' do
         schema '$ref' => '#/components/schemas/collection_entries'

@@ -33,6 +33,11 @@ module Api
       #   GET /api/v1/collections?sort=slug
       #   GET /api/v1/collections?sort=-slug
       #
+      # @example Include associated content
+      #   GET /api/v1/collections?includes=collection_fields
+      #   GET /api/v1/collections?includes=collection_entries
+      #   GET /api/v1/collections?includes=collection_fields,collection_entries
+      #
       # @example All resources paginated
       #   GET /api/v1/collections?per=100
       #   GET /api/v1/collections?page=2&per=12
@@ -44,6 +49,11 @@ module Api
       #
       # @example Show resource
       #   GET /api/v1/collections/{slug}
+      #
+      # @example Include associated content
+      #   GET /api/v1/collections/{slug}?includes=collection_fields
+      #   GET /api/v1/collections/{slug}?includes=collection_entries
+      #   GET /api/v1/collections/{slug}?includes=collection_fields,collection_entries
       def show; end
 
       # Create resource
@@ -106,10 +116,9 @@ module Api
       protected
 
       def resource_collection
-        includes = %i[collection_fields]
-
         @collections = retrieve(
-          current_site.collections.includes(includes)
+          current_site.collections
+                      .includes(collection_include_associations).references(collection_include_associations)
         ).page(page_num).per(per_page)
 
         authorize :collection
@@ -117,8 +126,11 @@ module Api
 
       def resource_object
         collection_id = params.fetch(:id, '')
+        includes = %w[show].include?(action_name) ? object_include_associations : nil
 
-        @collection = current_site.collections.find_by!(slug: collection_id)
+        @collection = current_site.collections
+                                  .includes(includes).references(includes)
+                                  .find_by!(slug: collection_id)
 
         authorize :collection
       rescue ActiveRecord::RecordNotFound
@@ -135,6 +147,26 @@ module Api
         permitted_attributes = policy(:collection).permitted_attributes
 
         params.permit(permitted_attributes)
+      end
+
+      private
+
+      def collection_include_associations
+        include_associations
+      end
+
+      def object_include_associations
+        include_associations
+      end
+
+      def include_associations
+        known_includes = %w[collection_fields collection_entries]
+        default_includes = %w[]
+
+        params.fetch(:includes, default_includes.join(','))
+              .split(',')
+              .map(&:strip)
+              .keep_if { |inc| known_includes.include?(inc) }
       end
     end
   end

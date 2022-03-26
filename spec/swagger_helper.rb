@@ -197,6 +197,10 @@ RSpec.configure do |config|
               fields: {
                 type: :array,
                 items: { '$ref' => '#/components/schemas/collection_field_item' }
+              },
+              entries: {
+                type: :array,
+                items: { '$ref' => '#/components/schemas/collection_entry_item' }
               }
             }
           },
