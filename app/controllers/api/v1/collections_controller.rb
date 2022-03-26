@@ -112,7 +112,7 @@ module Api
           current_site.collections.includes(includes)
         ).page(page_num).per(per_page)
 
-        authorize @collections
+        authorize :collection
       end
 
       def resource_object
@@ -120,7 +120,7 @@ module Api
 
         @collection = current_site.collections.find_by!(slug: collection_id)
 
-        authorize @collection
+        authorize :collection
       rescue ActiveRecord::RecordNotFound
         render json: json_not_found(controller_name), status: :not_found
       end
@@ -128,7 +128,7 @@ module Api
       def resource_create_object
         @collection = current_site.collections.new(resource_params)
 
-        authorize @collection
+        authorize :collection
       end
 
       def resource_params

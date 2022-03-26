@@ -103,7 +103,7 @@ module Api
           current_site.users.where.not(id: current_user.id)
         ).page(page_num).per(per_page)
 
-        authorize @users
+        authorize :user
       end
 
       def resource_object
@@ -111,7 +111,7 @@ module Api
 
         @user = current_site.users.where.not(id: current_user.id).find_by!(username: user_id)
 
-        authorize @user
+        authorize :user
       rescue ActiveRecord::RecordNotFound
         render json: json_not_found(controller_name), status: :not_found
       end
@@ -121,7 +121,7 @@ module Api
 
         @user = User.invite!(create_resource_params, current_user)
 
-        authorize @user
+        authorize :user
       end
 
       def resource_params

@@ -112,7 +112,7 @@ module Api
           current_site.contents.includes(includes)
         ).page(page_num).per(per_page)
 
-        authorize @contents
+        authorize :content
       end
 
       def resource_object
@@ -120,7 +120,7 @@ module Api
 
         @content = current_site.contents.find_by!(slug: content_id)
 
-        authorize @content
+        authorize :content
       rescue ActiveRecord::RecordNotFound
         render json: json_not_found(controller_name), status: :not_found
       end
@@ -128,7 +128,7 @@ module Api
       def resource_create_object
         @content = current_site.contents.new(resource_params)
 
-        authorize @content
+        authorize :content
       end
 
       def resource_params

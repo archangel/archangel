@@ -35,7 +35,7 @@ module Api
       def resource_object
         @site = current_site
 
-        authorize @site
+        authorize :site
       end
 
       def resource_params
