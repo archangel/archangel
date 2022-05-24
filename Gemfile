@@ -10,7 +10,7 @@ gem 'bootsnap', '>= 1.10.3', require: false
 gem 'highline', '~> 2.0.3', require: false
 
 gem 'bcrypt', '~> 3.1.16'
-gem 'nokogiri', '~> 1.13.3'
+gem 'nokogiri', '~> 1.13.6'
 gem 'pg', '~> 1.3.1'
 gem 'puma', '~> 5.6.2'
 gem 'rack-cors', '~> 1.1.1'
