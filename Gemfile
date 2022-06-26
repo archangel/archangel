@@ -12,7 +12,7 @@ gem 'highline', '~> 2.0.3', require: false
 gem 'bcrypt', '~> 3.1.16'
 gem 'nokogiri', '~> 1.13.3'
 gem 'pg', '~> 1.3.1'
-gem 'puma', '~> 5.6.2'
+gem 'puma', '~> 5.6.4'
 gem 'rack-cors', '~> 1.1.1'
 gem 'rails', '~> 6.1.5'
 gem 'shakapacker', '~> 6.1.1'
