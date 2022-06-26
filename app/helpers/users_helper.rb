@@ -16,7 +16,7 @@ module UsersHelper
   # @param [Object] resource User object
   # @return [String] status name
   def user_status(resource)
-    return 'unconfirmed' if resource.confirmed?
+    return 'unconfirmed' unless resource.confirmed?
     return 'locked' if resource.access_locked?
 
     'available'

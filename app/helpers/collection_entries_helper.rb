@@ -55,7 +55,7 @@ module CollectionEntriesHelper
   # @param [String] value content key value
   # @return [String] unformatted string
   def collection_entry_string(value)
-    value
+    value.to_s
   end
 
   # Collection Entry text formatter
@@ -228,8 +228,18 @@ module CollectionEntriesHelper
   private
 
   def _collection_entry_datetime_formatter(value, format)
-    string_to_datetime = value.present? ? value.to_datetime : nil
+    return nil if value.blank?
+
+    string_to_datetime = _collection_entry_datetime_to_datetime(value)
 
     I18n.l(string_to_datetime, format: format, default: nil)
+  end
+
+  def _collection_entry_datetime_to_datetime(value)
+    return value if value.is_a?(DateTime)
+
+    value.to_datetime
+  rescue StandardError
+    nil
   end
 end
