@@ -3,14 +3,13 @@
 RSpec.describe 'API v1 Content delete', type: :request do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
-  let(:access_token) { profile.auth_token }
+  let(:default_headers) { { accept: 'application/json', authorization: profile.auth_token } }
   let(:resource) { create(:content, site: site) }
 
   before do
     create(:user_site, user: profile, site: site)
 
-    delete "/api/v1/contents/#{resource.slug}",
-           headers: { accept: 'application/json', authorization: access_token }
+    delete "/api/v1/contents/#{resource.slug}", headers: default_headers
   end
 
   it 'returns correct status (204)' do

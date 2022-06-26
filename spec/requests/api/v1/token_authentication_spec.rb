@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'API v1 token authentication', type: :request, skip: true do
+RSpec.describe 'API v1 token authentication', type: :request do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
   let(:resource) { create(:content, site: site) }
@@ -20,7 +20,7 @@ RSpec.describe 'API v1 token authentication', type: :request, skip: true do
     end
 
     it 'returns correct message' do
-      expect(json_response[:message]).to eq('Authorization token is missing')
+      expect(json_response[:message]).to eq('Authorization token not found')
     end
   end
 
@@ -35,7 +35,7 @@ RSpec.describe 'API v1 token authentication', type: :request, skip: true do
     end
 
     it 'returns correct message' do
-      expect(json_response[:message]).to eq('Authorization token is missing')
+      expect(json_response[:message]).to eq('Authorization token not found')
     end
   end
 

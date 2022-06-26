@@ -3,47 +3,67 @@
 RSpec.describe 'API v1 Content detail', type: :request do
   let(:site) { create(:site) }
   let(:profile) { create(:user) }
-  let(:access_token) { profile.auth_token }
+  let(:default_headers) { { accept: 'application/json', authorization: profile.auth_token } }
   let(:resource) { create(:content, site: site, name: 'My Content') }
 
   before do
     create(:user_site, user: profile, site: site)
   end
 
-  describe 'when Content is found' do
+  describe 'when resource is found' do
     before do
-      get "/api/v1/contents/#{resource.slug}",
-          headers: { accept: 'application/json', authorization: access_token }
+      get "/api/v1/contents/#{resource.slug}", headers: default_headers
     end
 
-    it 'returns correct status (200)' do
+    it 'returns 200 status' do
       expect(response).to have_http_status(:ok)
     end
 
     it 'returns correct resource' do
       expect(json_response[:data][:name]).to eq('My Content')
     end
+
+    it 'matches schema' do
+      expect(response).to match_json_schema('api/v1/contents/show')
+    end
   end
 
-  describe 'when Content is not found' do
+  describe 'with includes' do
     before do
-      get '/api/v1/contents/000000000',
-          headers: { accept: 'application/json', authorization: access_token }
+      resource.update(stores: build_list(:store, 3, :for_content))
     end
 
-    it 'returns correct status (404)' do
+    it 'returns all Stores for resource' do
+      get "/api/v1/contents/#{resource.slug}", params: { includes: 'stores' },
+                                               headers: default_headers
+
+      expect(json_response[:data][:stores].size).to eq(3)
+    end
+
+    it 'does not return Stores key without includes' do
+      get "/api/v1/contents/#{resource.slug}", headers: default_headers
+
+      expect(json_response[:data].keys).not_to include(:stores)
+    end
+  end
+
+  describe 'when resource is not found' do
+    before do
+      get '/api/v1/contents/0000', headers: default_headers
+    end
+
+    it 'returns 404 status' do
       expect(response).to have_http_status(:not_found)
     end
 
-    it 'returns correct resource' do
+    it 'returns error message' do
       expect(json_response[:message]).to eq('Content not found')
     end
   end
 
   describe 'when no authorization token is sent' do
     before do
-      get '/api/v1/contents/000000000',
-          headers: { accept: 'application/json' }
+      get '/api/v1/contents/1234', headers: default_headers.except(:authorization)
     end
 
     it 'returns 401' do

@@ -35,7 +35,13 @@ module Controllers
         end
 
         def current_user
-          @current_user ||= User.find_by(auth_token: identify_user)
+          identified_user = identify_user
+
+          return if identified_user.blank?
+
+          @current_user ||= User.find_by!(auth_token: identified_user)
+        rescue ActiveRecord::RecordNotFound
+          render json: json_unauthorized('Invalid authorization token'), status: :unauthorized
         end
 
         def current_site

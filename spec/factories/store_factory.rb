@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :store do
     for_content
 
-    sequence(:key) { |n| "meta_#{n}_key" }
+    sequence(:key) { |n| "metaKey#{n}" }
     sequence(:value) { |n| "Meta #{n} Value" }
 
     trait :for_content do

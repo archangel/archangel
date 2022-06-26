@@ -4,6 +4,8 @@ module Archangel
   module TestingSupport
     module JsonResponseHelpers
       def json_response
+        return {} if response.body.blank?
+
         @json_response ||= JSON.parse(response.body, symbolize_names: true)
       end
     end

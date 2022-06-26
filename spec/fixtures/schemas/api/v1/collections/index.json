@@ -1,0 +1,103 @@
+{
+  "type" : "object",
+  "required" : [
+    "success",
+    "status",
+    "data"
+  ],
+  "properties" : {
+    "success" : {
+      "type" : "boolean"
+    },
+    "status" : {
+      "type" : "string"
+    },
+    "data" : {
+      "type" : "array",
+      "items": { "$ref": "#/$defs/resource" }
+    }
+  },
+  "$defs": {
+    "resource": {
+      "type" : "object",
+      "required" : [
+        "name",
+        "slug",
+        "publishedAt",
+        "deletedAt"
+      ],
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "slug" : {
+          "type" : "string"
+        },
+        "publishedAt" : {
+          "type" : ["string", null]
+        },
+        "deletedAt" : {
+          "type" : ["string", null]
+        },
+        "entries" : {
+          "type" : "array",
+          "items": { "$ref" : "#/$defs/entry" }
+        },
+        "fields" : {
+          "type" : "array",
+          "items": { "$ref" : "#/$defs/field" }
+        }
+      }
+    },
+    "entry": {
+      "type" : "object",
+      "required" : [
+        "content",
+        "position",
+        "publishedAt",
+        "deletedAt"
+      ],
+      "properties" : {
+        "content" : {
+          "type" : "object"
+        },
+        "position" : {
+          "type" : "integer"
+        },
+        "publishedAt" : {
+          "type" : ["string", null]
+        },
+        "deletedAt" : {
+          "type" : ["string", null]
+        }
+      }
+    },
+    "field": {
+      "type" : "object",
+      "required" : [
+        "label",
+        "key",
+        "classification",
+        "required",
+        "position"
+      ],
+      "properties" : {
+        "label" : {
+          "type" : "string"
+        },
+        "key" : {
+          "type" : "string"
+        },
+        "classification" : {
+          "type" : "string"
+        },
+        "required" : {
+          "type" : "boolean"
+        },
+        "position" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}

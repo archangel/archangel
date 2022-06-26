@@ -67,6 +67,7 @@ end
 group :test do
   gem 'capybara', '~> 3.36.0', require: false
   gem 'factory_bot_rails', '~> 6.2.0', require: false
+  gem 'json_schemer', '~> 0.2.19', require: false
   gem 'launchy', '~> 2.5.0', require: false
   gem 'pundit-matchers', '~> 1.7.0', require: false
   gem 'rspec_junit_formatter', '~> 0.5.1', require: false

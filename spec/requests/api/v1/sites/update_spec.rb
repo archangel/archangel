@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe 'API v1 Collection update', type: :request do
-  let(:site) { create(:site) }
+RSpec.describe 'API v1 Site update', type: :request do
+  let(:site) { create(:site, name: 'My Site') }
   let(:profile) { create(:user) }
   let(:default_headers) { { accept: 'application/json', authorization: profile.auth_token } }
-  let(:resource) { create(:collection, site: site, name: 'My Collection') }
 
   before do
     create(:user_site, user: profile, site: site)
@@ -13,12 +12,12 @@ RSpec.describe 'API v1 Collection update', type: :request do
   describe 'when resource is valid' do
     let(:parameters) do
       {
-        name: 'My Updated Collection'
+        name: 'My Updated Site'
       }
     end
 
     before do
-      put "/api/v1/collections/#{resource.slug}", params: parameters, headers: default_headers
+      put '/api/v1/site', params: parameters, headers: default_headers
     end
 
     it 'returns 202 status' do
@@ -26,7 +25,7 @@ RSpec.describe 'API v1 Collection update', type: :request do
     end
 
     it 'returns correct resource' do
-      expect(json_response[:data][:name]).to eq('My Updated Collection')
+      expect(json_response[:data][:name]).to eq('My Updated Site')
     end
   end
 
@@ -38,7 +37,7 @@ RSpec.describe 'API v1 Collection update', type: :request do
     end
 
     before do
-      put "/api/v1/collections/#{resource.slug}", params: parameters, headers: default_headers
+      put '/api/v1/site', params: parameters, headers: default_headers
     end
 
     it 'returns 422 status' do
@@ -56,7 +55,7 @@ RSpec.describe 'API v1 Collection update', type: :request do
 
   describe 'when no authorization token is sent' do
     before do
-      put "/api/v1/collections/#{resource.slug}", headers: default_headers.except(:authorization)
+      put '/api/v1/site', headers: default_headers.except(:authorization)
     end
 
     it 'returns 401' do

@@ -3,18 +3,17 @@
 RSpec.describe 'API v1 User delete', type: :request do
   let(:site) { create(:site) }
   let(:profile) { create(:user, email: 'me@example.com') }
-  let(:access_token) { profile.auth_token }
+  let(:default_headers) { { accept: 'application/json', authorization: profile.auth_token } }
   let(:resource) { create(:user) }
 
   before do
     create(:user_site, user: profile, site: site)
     create(:user_site, user: resource, site: site)
 
-    delete "/api/v1/users/#{resource.username}",
-           headers: { accept: 'application/json', authorization: access_token }
+    delete "/api/v1/users/#{resource.username}", headers: default_headers
   end
 
-  it 'returns correct status (204)' do
+  it 'returns 204 status' do
     expect(response).to have_http_status(:no_content)
   end
 

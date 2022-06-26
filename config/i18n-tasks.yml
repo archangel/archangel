@@ -102,6 +102,10 @@ ignore_missing:
   - 'flash.{collection_entries,collections,contents,profiles,sites,users}.*'
   # - 'errors.messages.{accepted,blank,invalid,too_short,too_long}'
   # - '{devise,simple_form}.*'
+  # Used in Vue
+  - 'footer.copyright'
+  - 'header.navigation.{about,contact,home,unknown}'
+  - 'view.{about,contact,home,not_found}.content'
 
 ## Consider these keys used:
 ignore_unused:

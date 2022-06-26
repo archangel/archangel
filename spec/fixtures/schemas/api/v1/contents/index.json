@@ -1,0 +1,68 @@
+{
+  "type" : "object",
+  "required" : [
+    "success",
+    "status",
+    "data"
+  ],
+  "properties" : {
+    "success" : {
+      "type" : "boolean"
+    },
+    "status" : {
+      "type" : "string"
+    },
+    "data" : {
+      "type" : "array",
+      "items": { "$ref": "#/$defs/resource" }
+    }
+  },
+  "$defs": {
+    "resource": {
+      "type" : "object",
+      "required" : [
+        "name",
+        "slug",
+        "body",
+        "publishedAt",
+        "deletedAt"
+      ],
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "slug" : {
+          "type" : "string"
+        },
+        "body" : {
+          "type" : "string"
+        },
+        "publishedAt" : {
+          "type" : ["string", null]
+        },
+        "deletedAt" : {
+          "type" : ["string", null]
+        },
+        "stores" : {
+          "type" : "array",
+          "items": { "$ref" : "#/$defs/store" }
+        }
+      }
+    },
+    "store": {
+      "type" : "object",
+      "required" : [
+        "key",
+        "value"
+      ],
+      "properties" : {
+        "key" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : ["string", null]
+        }
+      }
+    }
+  }
+}

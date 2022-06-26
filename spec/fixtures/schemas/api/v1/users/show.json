@@ -1,0 +1,56 @@
+{
+  "type" : "object",
+  "required" : [
+    "success",
+    "status",
+    "data"
+  ],
+  "properties" : {
+    "success" : {
+      "type" : "boolean"
+    },
+    "status" : {
+      "type" : "string"
+    },
+    "data" : {
+      "$ref" : "#/$defs/resource"
+    }
+  },
+  "$defs": {
+    "resource": {
+      "type" : "object",
+      "required" : [
+        "email",
+        "username",
+        "firstName",
+        "lastName",
+        "name",
+        "locked",
+        "deletedAt"
+      ],
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "username" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : ["string", null]
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "locked" : {
+          "type" : "boolean"
+        },
+        "deletedAt" : {
+          "type" : ["string", null]
+        }
+      }
+    }
+  }
+}

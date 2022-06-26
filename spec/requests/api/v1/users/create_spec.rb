@@ -3,13 +3,13 @@
 RSpec.describe 'API v1 User create', type: :request do
   let(:site) { create(:site) }
   let(:profile) { create(:user, email: 'me@example.com') }
-  let(:access_token) { profile.auth_token }
+  let(:default_headers) { { accept: 'application/json', authorization: profile.auth_token } }
 
   before do
     create(:user_site, user: profile, site: site)
   end
 
-  describe 'when User is valid' do
+  describe 'when resource is valid' do
     let(:parameters) do
       {
         email: 'me@example.com',
@@ -20,12 +20,10 @@ RSpec.describe 'API v1 User create', type: :request do
     end
 
     before do
-      post '/api/v1/users',
-           headers: { accept: 'application/json', authorization: access_token },
-           params: parameters
+      post '/api/v1/users', params: parameters, headers: default_headers
     end
 
-    it 'returns correct status (201)' do
+    it 'returns 201 status' do
       expect(response).to have_http_status(:created)
     end
 
@@ -34,7 +32,7 @@ RSpec.describe 'API v1 User create', type: :request do
     end
   end
 
-  describe 'when User is invalid' do
+  describe 'when resource is invalid' do
     let(:parameters) do
       {
         email: '',
@@ -45,12 +43,10 @@ RSpec.describe 'API v1 User create', type: :request do
     end
 
     before do
-      post '/api/v1/users',
-           headers: { accept: 'application/json', authorization: access_token },
-           params: parameters
+      post '/api/v1/users', params: parameters, headers: default_headers
     end
 
-    it 'returns correct status (422)' do
+    it 'returns 422 status' do
       expect(response).to have_http_status(:unprocessable_entity)
     end
 
@@ -65,8 +61,7 @@ RSpec.describe 'API v1 User create', type: :request do
 
   describe 'when no authorization token is sent' do
     before do
-      post '/api/v1/users',
-           headers: { accept: 'application/json' }
+      post '/api/v1/users', headers: default_headers.except(:authorization)
     end
 
     it 'returns 401' do

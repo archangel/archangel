@@ -1,0 +1,259 @@
+{
+  "type" : "object",
+  "required" : [
+    "success",
+    "status",
+    "data"
+  ],
+  "properties" : {
+    "success" : {
+      "type" : "boolean"
+    },
+    "status" : {
+      "type" : "string"
+    },
+    "data" : {
+      "$ref" : "#/$defs/resource"
+    }
+  },
+  "$defs": {
+    "resource": {
+      "type" : "object",
+      "required" : [
+        "collection",
+        "collectionEntry",
+        "content",
+        "profile",
+        "site",
+        "user"
+      ],
+      "properties" : {
+        "collection" : {
+          "$ref" : "#/$defs/collection"
+        },
+        "collectionEntry" : {
+          "$ref" : "#/$defs/collectionEntry"
+        },
+        "content" : {
+          "$ref" : "#/$defs/content"
+        },
+        "profile" : {
+          "$ref" : "#/$defs/profile"
+        },
+        "site" : {
+          "$ref" : "#/$defs/site"
+        },
+        "user" : {
+          "$ref" : "#/$defs/user"
+        }
+      }
+    },
+    "collection": {
+      "type" : "object",
+      "required" : [
+        "index",
+        "show",
+        "new",
+        "create",
+        "edit",
+        "update",
+        "destroy",
+        "restore"
+      ],
+      "properties" : {
+        "index" : {
+          "type" : "boolean"
+        },
+        "show" : {
+          "type" : "boolean"
+        },
+        "new" : {
+          "type" : "boolean"
+        },
+        "create" : {
+          "type" : "boolean"
+        },
+        "edit" : {
+          "type" : "boolean"
+        },
+        "update" : {
+          "type" : "boolean"
+        },
+        "destroy" : {
+          "type" : "boolean"
+        },
+        "restore" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "collectionEntry": {
+      "type" : "object",
+      "required" : [
+        "index",
+        "show",
+        "new",
+        "create",
+        "edit",
+        "update",
+        "destroy",
+        "restore",
+        "reposition"
+      ],
+      "properties" : {
+        "index" : {
+          "type" : "boolean"
+        },
+        "show" : {
+          "type" : "boolean"
+        },
+        "new" : {
+          "type" : "boolean"
+        },
+        "create" : {
+          "type" : "boolean"
+        },
+        "edit" : {
+          "type" : "boolean"
+        },
+        "update" : {
+          "type" : "boolean"
+        },
+        "destroy" : {
+          "type" : "boolean"
+        },
+        "restore" : {
+          "type" : "boolean"
+        },
+        "reposition" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "content": {
+      "type" : "object",
+      "required" : [
+        "index",
+        "show",
+        "new",
+        "create",
+        "edit",
+        "update",
+        "destroy",
+        "restore"
+      ],
+      "properties" : {
+        "index" : {
+          "type" : "boolean"
+        },
+        "show" : {
+          "type" : "boolean"
+        },
+        "new" : {
+          "type" : "boolean"
+        },
+        "create" : {
+          "type" : "boolean"
+        },
+        "edit" : {
+          "type" : "boolean"
+        },
+        "update" : {
+          "type" : "boolean"
+        },
+        "destroy" : {
+          "type" : "boolean"
+        },
+        "restore" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "profile": {
+      "type" : "object",
+      "required" : [
+        "index",
+        "show",
+        "edit",
+        "update"
+      ],
+      "properties" : {
+        "show" : {
+          "type" : "boolean"
+        },
+        "edit" : {
+          "type" : "boolean"
+        },
+        "update" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "site": {
+      "type" : "object",
+      "required" : [
+        "show",
+        "edit",
+        "update"
+      ],
+      "properties" : {
+        "show" : {
+          "type" : "boolean"
+        },
+        "edit" : {
+          "type" : "boolean"
+        },
+        "update" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "user": {
+      "type" : "object",
+      "required" : [
+        "index",
+        "show",
+        "new",
+        "create",
+        "edit",
+        "update",
+        "destroy",
+        "reinvite",
+        "retoken",
+        "unlock"
+      ],
+      "properties" : {
+        "index" : {
+          "type" : "boolean"
+        },
+        "show" : {
+          "type" : "boolean"
+        },
+        "new" : {
+          "type" : "boolean"
+        },
+        "create" : {
+          "type" : "boolean"
+        },
+        "edit" : {
+          "type" : "boolean"
+        },
+        "update" : {
+          "type" : "boolean"
+        },
+        "destroy" : {
+          "type" : "boolean"
+        },
+        "reinvite" : {
+          "type" : "boolean"
+        },
+        "retoken" : {
+          "type" : "boolean"
+        },
+        "unlock" : {
+          "type" : "boolean"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "type" : "object",
+  "required" : [
+    "success",
+    "status",
+    "data"
+  ],
+  "properties" : {
+    "success" : {
+      "type" : "boolean"
+    },
+    "status" : {
+      "type" : "string"
+    },
+    "data" : {
+      "$ref" : "#/$defs/resource"
+    }
+  },
+  "$defs": {
+    "resource": {
+      "type" : "object",
+      "required" : [
+        "name",
+        "subdomain",
+        "formatDate",
+        "formatDatetime",
+        "formatTime",
+        "formatJsDate",
+        "formatJsDatetime",
+        "formatJsTime"
+      ],
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "subdomain" : {
+          "type" : "string"
+        },
+        "formatDate" : {
+          "type" : "string"
+        },
+        "formatDatetime" : {
+          "type" : "string"
+        },
+        "formatTime" : {
+          "type" : "string"
+        },
+        "formatJsDate" : {
+          "type" : "string"
+        },
+        "formatJsDatetime" : {
+          "type" : "string"
+        },
+        "formatJsTime" : {
+          "type" : "string"
+        },
+        "stores" : {
+          "type" : "array",
+          "items": { "$ref" : "#/$defs/store" }
+        }
+      }
+    },
+    "store": {
+      "type" : "object",
+      "required" : [
+        "key",
+        "value"
+      ],
+      "properties" : {
+        "key" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : ["string", null]
+        }
+      }
+    }
+  }
+}
