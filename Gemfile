@@ -47,6 +47,7 @@ group :development do
 
   gem 'letter_opener', '~> 1.7.0'
   gem 'listen', '~> 3.7.1'
+  gem 'ruby-debug-ide', '~> 0.7.3'
   gem 'spring', '~> 4.0.0'
   gem 'web-console', '~> 4.2.0'
 end
